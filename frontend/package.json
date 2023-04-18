@@ -28,9 +28,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/uuid": "^9.0.1",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.1"
+    "eslint-plugin-prettier": "^4.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,16 +37,6 @@
     "lint": "eslint src/ --ext .tsx,.ts",
     "lint:fix": "eslint src/ --ext .tsx,.ts --fix",
     "eject": "react-scripts eject"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "npm run lint"
-    ]
   },
   "eslintConfig": {
     "extends": [
