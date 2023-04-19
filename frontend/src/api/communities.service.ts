@@ -4,9 +4,11 @@ import api from "./api";
 
 const endpoint = "/communities";
 
-export class CommunitiesService {
+class CommunitiesService {
   async getAll(): Promise<Community[]> {
     const communities = await api.get<any[]>(endpoint);
     return communities.map(({ id, name, description }) => new Community(id, name, description));
   }
 }
+
+export default new CommunitiesService();
