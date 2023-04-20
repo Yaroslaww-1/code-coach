@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
-import { CommunitiesController } from "src/controllers/communities.controller";
-import { GetAllCommunitiesQuery } from "src/queries/communities/get-all.query";
+import { CommunitiesController } from "src/modules/communities/communities.controller";
+import { GetAllCommunitiesQuery } from "src/modules/communities/queries/get-all.query";
 
 @Module({
   imports: [],

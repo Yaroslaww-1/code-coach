@@ -1,5 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
-import { GetAllCommunitiesQuery } from "src/queries/communities/get-all.query";
+import { GetAllCommunitiesQuery } from "src/modules/communities/queries/get-all.query";
 
 @Controller("communities")
 export class CommunitiesController {
