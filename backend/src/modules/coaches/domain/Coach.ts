@@ -1,6 +1,9 @@
 export class Coach {
   constructor(
-    private email: string,
-    private name: string
+    private _email: string,
+    private _name: string
   ) {}
+
+  public email() { return this._email; }
+  public name() { return this._name; }
 }

@@ -18,7 +18,6 @@ export class GetAllCoachesQuery {
       ExpressionAttributeValues: { ":pk": "Coach#" },
       Limit: 10,
     });
-    const coaches = await this.dynamoDb.client().send(query);
-    return coaches;
+    return await this.dynamoDb.client().send(query);
   }
 }
