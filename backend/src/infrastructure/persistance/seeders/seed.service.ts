@@ -2,6 +2,7 @@ import { Injectable, OnApplicationBootstrap } from "@nestjs/common";
 import { DynamoDbService } from "../../aws/dynamodb.service";
 import { CreateTableCommand, DeleteTableCommand, waitUntilTableExists, waitUntilTableNotExists } from "@aws-sdk/client-dynamodb";
 import { CoachesSeeder } from "./coaches-seeder";
+import { StudentsSeeder } from "./students-seeder";
 
 @Injectable()
 export class SeedService implements OnApplicationBootstrap {
@@ -15,6 +16,7 @@ export class SeedService implements OnApplicationBootstrap {
 
     await this.truncateUsers();
     await new CoachesSeeder(this.dynamoDb).seed();
+    await new StudentsSeeder(this.dynamoDb).seed();
   }
 
   private async truncateUsers() {

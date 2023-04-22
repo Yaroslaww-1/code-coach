@@ -9,8 +9,8 @@ export class CoachesSeeder {
 
   public async seed() {
     const coaches = [
-      new Coach("sam@gmail.com", "Sam Spade"),
-      new Coach("joel@gmail.com", "Joel Cairo"),
+      new Coach("abe.ryland@gmail.com", "Abe Ryland"),
+      new Coach("abigail@gmail.com", "Abigail McGinty"),
     ];
 
     await this.dynamoDb.client().send(new BatchWriteCommand({
