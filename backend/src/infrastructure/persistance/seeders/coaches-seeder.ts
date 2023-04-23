@@ -30,6 +30,15 @@ export class CoachesSeeder {
           new WorkExperience("Google", new Date(2010, 5), null),
         ],
         new Location("USA", "San Francisco")),
+      new Coach(
+        "adela.marchmont@gmail.com",
+        "Adela Marchmont",
+        ["Python"],
+        ["English", "French"],
+        [
+          new WorkExperience("Microsoft", new Date(2017, 10), null),
+        ],
+        new Location("USA", "Seattle")),
     ];
 
     await this.dynamoDb.client().send(new BatchWriteCommand({
