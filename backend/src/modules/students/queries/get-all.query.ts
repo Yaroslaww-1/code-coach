@@ -18,6 +18,14 @@ export class GetAllStudentsQuery {
       ExpressionAttributeValues: { ":pk": "Student#" },
       Limit: 10,
     });
-    return await this.dynamoDb.client().send(query);
+
+    const students = await this.dynamoDb.client().send(query);
+
+    students.Items = students.Items.map(student => ({
+      "email": (<string>student["PK"]).replace("Student#", ""),
+      "name": student["SK"],
+    }))
+
+    return students;
   }
 }
