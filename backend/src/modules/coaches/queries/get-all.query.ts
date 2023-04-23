@@ -14,15 +14,16 @@ export class GetAllCoachesQuery {
       TableName: "Users",
       Select: Select.ALL_ATTRIBUTES,
       FilterExpression: "contains(#pk, :pk)",
-      ExpressionAttributeNames: { "#pk": "PK" },
+      ExpressionAttributeNames: { "#pk": "pk" },
       ExpressionAttributeValues: { ":pk": "Coach#" },
       Limit: 10,
     });
 
     const coaches = await this.dynamoDb.client().send(query);
     coaches.Items = coaches.Items.map(coach => ({
-      "email": (<string>coach["PK"]).replace("Coach#", ""),
-      "name": coach["SK"],
+      ...coach,
+      "email": (<string>coach["pk"]).replace("Coach#", ""),
+      "name": coach["sk"],
     }))
 
     return coaches;

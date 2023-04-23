@@ -1,6 +1,6 @@
 import { Injectable, OnApplicationBootstrap } from "@nestjs/common";
 import { DynamoDbService } from "../../aws/dynamodb.service";
-import { CreateTableCommand, DeleteTableCommand, waitUntilTableExists, waitUntilTableNotExists } from "@aws-sdk/client-dynamodb";
+import { AttributeValue, CreateTableCommand, DeleteTableCommand, ScalarAttributeType, waitUntilTableExists, waitUntilTableNotExists } from "@aws-sdk/client-dynamodb";
 import { CoachesSeeder } from "./coaches-seeder";
 import { StudentsSeeder } from "./students-seeder";
 
@@ -41,12 +41,12 @@ export class SeedService implements OnApplicationBootstrap {
         WriteCapacityUnits: 1,
       },
       KeySchema: [
-        { AttributeName: "PK", KeyType: "HASH" },
-        { AttributeName: "SK", KeyType: "RANGE" },
+        { AttributeName: "pk", KeyType: "HASH" },
+        { AttributeName: "sk", KeyType: "RANGE" },
       ],
       AttributeDefinitions: [
-        { AttributeName: "PK", AttributeType: "S" },
-        { AttributeName: "SK", AttributeType: "S" },
+        { AttributeName: "pk", AttributeType: "S" },
+        { AttributeName: "sk", AttributeType: "S" },
       ],
     }));
 

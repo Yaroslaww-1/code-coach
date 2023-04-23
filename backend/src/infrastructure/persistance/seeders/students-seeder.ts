@@ -1,6 +1,6 @@
 import { BatchWriteCommand } from "@aws-sdk/lib-dynamodb";
 import { DynamoDbService } from "../../aws/dynamodb.service";
-import { Student } from "src/modules/students/domain/Student";
+import { Student } from "src/domain/Student";
 
 export class StudentsSeeder {
   constructor (
@@ -20,8 +20,8 @@ export class StudentsSeeder {
         "Users": students.map(coach => ({
           PutRequest: {
             Item: {
-              PK: `Student#${coach.email()}`,
-              SK: coach.name(),
+              pk: `Student#${coach.email()}`,
+              sk: coach.name(),
             },
           },
         })),

@@ -1,6 +1,8 @@
 import { BatchWriteCommand } from "@aws-sdk/lib-dynamodb";
 import { DynamoDbService } from "../../aws/dynamodb.service";
-import { Coach } from "src/modules/coaches/domain/Coach";
+import { Coach } from "src/domain/Coach";
+import { WorkExperience } from "src/domain/WorkExperience";
+import { Location } from "src/domain/Location";
 
 export class CoachesSeeder {
   constructor (
@@ -9,8 +11,25 @@ export class CoachesSeeder {
 
   public async seed() {
     const coaches = [
-      new Coach("abe.ryland@gmail.com", "Abe Ryland"),
-      new Coach("abigail@gmail.com", "Abigail McGinty"),
+      new Coach(
+        "abe.ryland@gmail.com",
+        "Abe Ryland",
+        ["Java", "Kotlin"],
+        ["English"],
+        [
+          new WorkExperience("Amazon", new Date(2015, 1), new Date(2022, 10)),
+          new WorkExperience("Netflix", new Date(2023, 3), null),
+        ],
+        new Location("UK", "London")),
+      new Coach(
+        "abigail@gmail.com",
+        "Abigail McGinty",
+        ["C++", "Rust"],
+        ["English", "Spanish"],
+        [
+          new WorkExperience("Google", new Date(2010, 5), null),
+        ],
+        new Location("USA", "San Francisco")),
     ];
 
     await this.dynamoDb.client().send(new BatchWriteCommand({
@@ -18,8 +37,17 @@ export class CoachesSeeder {
         "Users": coaches.map(coach => ({
           PutRequest: {
             Item: {
-              PK: `Coach#${coach.email()}`,
-              SK: coach.name(),
+              pk: `Coach#${coach.email()}`,
+              sk: coach.name(),
+              programmingLanguages: coach.programmingLanguages(),
+              languages: coach.languages(),
+              workExperience: coach.workExperience().map(work => ({
+                company: work.company(),
+                start: work.start().toISOString(),
+                end: work.end()?.toISOString(),
+              })),
+              yearsOfExperience: coach.yearsOfExperience(),
+              location: coach.location(),
             },
           },
         })),

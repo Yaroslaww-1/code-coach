@@ -7,7 +7,14 @@ export class DynamoDbService {
   readonly #client: DynamoDBDocument;
 
   constructor() {
-    this.#client = DynamoDBDocument.from(new DynamoDB({}), {});
+    this.#client = DynamoDBDocument.from(
+      new DynamoDB({}),
+      {
+        marshallOptions: {
+          removeUndefinedValues: true,
+          convertClassInstanceToMap: true,
+        },
+      });
   }
 
   public client(): DynamoDBDocument {

@@ -14,7 +14,7 @@ export class GetAllStudentsQuery {
       TableName: "Users",
       Select: Select.ALL_ATTRIBUTES,
       FilterExpression: "contains(#pk, :pk)",
-      ExpressionAttributeNames: { "#pk": "PK" },
+      ExpressionAttributeNames: { "#pk": "pk" },
       ExpressionAttributeValues: { ":pk": "Student#" },
       Limit: 10,
     });
@@ -22,8 +22,9 @@ export class GetAllStudentsQuery {
     const students = await this.dynamoDb.client().send(query);
 
     students.Items = students.Items.map(student => ({
-      "email": (<string>student["PK"]).replace("Student#", ""),
-      "name": student["SK"],
+      ...student,
+      "email": (<string>student["pk"]).replace("Student#", ""),
+      "name": student["sk"],
     }))
 
     return students;
