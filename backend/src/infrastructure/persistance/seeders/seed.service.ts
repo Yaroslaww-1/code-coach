@@ -4,6 +4,7 @@ import { CreateTableCommand, DeleteTableCommand, waitUntilTableExists, waitUntil
 import { CoachesSeeder } from "./coaches-seeder";
 import { StudentsSeeder } from "./students-seeder";
 import { CommunitiesSeeder } from "./communities-seeder";
+import { PostsSeeder } from "./post-seeder";
 
 @Injectable()
 export class SeedService implements OnApplicationBootstrap {
@@ -16,32 +17,34 @@ export class SeedService implements OnApplicationBootstrap {
     if (!shouldSeed) return;
 
     await Promise.all([
-      this.truncateUsers(),
-      this.truncateCommunities()]);
+      this.truncate("Users"),
+      this.truncate("Communities"),
+      this.truncate("Posts")]);
 
     await Promise.all([
       new CoachesSeeder(this.dynamoDb).seed(),
       new StudentsSeeder(this.dynamoDb).seed(),
-      new CommunitiesSeeder(this.dynamoDb).seed()]);
+      new CommunitiesSeeder(this.dynamoDb).seed(),
+      new PostsSeeder(this.dynamoDb).seed()]);
   }
 
-  private async truncateUsers() {
-    console.log("Start Users table truncating")
+  private async truncate(table: string) {
+    console.log(`Start ${table} table truncating`)
 
     try {
       await this.dynamoDb.client().send(new DeleteTableCommand({
-        TableName: "Users",
+        TableName: table,
       }));
 
       await waitUntilTableNotExists(
         { client: this.dynamoDb.client(), maxWaitTime: 300 },
-        { TableName: "Users" });
+        { TableName: table });
     } catch (e) {
-      console.warn(`Error occurred during Users table removal: ${e.message} `)
+      console.warn(`Error occurred during ${table} table removal: ${e.message} `)
     }
 
     await this.dynamoDb.client().send(new CreateTableCommand({
-      TableName: "Users",
+      TableName: table,
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
@@ -58,46 +61,8 @@ export class SeedService implements OnApplicationBootstrap {
 
     await waitUntilTableExists(
       { client: this.dynamoDb.client(), maxWaitTime: 300 },
-      { TableName: "Users" });
+      { TableName: table });
 
-    console.log("Users table truncated")
-  }
-
-  private async truncateCommunities() {
-    console.log("Start Communities table truncating")
-
-    try {
-      await this.dynamoDb.client().send(new DeleteTableCommand({
-        TableName: "Communities",
-      }));
-
-      await waitUntilTableNotExists(
-        { client: this.dynamoDb.client(), maxWaitTime: 300 },
-        { TableName: "Communities" });
-    } catch (e) {
-      console.warn(`Error occurred during Communities table removal: ${e.message} `)
-    }
-
-    await this.dynamoDb.client().send(new CreateTableCommand({
-      TableName: "Communities",
-      ProvisionedThroughput: {
-        ReadCapacityUnits: 1,
-        WriteCapacityUnits: 1,
-      },
-      KeySchema: [
-        { AttributeName: "pk", KeyType: "HASH" },
-        { AttributeName: "sk", KeyType: "RANGE" },
-      ],
-      AttributeDefinitions: [
-        { AttributeName: "pk", AttributeType: "S" },
-        { AttributeName: "sk", AttributeType: "S" },
-      ],
-    }));
-
-    await waitUntilTableExists(
-      { client: this.dynamoDb.client(), maxWaitTime: 300 },
-      { TableName: "Communities" });
-
-    console.log("Communities table truncated")
+    console.log(`${table} table truncated`)
   }
 }
