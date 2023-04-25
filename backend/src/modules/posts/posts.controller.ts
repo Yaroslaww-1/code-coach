@@ -1,14 +1,21 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Param } from "@nestjs/common";
 import { GetAllPostsQuery } from "./queries/get-all.query";
+import { GetByPostQuery } from "./queries/get-by-post.query";
 
 @Controller("posts")
 export class PostsController {
   constructor(
-    private readonly getAllPosts: GetAllPostsQuery
+    private readonly getAllPostsQuery: GetAllPostsQuery,
+    private readonly getByPostQuery: GetByPostQuery
   ) {}
 
   @Get()
   getAll() {
-    return this.getAllPosts.execute();
+    return this.getAllPostsQuery.execute();
+  }
+
+  @Get(":postId/comments")
+  getByPost(@Param("postId") postId: string) {
+    return this.getByPostQuery.execute(postId);
   }
 }

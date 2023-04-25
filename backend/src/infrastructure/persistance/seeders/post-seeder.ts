@@ -63,6 +63,7 @@ export class PostsSeeder {
                 content: comment.content(),
                 createdAt: comment.createdAt().toISOString(),
                 createdBy: comment.createdBy(),
+                replyTo: comment.replyTo(),
               },
             },
           })),
