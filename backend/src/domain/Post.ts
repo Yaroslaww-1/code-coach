@@ -22,6 +22,4 @@ export class Post {
   public createdAt() { return this._createdAt; }
   public commentsCount() { return this._commentsCount; }
   public community() { return this._community; }
-
-  
 }
