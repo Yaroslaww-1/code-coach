@@ -1,7 +1,7 @@
 import { BatchWriteCommand } from "@aws-sdk/lib-dynamodb";
 import { DynamoDbService } from "../../aws/dynamodb.service";
-import { Post } from "src/domain/Post";
-import { Comment } from "src/domain/Comment";
+import { Post } from "src/domain/post/Post";
+import { Comment } from "src/domain/post/Comment";
 
 export class PostsSeeder {
   constructor (
