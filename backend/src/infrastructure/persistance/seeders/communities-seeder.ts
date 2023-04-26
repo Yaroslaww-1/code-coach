@@ -1,7 +1,9 @@
 import { BatchWriteCommand } from "@aws-sdk/lib-dynamodb";
 import { DynamoDbService } from "../../aws/dynamodb.service";
 import { Community } from "src/domain/Community";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class CommunitiesSeeder {
   constructor (
     private readonly dynamoDb: DynamoDbService
@@ -51,6 +53,6 @@ export class CommunitiesSeeder {
       },
     }));
 
-    console.log("Students are seeded")
+    console.log("Communities are seeded")
   }
 }

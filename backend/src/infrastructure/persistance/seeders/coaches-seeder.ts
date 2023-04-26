@@ -3,14 +3,16 @@ import { DynamoDbService } from "../../aws/dynamodb.service";
 import { Coach } from "src/domain/Coach";
 import { WorkExperience } from "src/domain/WorkExperience";
 import { Location } from "src/domain/Location";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class CoachesSeeder {
   constructor (
     private readonly dynamoDb: DynamoDbService
   ) {}
 
-  public async seed() {
-    const coaches = [
+  public coaches() {
+    return [
       new Coach(
         "abe.ryland@gmail.com",
         "Abe Ryland",
@@ -39,11 +41,13 @@ export class CoachesSeeder {
           new WorkExperience("Microsoft", new Date(2017, 10), null),
         ],
         new Location("USA", "Seattle")),
-    ];
+    ]
+  }
 
+  public async seed() {
     await this.dynamoDb.client().send(new BatchWriteCommand({
       RequestItems: {
-        "Users": coaches.map(coach => ({
+        "Users": this.coaches().map(coach => ({
           PutRequest: {
             Item: {
               pk: `Coach#${coach.email()}`,

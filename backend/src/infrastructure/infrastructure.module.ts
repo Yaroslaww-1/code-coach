@@ -1,9 +1,10 @@
 import { Module } from "@nestjs/common";
-import { DynamoDbService } from "./aws/dynamodb.service";
-import { SeedService } from "./persistance/seeders/seed.service";
+import { SeedModule } from "./persistance/seeders/seed.module";
+import { AwsModule } from "./aws/aws.module";
 
 @Module({
-  providers: [DynamoDbService, SeedService],
-  exports: [DynamoDbService],
+  imports: [AwsModule, SeedModule],
+  providers: [],
+  exports: [AwsModule],
 })
 export class InfrastructureModule {}

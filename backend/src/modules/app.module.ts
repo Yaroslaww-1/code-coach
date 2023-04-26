@@ -3,8 +3,9 @@ import { CommunitiesModule } from "./communities/communities.module";
 import { CoachesModule } from "./coaches/coaches.module";
 import { StudentsModule } from "./students/students.module";
 import { PostsModule } from "./posts/posts.module";
+import { FairsModule } from "./fairs/fairs.module";
 
 @Module({
-  imports: [CommunitiesModule, CoachesModule, StudentsModule, PostsModule],
+  imports: [CommunitiesModule, CoachesModule, StudentsModule, PostsModule, FairsModule],
 })
 export class AppModule {}

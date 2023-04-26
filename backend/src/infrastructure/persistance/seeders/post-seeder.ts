@@ -2,7 +2,9 @@ import { BatchWriteCommand } from "@aws-sdk/lib-dynamodb";
 import { DynamoDbService } from "../../aws/dynamodb.service";
 import { Post } from "src/domain/post/Post";
 import { Comment } from "src/domain/post/Comment";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class PostsSeeder {
   constructor (
     private readonly dynamoDb: DynamoDbService

@@ -5,11 +5,17 @@ import { CoachesSeeder } from "./coaches-seeder";
 import { StudentsSeeder } from "./students-seeder";
 import { CommunitiesSeeder } from "./communities-seeder";
 import { PostsSeeder } from "./post-seeder";
+import { FairsSeeder } from "./fairs-seeder";
 
 @Injectable()
 export class SeedService implements OnApplicationBootstrap {
   constructor (
-    private readonly dynamoDb: DynamoDbService
+    private readonly dynamoDb: DynamoDbService,
+    private readonly coachesSeeder: CoachesSeeder,
+    private readonly studentsSeeder: StudentsSeeder,
+    private readonly communitiesSeeder: CommunitiesSeeder,
+    private readonly postsSeeder: PostsSeeder,
+    private readonly fairsSeeder: FairsSeeder,
   ) {}
 
   async onApplicationBootstrap() {
@@ -22,10 +28,11 @@ export class SeedService implements OnApplicationBootstrap {
       this.truncate("Posts")]);
 
     await Promise.all([
-      new CoachesSeeder(this.dynamoDb).seed(),
-      new StudentsSeeder(this.dynamoDb).seed(),
-      new CommunitiesSeeder(this.dynamoDb).seed(),
-      new PostsSeeder(this.dynamoDb).seed()]);
+      this.coachesSeeder.seed(),
+      this.studentsSeeder.seed(),
+      this.communitiesSeeder.seed(),
+      this.postsSeeder.seed(),
+      this.fairsSeeder.seed()]);
   }
 
   private async truncate(table: string) {
