@@ -1,8 +1,9 @@
-import { Entity } from "./lib/Entity";
-import { RemoveMethods } from "./lib/typings";
+import { Entity } from "../lib/Entity";
+import { RemoveMethods } from "../lib/typings";
+import { StudentEmail } from "./StudentEmail";
 
 export class Student extends Entity<Student> {
-  public email: string;
+  public email: StudentEmail;
   public name: string;
 
   public static createNew(student: RemoveMethods<Student>) {

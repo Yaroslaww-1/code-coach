@@ -4,6 +4,7 @@ import { Location } from "src/domain/coach/Location";
 import { Injectable } from "@nestjs/common";
 import { Coach } from "src/domain/coach/Coach";
 import { WorkExperience } from "src/domain/coach/WorkExperience";
+import { CoachEmail } from "src/domain/coach/CoachEmail";
 
 @Injectable()
 export class CoachesSeeder {
@@ -14,7 +15,7 @@ export class CoachesSeeder {
   public coaches() {
     return [
       Coach.createNew({
-        email: "abe.ryland@gmail.com",
+        email: new CoachEmail("abe.ryland@gmail.com"),
         name: "Abe Ryland",
         programmingLanguages: ["Java", "Kotlin"],
         languages: ["English"],
@@ -25,7 +26,7 @@ export class CoachesSeeder {
         location: Location.createNew("UK", "London"),
       }),
       Coach.createNew({
-        email: "abigail@gmail.com",
+        email: new CoachEmail("abigail@gmail.com"),
         name: "Abigail McGinty",
         programmingLanguages: ["C++", "Rust"],
         languages: ["English", "Spanish"],
@@ -35,7 +36,7 @@ export class CoachesSeeder {
         location: Location.createNew("USA", "San Francisco"),
       }),
       Coach.createNew({
-        email: "adela.marchmont@gmail.com",
+        email: new CoachEmail("adela.marchmont@gmail.com"),
         name: "Adela Marchmont",
         programmingLanguages: ["Python"],
         languages: ["English", "French"],
@@ -53,7 +54,7 @@ export class CoachesSeeder {
         "Users": this.coaches().map(coach => ({
           PutRequest: {
             Item: {
-              pk: `Coach#${coach.email}`,
+              pk: `Coach#${coach.email.value}`,
               sk: coach.name,
               programmingLanguages: coach.programmingLanguages,
               languages: coach.languages,

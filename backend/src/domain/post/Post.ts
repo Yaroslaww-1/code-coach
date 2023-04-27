@@ -1,9 +1,10 @@
 import { nanoid } from "nanoid";
 import { Entity } from "../lib/Entity";
 import { RemoveMethods } from "../lib/typings";
+import { PostId } from "./PostId";
 
 export class Post extends Entity<Post> {
-  public id: string;
+  public id: PostId;
 
   public title: string;
   public content: string;
@@ -15,6 +16,6 @@ export class Post extends Entity<Post> {
   public commentsCount: number;
 
   public static createNew(post: Omit<RemoveMethods<Post>, "id" | "createdAt" | "commentsCount">) {
-    return new Post({ ...post, id: nanoid(8), commentsCount: 0, createdAt: new Date() })
+    return new Post({ ...post, id: new PostId(nanoid(8)), commentsCount: 0, createdAt: new Date() })
   }
 }

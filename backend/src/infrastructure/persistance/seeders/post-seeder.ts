@@ -34,9 +34,9 @@ export class PostsSeeder {
 
     const posts = [post1, post2];
 
-    const comment1 = Comment.replyToPost(post1, "Nuxt has a lot of things already setup like routing, so I would go with that", "adela.marchmont@gmail.com");
+    const comment1 = Comment.replyToPost(post1.id, "Nuxt has a lot of things already setup like routing, so I would go with that", "adela.marchmont@gmail.com");
     const comment2 = Comment.replyToOtherComment(comment1, "Thank you!", "barbara.amory@gmail.com");
-    const comment3 = Comment.replyToPost(post1, "I guess if you want to learn the different parts that Nuxt just handled out of the box, you can start a Vue project with Vite.", "abe.ryland@gmail.com");
+    const comment3 = Comment.replyToPost(post1.id, "I guess if you want to learn the different parts that Nuxt just handled out of the box, you can start a Vue project with Vite.", "abe.ryland@gmail.com");
 
     const comments = [comment1, comment2, comment3];
 
@@ -46,7 +46,7 @@ export class PostsSeeder {
           ...posts.map(post => ({
             PutRequest: {
               Item: {
-                pk: `Post#${post.id}`,
+                pk: `Post#${post.id.value}`,
                 sk: "Identity",
                 title: post.title,
                 content: post.content,
@@ -60,12 +60,12 @@ export class PostsSeeder {
           ...comments.map(comment => ({
             PutRequest: {
               Item: {
-                pk: `Post#${comment.postId}`,
-                sk: `Comment#${comment.id}`,
+                pk: `Post#${comment.postId.value}`,
+                sk: `Comment#${comment.id.value}`,
                 content: comment.content,
                 createdAt: comment.createdAt.toISOString(),
                 createdBy: comment.createdBy,
-                replyTo: comment.replyTo,
+                replyTo: comment.replyTo.value,
               },
             },
           })),

@@ -48,7 +48,7 @@ export class FairsSeeder {
             PutRequest: {
               Item: {
                 pk: `Fair#${fair.id}`,
-                sk: `Student#${student.email}`,
+                sk: `Student#${student.email.value}`,
                 student,
               },
             },
@@ -57,7 +57,7 @@ export class FairsSeeder {
             PutRequest: {
               Item: {
                 pk: `Fair#${fair.id}`,
-                sk: `Coach#${coach.email}`,
+                sk: `Coach#${coach.email.value}`,
                 coach,
               },
             },

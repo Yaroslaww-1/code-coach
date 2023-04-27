@@ -1,10 +1,11 @@
 import { Entity } from "../lib/Entity";
 import { RemoveMethods } from "../lib/typings";
+import { CoachEmail } from "./CoachEmail";
 import { Location } from "./Location";
 import { WorkExperience } from "./WorkExperience";
 
 export class Coach extends Entity<Coach> {
-  public email: string;
+  public email: CoachEmail;
   public name: string;
   public programmingLanguages: string[];
   public languages: string[];
