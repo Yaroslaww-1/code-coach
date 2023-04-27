@@ -1,16 +1,17 @@
-export class Community {
-  constructor(
-    private _name: string,
-    private _description: string,
-    private _membersCount: number
-  ) {}
+import { Entity } from "./lib/Entity";
+import { RemoveMethods } from "./lib/typings";
 
-  public name() { return this._name; }
-  public description() { return this._description; }
-  public membersCount() { return this._membersCount; }
+export class Community extends Entity<Community> {
+  public name: string;
+  public description: string;
+  public membersCount: number;
+
+  public static createNew(community: Omit<RemoveMethods<Community>, "membersCount">) {
+    return new Community({ ...community, membersCount: 0 })
+  }
 
   public join(userEmail: string) {
-    this._membersCount++;
+    this.membersCount++;
     // TODO: emit UserJoinedCommunityEvent()
   }
 }

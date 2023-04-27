@@ -1,9 +1,11 @@
-export class Student {
-  constructor(
-    private _email: string,
-    private _name: string
-  ) {}
+import { Entity } from "./lib/Entity";
+import { RemoveMethods } from "./lib/typings";
 
-  public email() { return this._email; }
-  public name() { return this._name; }
+export class Student extends Entity<Student> {
+  public email: string;
+  public name: string;
+
+  public static createNew(student: RemoveMethods<Student>) {
+    return new Student(student)
+  }
 }

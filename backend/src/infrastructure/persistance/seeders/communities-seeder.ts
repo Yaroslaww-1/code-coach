@@ -10,10 +10,19 @@ export class CommunitiesSeeder {
   ) {}
 
   public async seed() {
-    const communities = [
-      new Community("c/Vue", "The largest Vue developers community.", 4),
-      new Community("c/React", "The largest Vue developers community.", 3),
-    ];
+    const vue = Community.createNew({ name: "c/Vue", description: "The largest Vue developers community." });
+    const react = Community.createNew({ name: "c/React", description: "The largest Vue developers community." });
+
+    const communities = [vue, react];
+
+    vue.join("abe.ryland@gmail.com");
+    vue.join("abigail@gmail.com");
+    vue.join("barbara.amory@gmail.com");
+    vue.join("barbara.franklin@gmail.com");
+
+    react.join("adela.marchmont@gmail.com");
+    react.join("beatrice.lippincott@gmail.com");
+    react.join("bella.duveen@gmail.com");
 
     const members = [
       // Coaches
@@ -34,10 +43,10 @@ export class CommunitiesSeeder {
           ...communities.map(community => ({
             PutRequest: {
               Item: {
-                pk: `Community#${community.name()}`,
+                pk: `Community#${community.name}`,
                 sk: "Identity",
-                description: community.description(),
-                membersCount: community.membersCount(),
+                description: community.description,
+                membersCount: community.membersCount,
               },
             },
           })),

@@ -1,31 +1,34 @@
 import { nanoid } from "nanoid";
 import { Post } from "./Post";
+import { Entity } from "../lib/Entity";
 
-export class Comment {
-  private _createdAt: Date;
-
-  private constructor(
-    private _id: string,
-    private _content: string,
-    private _createdBy: string,
-    private _replyTo: string,
-    private _postId: string
-  ) {
-    this._createdAt = new Date();
-  }
+export class Comment extends Entity<Comment> {
+  public id: string;
+  public content: string;
+  public createdBy: string;
+  public replyTo: string;
+  public postId: string;
+  public createdAt: Date;
 
   public static replyToPost(post: Post, content: string, user: string): Comment {
-    return new Comment(nanoid(8), content, user, post.id(), post.id());
+    return new Comment({
+      id: nanoid(8),
+      content,
+      createdBy: user,
+      replyTo: post.id,
+      postId: post.id,
+      createdAt: new Date(),
+    });
   }
 
   public static replyToOtherComment(comment: Comment, content: string, user: string): Comment {
-    return new Comment(`${comment.id()}#${nanoid(8)}`, content, user, comment.id(), comment.postId());
+    return new Comment({
+      id: `${comment.id}#${nanoid(8)}`,
+      content,
+      createdBy: user,
+      replyTo: comment.id,
+      postId: comment.postId,
+      createdAt: new Date(),
+    });
   }
-
-  public id() { return this._id; }
-  public content() { return this._content; }
-  public createdBy() { return this._createdBy; }
-  public createdAt() { return this._createdAt; }
-  public replyTo() { return this._replyTo; }
-  public postId() { return this._postId; }
 }

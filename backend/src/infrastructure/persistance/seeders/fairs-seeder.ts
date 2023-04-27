@@ -14,18 +14,18 @@ export class FairsSeeder {
   ) {}
 
   public async seed() {
-    const fair = new Fair(
-      new Date(2023, 4, 20),
-      new Date(2023, 4, 21),
-      "Weekly Fair",
-      "c/Vue",
-    );
+    const fair = Fair.createNew({
+      startAt: new Date(2023, 4, 20),
+      endAt: new Date(2023, 4, 21),
+      title: "Weekly Fair",
+      community: "c/Vue",
+    });
 
     const students = this.studentsSeeder.students();
     const coaches = this.coachesSeeder.coaches();
 
-    students.forEach(student => fair.joinAsStudent(student.email()));
-    coaches.forEach(coach => fair.joinAsCoach(coach.email()));
+    students.forEach(student => fair.joinAsStudent(student.email));
+    coaches.forEach(coach => fair.joinAsCoach(coach.email));
 
     await this.dynamoDb.client().send(new BatchWriteCommand({
       RequestItems: {
@@ -33,22 +33,22 @@ export class FairsSeeder {
           {
             PutRequest: {
               Item: {
-                pk: `Fair#${fair.id()}`,
+                pk: `Fair#${fair.id}`,
                 sk: "Identity",
-                title: fair.title(),
-                startAt: fair.startAt().toISOString(),
-                endAt: fair.endAt().toISOString(),
-                community: fair.community(),
-                studentsCount: fair.studentsCount(),
-                coachesCount: fair.coachesCount(),
+                title: fair.title,
+                startAt: fair.startAt.toISOString(),
+                endAt: fair.endAt.toISOString(),
+                community: fair.community,
+                studentsCount: fair.studentsCount,
+                coachesCount: fair.coachesCount,
               },
             },
           },
           ...students.map(student => ({
             PutRequest: {
               Item: {
-                pk: `Fair#${fair.id()}`,
-                sk: `Student#${student.email()}`,
+                pk: `Fair#${fair.id}`,
+                sk: `Student#${student.email}`,
                 student,
               },
             },
@@ -56,8 +56,8 @@ export class FairsSeeder {
           ...coaches.map(coach => ({
             PutRequest: {
               Item: {
-                pk: `Fair#${fair.id()}`,
-                sk: `Coach#${coach.email()}`,
+                pk: `Fair#${fair.id}`,
+                sk: `Coach#${coach.email}`,
                 coach,
               },
             },

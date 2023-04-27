@@ -1,25 +1,20 @@
 import { nanoid } from "nanoid";
+import { Entity } from "../lib/Entity";
+import { RemoveMethods } from "../lib/typings";
 
-export class Post {
-  private _id: string;
-  private _createdAt: Date;
+export class Post extends Entity<Post> {
+  public id: string;
 
-  constructor(
-    private _title: string,
-    private _content: string,
-    private _createdBy: string,
-    private _community: string,
-    private _commentsCount: number
-  ) {
-    this._id = nanoid(8);
-    this._createdAt = new Date();
+  public title: string;
+  public content: string;
+  public community: string;
+
+  public createdBy: string;
+  public createdAt: Date;
+
+  public commentsCount: number;
+
+  public static createNew(post: Omit<RemoveMethods<Post>, "id" | "createdAt" | "commentsCount">) {
+    return new Post({ ...post, id: nanoid(8), commentsCount: 0, createdAt: new Date() })
   }
-
-  public id() { return this._id; }
-  public title() { return this._title; }
-  public content() { return this._content; }
-  public createdBy() { return this._createdBy; }
-  public createdAt() { return this._createdAt; }
-  public commentsCount() { return this._commentsCount; }
-  public community() { return this._community; }
 }
