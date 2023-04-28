@@ -6,6 +6,7 @@ import { StudentsSeeder } from "./students-seeder";
 import { CommunitiesSeeder } from "./communities-seeder";
 import { PostsSeeder } from "./post-seeder";
 import { FairsSeeder } from "./fairs-seeder";
+import { ChatsSeeder } from "./chats-seeder";
 
 @Injectable()
 export class SeedService implements OnApplicationBootstrap {
@@ -16,6 +17,7 @@ export class SeedService implements OnApplicationBootstrap {
     private readonly communitiesSeeder: CommunitiesSeeder,
     private readonly postsSeeder: PostsSeeder,
     private readonly fairsSeeder: FairsSeeder,
+    private readonly chatsSeeder: ChatsSeeder,
   ) {}
 
   async onApplicationBootstrap() {
@@ -25,14 +27,16 @@ export class SeedService implements OnApplicationBootstrap {
     await Promise.all([
       this.truncate("Users"),
       this.truncate("Communities"),
-      this.truncate("Posts")]);
+      this.truncate("Posts"),
+      this.truncate("Chats")]);
 
     await Promise.all([
       this.coachesSeeder.seed(),
       this.studentsSeeder.seed(),
       this.communitiesSeeder.seed(),
       this.postsSeeder.seed(),
-      this.fairsSeeder.seed()]);
+      this.fairsSeeder.seed(),
+      this.chatsSeeder.seed()]);
   }
 
   private async truncate(table: string) {
