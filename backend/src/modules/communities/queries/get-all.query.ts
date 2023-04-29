@@ -19,12 +19,6 @@ export class GetAllCommunitiesQuery {
       Limit: 10,
     });
 
-    const communities = await this.dynamoDb.client().send(query);
-    communities.Items = communities.Items.map(community => ({
-      ...community,
-      "name": (<string>community["pk"]).replace("Community#", ""),
-    }))
-
-    return communities;
+    return await this.dynamoDb.client().send(query);
   }
 }

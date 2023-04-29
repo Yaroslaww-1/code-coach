@@ -19,12 +19,6 @@ export class GetMessagesQuery {
       Limit: 10,
     });
 
-    const messages = await this.dynamoDb.client().send(query);
-    messages.Items = messages.Items.map(message => ({
-      ...message,
-      "id": (<string>message["sk"]).replace("Message#", ""),
-    }))
-
-    return messages;
+    return await this.dynamoDb.client().send(query);
   }
 }

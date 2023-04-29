@@ -19,12 +19,6 @@ export class GetAllPostsQuery {
       Limit: 10,
     });
 
-    const posts = await this.dynamoDb.client().send(query);
-    posts.Items = posts.Items.map(community => ({
-      ...community,
-      "id": (<string>community["pk"]).replace("Post#", ""),
-    }))
-
-    return posts;
+    return await this.dynamoDb.client().send(query);
   }
 }

@@ -19,14 +19,6 @@ export class GetAllStudentsQuery {
       Limit: 10,
     });
 
-    const students = await this.dynamoDb.client().send(query);
-
-    students.Items = students.Items.map(student => ({
-      ...student,
-      "email": (<string>student["pk"]).replace("Student#", ""),
-      "name": student["sk"],
-    }))
-
-    return students;
+    return await this.dynamoDb.client().send(query);
   }
 }

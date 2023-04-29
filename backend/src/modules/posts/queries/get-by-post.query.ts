@@ -19,15 +19,14 @@ export class GetByPostQuery {
       Limit: 10,
     });
 
+
     const comments = await this.dynamoDb.client().send(query);
+
     comments.Items = comments.Items.map(comment => {
-      const id = (<string>comment["sk"]).split("#").pop();
-      const replies = comments.Items.filter(comment => comment.replyTo === id); 
+      const replies = comments.Items.filter(c => c.replyTo === comment.id); 
 
       return {
         ...comment,
-        "postId": (<string>comment["pk"]).replace("Post#", ""),
-        id,
         replies,
       }})
       .filter(comment => comment["replyTo"] === postId)

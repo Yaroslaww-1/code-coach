@@ -1,5 +1,1 @@
-import { StringId } from "../lib/StringId";
-
-export class ChatId extends StringId {
-
-}
+export type ChatId = string;

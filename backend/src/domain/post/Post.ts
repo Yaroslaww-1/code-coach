@@ -13,9 +13,7 @@ export class Post extends Entity<Post> {
   public createdBy: string;
   public createdAt: Date;
 
-  public commentsCount: number;
-
-  public static createNew(post: Omit<RemoveMethods<Post>, "id" | "createdAt" | "commentsCount">) {
-    return new Post({ ...post, id: new PostId(nanoid(8)), commentsCount: 0, createdAt: new Date() })
+  public static createNew(post: Omit<RemoveMethods<Post>, "id" | "createdAt">) {
+    return new Post({ ...post, id: nanoid(8), createdAt: new Date() })
   }
 }

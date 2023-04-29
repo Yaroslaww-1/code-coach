@@ -11,7 +11,7 @@ export class GetAllFairsQuery {
 
   async execute() {
     const query = new ScanCommand({
-      TableName: "Posts",
+      TableName: "Fairs",
       Select: Select.ALL_ATTRIBUTES,
       FilterExpression: "contains(#pk, :pk) and #sk = :sk",
       ExpressionAttributeNames: { "#pk": "pk", "#sk": "sk" },
@@ -19,12 +19,6 @@ export class GetAllFairsQuery {
       Limit: 10,
     });
 
-    const fairs = await this.dynamoDb.client().send(query);
-    fairs.Items = fairs.Items.map(fair => ({
-      ...fair,
-      "id": (<string>fair["pk"]).replace("Fair#", ""),
-    }))
-
-    return fairs;
+    return await this.dynamoDb.client().send(query);
   }
 }

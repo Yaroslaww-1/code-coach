@@ -14,6 +14,6 @@ export class Message extends ValueObject<Message> {
   public author: CoachEmail | StudentEmail;
 
   public static createNew(message: Omit<RemoveMethods<Message>, "id">) {
-    return new Message({ ...message, id: new MessageId(nanoid(8)) })
+    return new Message({ ...message, id: nanoid(8) })
   }
 }

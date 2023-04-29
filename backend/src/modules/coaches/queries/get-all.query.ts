@@ -19,13 +19,6 @@ export class GetAllCoachesQuery {
       Limit: 10,
     });
 
-    const coaches = await this.dynamoDb.client().send(query);
-    coaches.Items = coaches.Items.map(coach => ({
-      ...coach,
-      "email": (<string>coach["pk"]).replace("Coach#", ""),
-      "name": coach["sk"],
-    }))
-
-    return coaches;
+    return await this.dynamoDb.client().send(query);
   }
 }
