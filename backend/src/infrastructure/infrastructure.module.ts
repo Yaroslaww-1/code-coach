@@ -6,6 +6,6 @@ import { RepositoriesModule } from "./persistance/repositories/repositories.modu
 @Module({
   imports: [AwsModule, RepositoriesModule, SeedModule],
   providers: [],
-  exports: [AwsModule],
+  exports: [AwsModule, RepositoriesModule],
 })
 export class InfrastructureModule {}

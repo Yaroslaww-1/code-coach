@@ -5,26 +5,26 @@ import { ChatId } from "./ChatId";
 import { Message } from "./Message";
 import { CoachEmail } from "../coach/CoachEmail";
 import { StudentEmail } from "../student/StudentEmail";
+import { MessageSent } from "./events/MessageSent.event";
 
 export class Chat extends Entity<Chat> {
   public id: ChatId;
   public member1: CoachEmail | StudentEmail;
   public member2: CoachEmail | StudentEmail;
 
-  public messages: Message[];
-
   public static createNew(chat: Omit<RemoveMethods<Chat>, "id" | "messages">) {
-    return new Chat({ ...chat, id: nanoid(8), messages: [] })
+    return new Chat({ ...chat, id: nanoid(8) })
   }
 
-  public send(message: string, userId: CoachEmail | StudentEmail) {
+  public send(messageContent: string, userId: CoachEmail | StudentEmail) {
     // TODO: check whether userId is member1/2
-    this.messages.push(Message.createNew({
-      content: message,
+    const message = Message.createNew({
+      content: messageContent,
       author: userId,
       createdAt: new Date(),
       chat: this.id,
-    }))
-    // TODO: new MessageSentEvent()
+    });
+
+    this.events.push(new MessageSent(message));
   }
 }
