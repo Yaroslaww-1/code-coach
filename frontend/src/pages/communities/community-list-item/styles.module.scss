@@ -1,5 +1,7 @@
+@import '../../../variables.scss';
+
 .root {
   margin: 10px;
-  background-color: rgb(224, 239, 255);
+  background-color: $colorLighterGray;
   border-radius: 5px;
 }

@@ -1,0 +1,38 @@
+@import '../../../variables.scss';
+
+.general {
+  background-color: $colorLightBlue;
+  padding: 12px 20px 12px 20px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logoAndName {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    text-align: center;
+
+    .name {
+      margin-left: 12px;
+      font-size: 36px;
+      font-weight: 600;
+    }
+  
+    .members {
+      color: $colorDarkGray;
+      margin-left: 12px;
+    }
+  }
+}
+
+.details {
+  background-color: $colorLightBlue;
+  padding: 6px 20px 6px 20px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}

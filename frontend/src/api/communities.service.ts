@@ -7,7 +7,13 @@ const endpoint = "/communities";
 class CommunitiesService {
   async getAll(): Promise<Community[]> {
     const communities = await api.get<any[]>(endpoint);
-    return communities.map(({ name, description, isJoined }) => new Community(name, description, isJoined));
+    return communities.map(({ name, description, isJoined, membersCount }) =>
+      new Community(name, description, isJoined, membersCount));
+  }
+
+  async getById(id: string): Promise<Community> {
+    const { name, description, isJoined, membersCount } = await api.get<any>(`${endpoint}/${id}`);
+    return new Community(name, description, isJoined, membersCount);
   }
 
   async joinCommunity(communityId: string): Promise<void> {

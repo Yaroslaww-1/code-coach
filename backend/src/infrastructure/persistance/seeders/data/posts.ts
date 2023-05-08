@@ -9,7 +9,7 @@ class Posts {
         title: "What should I use - Vite or Nuxt?",
         content: "I'm very new to Vue and I have a couple of questions. I want to start my new pet-project using Vue so that I could add Vue to my resume. And Vite or Nuxt are essentials to have a nice pet-project I guess. My main question is if I choose to use Nuxt does it affect my back-end and do I need to rewrite some code there so that Nuxt would function better?",
         createdBy: "barbara.amory@gmail.com",
-        community: "c/Vue",
+        community: "vue",
       }),
       Post.createNew({
         title: "Vue+Nuxt: Scope of .this and context, how do I know I have access to my nuxt module",
@@ -22,7 +22,7 @@ class Posts {
         TLDR: why do I sometimes have access to modules in my components through "this.$module" and sometimes only through importing "useContext" ?
         Thanks in advance!`,
         createdBy: "barbara.franklin@gmail.com",
-        community: "c/Vue",
+        community: "vue",
       }),
     ];
   }

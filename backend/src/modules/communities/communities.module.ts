@@ -5,10 +5,11 @@ import { GetAllCommunitiesQuery } from "src/modules/communities/queries/get-all.
 import { AuthModule } from "../auth/auth.module";
 import { JoinCommunityCommand } from "./commands/join-community.command";
 import { LeaveCommunityCommand } from "./commands/leave-community.command";
+import { GetByIdCommunityQuery } from "./queries/get-by-id.query";
 
 @Module({
   imports: [InfrastructureModule, AuthModule],
   controllers: [CommunitiesController],
-  providers: [GetAllCommunitiesQuery, JoinCommunityCommand, LeaveCommunityCommand],
+  providers: [GetAllCommunitiesQuery, GetByIdCommunityQuery, JoinCommunityCommand, LeaveCommunityCommand],
 })
 export class CommunitiesModule {}

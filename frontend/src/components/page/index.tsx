@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 interface IProps {
   classes?: {
     root?: string;
-  }
+  },
 }
 
 export const Page: React.FC<PropsWithChildren<IProps>> = ({

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Grid from "@mui/material/Unstable_Grid2";
 import { Page } from "components/page";
 import { Post } from "domain/post";
 import postsService from "api/posts.service";
-import { PostListItem } from "./post-list-item";
+import { PostsList } from "./post-list";
 
 export const PostsFeedPage: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -19,13 +18,7 @@ export const PostsFeedPage: React.FC = () => {
 
   return (
     <Page>
-      <Grid container spacing={2}>
-        {posts.map(post => (
-          <Grid xs={12} key={post.id} display="flex" justifyContent="center" alignItems="center">
-            <PostListItem post={post} />
-          </Grid>
-        ))}
-      </Grid>
+      <PostsList posts={posts} />
     </Page>
   );
 };

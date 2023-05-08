@@ -6,6 +6,7 @@ export class Community {
     public name: string,
     public description: string,
     public isJoined: boolean,
+    public membersCount: number,
   ) {
     makeAutoObservable(this);
   }

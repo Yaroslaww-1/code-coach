@@ -15,7 +15,6 @@ export class Post {
   }
 
   public createdAtReadable() {
-    console.log(this.createdAt);
     return this.createdAt?.toLocaleDateString();
   }
 }
