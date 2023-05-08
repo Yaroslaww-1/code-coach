@@ -9,15 +9,13 @@ export class GetMineQuery {
     private readonly dynamoDb: DynamoDbService
   ) {}
 
-  async execute() {
-    const identity = "barbara.amory@gmail.com"
-
+  async execute(authenticatedUserId: string) {
     const query = new ScanCommand({
       TableName: "Chats",
       Select: Select.ALL_ATTRIBUTES,
       FilterExpression: "#member1 = :member or #member2 = :member",
       ExpressionAttributeNames: { "#member1": "member1", "#member2": "member2" },
-      ExpressionAttributeValues: { ":member": identity },
+      ExpressionAttributeValues: { ":member": authenticatedUserId },
       Limit: 10,
     });
 

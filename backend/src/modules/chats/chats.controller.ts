@@ -1,6 +1,7 @@
 import { Controller, Get, Param } from "@nestjs/common";
 import { GetMineQuery } from "./queries/get-mine.query";
 import { GetMessagesQuery } from "./queries/get-messages.query";
+import { Identity } from "../auth/identity";
 
 @Controller("chats")
 export class ChatsController {
@@ -11,7 +12,7 @@ export class ChatsController {
 
   @Get("mine")
   getMine() {
-    return this.getMineQuery.execute();
+    return this.getMineQuery.execute(Identity.STUDENT);
   }
 
   @Get(":chatId/messages")

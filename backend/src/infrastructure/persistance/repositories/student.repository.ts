@@ -1,8 +1,10 @@
-import { PutCommand } from "@aws-sdk/lib-dynamodb";
+import { QueryCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { DynamoDbService } from "../../aws/dynamodb.service";
 import { Student } from "src/domain/student/Student";
 import { Injectable } from "@nestjs/common";
 import { Repository } from "./repository";
+import { StudentEmail } from "src/domain/student/StudentEmail";
+import { Select } from "@aws-sdk/client-dynamodb";
 
 @Injectable()
 export class StudentRepository implements Repository<Student> {
@@ -21,5 +23,18 @@ export class StudentRepository implements Repository<Student> {
         ...JSON.parse(JSON.stringify(student)),
       },
     }));
+  }
+
+  async findOne(id: StudentEmail): Promise<Student> {
+    const query = new QueryCommand({
+      TableName: "Users",
+      Select: Select.ALL_ATTRIBUTES,
+      KeyConditionExpression: "#pk = :pk",
+      ExpressionAttributeNames: { "#pk": "pk" },
+      ExpressionAttributeValues: { ":pk": `Student#${id}` },
+    });
+
+    const student = (await this.dynamoDb.client().send(query)).Items[0] as any;
+    return Student.createNew(student);
   }
 }

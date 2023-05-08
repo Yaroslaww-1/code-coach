@@ -1,25 +1,30 @@
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
+import List from "@mui/material/List";
+import { observer } from "mobx-react-lite";
 import { Page } from "components/page";
 import { Community } from "domain/community";
 import { CommunityListItem } from "./community-list-item";
 import communitiesService from "api/communities.service";
 
-export const Communities: React.FC = () => {
-  const communities = [
-    new Community("id1", "r/React", "React developers community"),
-    new Community("id2", "r/Vue", "Vue developers community"),
-  ];
+export const Communities: React.FC = observer(() => {
+  const [communities, setCommunities] = useState<Community[]>([]);
 
   useEffect(() => {
-    communitiesService.getAll().then(console.log);
-  });
+    const fetch = async () => {
+      const communities = await communitiesService.getAll();
+      setCommunities(communities);
+    };
+
+    fetch();
+  }, []);
 
   return (
     <Page>
-      {communities.map(community => (
-        <CommunityListItem key={community.id} community={community} />
-      ))}
+      <List sx={{ width: "100%", maxWidth: 800, bgcolor: "background.paper" }}>
+        {communities.map(community => (
+          <CommunityListItem key={community.name} community={community} />
+        ))}
+      </List>
     </Page>
   );
-};
+});

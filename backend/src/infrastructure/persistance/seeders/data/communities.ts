@@ -4,8 +4,8 @@ class Communities {
   public readonly data: Community[];
 
   constructor() {
-    const vue = Community.createNew({ name: "c/Vue", description: "The largest Vue developers community." });
-    const react = Community.createNew({ name: "c/React", description: "The largest Vue developers community." });
+    const vue = Community.createNew({ name: "vue", description: "The largest Vue developers community." });
+    const react = Community.createNew({ name: "react", description: "The largest Vue developers community." });
 
     const communities = [vue, react];
 
