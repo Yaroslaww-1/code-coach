@@ -1,0 +1,26 @@
+@import '../../../variables.scss';
+
+.root {
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid $colorLightBlue;
+  border-radius: 4px;
+  margin: 8px;
+  padding: 8px;
+  // background-color: $colorLightGray;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .createdBy {
+      margin-left: 12px;
+    }
+  }
+
+  .content {
+
+  }
+}

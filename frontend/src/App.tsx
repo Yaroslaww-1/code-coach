@@ -6,6 +6,7 @@ import { Communities } from "pages/communities";
 
 import { PostsFeedPage } from "pages/posts-feed";
 import { CommunityPage } from "pages/community";
+import { PostPage } from "pages/post";
 
 function App() {
   return (
@@ -16,7 +17,10 @@ function App() {
             <Route path={AppRoute.COMMUNITY} element={<CommunityPage />} />
             <Route path={""} element={<Communities />} />
           </Route>
-          <Route path={AppRoute.POSTS} element={<PostsFeedPage />} />
+          <Route path={AppRoute.POSTS} >
+            <Route path={AppRoute.POST} element={<PostPage />} />
+            <Route path={""} element={<PostsFeedPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

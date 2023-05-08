@@ -4,7 +4,7 @@ import { Injectable } from "@nestjs/common";
 import { DynamoDbService } from "src/infrastructure/aws/dynamodb.service";
 
 @Injectable()
-export class GetByPostQuery {
+export class GetByIdPostQuery {
   constructor (
     private readonly dynamoDb: DynamoDbService
   ) {}
@@ -15,22 +15,9 @@ export class GetByPostQuery {
       Select: Select.ALL_ATTRIBUTES,
       FilterExpression: "#pk = :pk and contains(#sk, :sk)",
       ExpressionAttributeNames: { "#pk": "pk", "#sk": "sk" },
-      ExpressionAttributeValues: { ":pk": `Post#${postId}`, ":sk": "Comment#" },
-      Limit: 10,
+      ExpressionAttributeValues: { ":pk": `Post#${postId}`, ":sk": "Identity#" },
     });
 
-
-    const comments = await this.dynamoDb.client().send(query);
-
-    comments.Items = comments.Items.map(comment => {
-      const replies = comments.Items.filter(c => c.replyTo === comment.id); 
-
-      return {
-        ...comment,
-        replies,
-      }})
-      .filter(comment => comment["replyTo"] === postId)
-
-    return comments;
+    return (await this.dynamoDb.client().send(query)).Items[0];
   }
 }

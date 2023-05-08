@@ -12,14 +12,22 @@ import ShareIcon from "@mui/icons-material/Share";
 import { Post } from "domain/post";
 import { CommunityLogoName } from "pages/communities/community-logo-name";
 import styles from "./styles.module.scss";
+import { generatePath, useNavigate } from "react-router-dom";
+import { AppRoute } from "common/enums/app-route.enum";
 
 interface IProps {
   post: Post;
 }
 
 export const PostListItem: React.FC<IProps> = ({ post }) => {
+  const navigate = useNavigate();
+
+  const goToPost = () => {
+    navigate(generatePath(AppRoute.POST, { id: post.id }));
+  };
+
   return (
-    <Card sx={{ maxWidth: 800 }} classes={{ root: styles.root }}>
+    <Card sx={{ maxWidth: 800 }} classes={{ root: styles.root }} onClick={goToPost}>
       <CardHeader
         avatar={
           <CommunityLogoName

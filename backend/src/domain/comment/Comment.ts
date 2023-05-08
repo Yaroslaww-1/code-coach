@@ -13,7 +13,7 @@ export class Comment extends Entity<Comment> {
 
   public static replyToPost(postId: PostId, content: string, user: string): Comment {
     return new Comment({
-      id: nanoid(8),
+      id: `${postId}#${nanoid(8)}`,
       content,
       createdBy: user,
       replyTo: postId,
