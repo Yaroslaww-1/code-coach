@@ -1,0 +1,9 @@
+.root {
+  display: flex;
+  flex-direction: row;
+
+  span {
+    margin-left: 12px;
+    font-weight: bold;
+  }
+}

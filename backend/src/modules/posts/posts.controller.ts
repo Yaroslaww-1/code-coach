@@ -9,7 +9,7 @@ export class PostsController {
     private readonly getByPostQuery: GetByPostQuery
   ) {}
 
-  @Get()
+  @Get("feed")
   getAll() {
     return this.getAllPostsQuery.execute();
   }

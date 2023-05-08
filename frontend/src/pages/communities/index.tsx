@@ -18,7 +18,7 @@ export const Communities: React.FC = () => {
   return (
     <Page>
       {communities.map(community => (
-        <CommunityListItem key={community.id()} community={community} />
+        <CommunityListItem key={community.id} community={community} />
       ))}
     </Page>
   );

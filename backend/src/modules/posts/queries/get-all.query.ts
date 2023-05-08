@@ -19,6 +19,6 @@ export class GetAllPostsQuery {
       Limit: 10,
     });
 
-    return await this.dynamoDb.client().send(query);
+    return (await this.dynamoDb.client().send(query)).Items;
   }
 }
