@@ -1,0 +1,8 @@
+@import '../../../variables.scss';
+
+.root {
+  margin-top: 12px;
+
+  border-color: $colorLightBlue;
+  border: 1px groove $colorLightBlue;
+}

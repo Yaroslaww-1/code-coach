@@ -11,6 +11,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { Post } from "domain/post";
 import { CommunityLogoName } from "pages/communities/community-logo-name";
+import styles from "./styles.module.scss";
 
 interface IProps {
   post: Post;
@@ -18,7 +19,7 @@ interface IProps {
 
 export const PostListItem: React.FC<IProps> = ({ post }) => {
   return (
-    <Card sx={{ maxWidth: 600 }}>
+    <Card sx={{ maxWidth: 800 }} classes={{ root: styles.root }}>
       <CardHeader
         avatar={
           <CommunityLogoName

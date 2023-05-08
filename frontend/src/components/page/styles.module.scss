@@ -1,3 +1,7 @@
+@import '../../variables.scss';
+
 .page {
-  margin: 0px 40px 0px 40px;
+  padding: 0px 40px 0px 40px;
+  height: 100vh;
+  background-color: $colorLighterGray;
 }
