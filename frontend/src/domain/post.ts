@@ -1,3 +1,5 @@
+import postsService from "api/posts.service";
+
 export class Post {
   constructor(
     public id: string,
@@ -20,5 +22,9 @@ export class Post {
 
   public createdAtReadable() {
     return this.createdAt?.toLocaleDateString();
+  }
+
+  public reply(content: string) {
+    postsService.replyToPost(this.id, content);
   }
 }

@@ -1,8 +1,10 @@
-import { Controller, Get, Param, Query } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { GetAllPostsQuery } from "./queries/get-all.query";
 import { GetCommentsByPostQuery } from "./queries/get-comments-by-post.query";
 import { GetByCommunityIdPostsQuery } from "./queries/get-by-community-id.query";
 import { GetByIdPostQuery } from "./queries/get-by-id.query";
+import { ReplyToPostCommand } from "./commands/reply-to-post.command";
+import { Identity } from "../auth/identity";
 
 @Controller("posts")
 export class PostsController {
@@ -10,7 +12,8 @@ export class PostsController {
     private readonly getAllPostsQuery: GetAllPostsQuery,
     private readonly getByCommunityIdPostsQuery: GetByCommunityIdPostsQuery,
     private readonly getCommentsByPostQuery: GetCommentsByPostQuery,
-    private readonly getByIdPostQuery: GetByIdPostQuery
+    private readonly getByIdPostQuery: GetByIdPostQuery,
+    private readonly replyToPostCommand: ReplyToPostCommand
   ) {}
 
   @Get("feed")
@@ -31,5 +34,10 @@ export class PostsController {
   @Get(":id/comments")
   getByPost(@Param("id") id: string) {
     return this.getCommentsByPostQuery.execute(id);
+  }
+
+  @Post(":id/reply")
+  reply(@Param("id") id: string, @Body("content") content: string) {
+    return this.replyToPostCommand.execute(Identity.STUDENT, id, content);
   }
 }

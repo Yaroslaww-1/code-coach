@@ -31,6 +31,10 @@ class PostsService {
       { id, content, createdBy, createdAt, replyTo }) =>
       new Comment(id, content, createdBy, new Date(Date.parse(createdAt)), replyTo));
   }
+
+  async replyToPost(postId: string, content: string): Promise<void> {
+    await api.post<any[]>(`${endpoint}/${encodeURIComponent(postId)}/reply`, { content });
+  }
 }
 
 export default new PostsService();
