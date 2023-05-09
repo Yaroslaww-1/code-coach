@@ -1,8 +1,8 @@
-import { Entity } from "../lib/Entity";
-import { RemoveMethods } from "../lib/typings";
+import { Entity } from "../../lib/Entity";
+import { RemoveMethods } from "../../lib/typings";
 import { CoachEmail } from "./CoachEmail";
-import { Location } from "./Location";
-import { WorkExperience } from "./WorkExperience";
+import { WorkExperience } from "../WorkExperience";
+import { Location } from "../Location";
 
 export class Coach extends Entity<Coach> {
   public email: CoachEmail;

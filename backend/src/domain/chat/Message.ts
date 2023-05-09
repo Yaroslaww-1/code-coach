@@ -2,8 +2,8 @@ import { nanoid } from "nanoid";
 import { ValueObject } from "../lib/ValueObject";
 import { RemoveMethods } from "../lib/typings";
 import { MessageId } from "./MessageId";
-import { StudentEmail } from "../student/StudentEmail";
-import { CoachEmail } from "../coach/CoachEmail";
+import { StudentEmail } from "../user/student/StudentEmail";
+import { CoachEmail } from "../user/coach/CoachEmail";
 import { ChatId } from "./ChatId";
 
 export class Message extends ValueObject<Message> {

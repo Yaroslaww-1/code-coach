@@ -3,8 +3,8 @@ import { Entity } from "../lib/Entity";
 import { RemoveMethods } from "../lib/typings";
 import { ChatId } from "./ChatId";
 import { Message } from "./Message";
-import { CoachEmail } from "../coach/CoachEmail";
-import { StudentEmail } from "../student/StudentEmail";
+import { CoachEmail } from "../user/coach/CoachEmail";
+import { StudentEmail } from "../user/student/StudentEmail";
 import { MessageSent } from "./events/MessageSent.event";
 
 export class Chat extends Entity<Chat> {

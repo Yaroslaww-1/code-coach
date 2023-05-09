@@ -13,6 +13,6 @@ export const UserName: React.FC<IProps> = ({ email, className = "" }) => {
   const name = email.split("@", 1)[0];
 
   return (
-    <Link to={`${AppRoute.USERS}/${name}`} className={`${styles.root} ${className}`}>{name}</Link>
+    <Link to={`${AppRoute.USERS}/${email}`} className={`${styles.root} ${className}`} onClick={e => e.stopPropagation()}>{name}</Link>
   );
 };

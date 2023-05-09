@@ -1,6 +1,6 @@
-import { Location } from "src/domain/coach/Location";
-import { Coach } from "src/domain/coach/Coach";
-import { WorkExperience } from "src/domain/coach/WorkExperience";
+import { Location } from "src/domain/user/Location";
+import { Coach } from "src/domain/user/coach/Coach";
+import { WorkExperience } from "src/domain/user/WorkExperience";
 
 class Coaches {
   public readonly data: Coach[];

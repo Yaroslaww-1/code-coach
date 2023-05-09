@@ -1,10 +1,10 @@
 import { nanoid } from "nanoid";
 import { Entity } from "../lib/Entity";
 import { RemoveMethods } from "../lib/typings";
-import { Student } from "../student/Student";
-import { Coach } from "../coach/Coach";
-import { StudentEmail } from "../student/StudentEmail";
-import { CoachEmail } from "../coach/CoachEmail";
+import { Student } from "../user/student/Student";
+import { Coach } from "../user/coach/Coach";
+import { StudentEmail } from "../user/student/StudentEmail";
+import { CoachEmail } from "../user/coach/CoachEmail";
 
 export class Fair extends Entity<Fair> {
   public id: string;

@@ -1,0 +1,19 @@
+@import '../../../variables.scss';
+
+.root {
+  background-color: $colorLightBlue;
+  padding: 12px 20px 12px 20px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  .name {
+    margin-left: 12px;
+    font-size: 36px;
+    font-weight: 600;
+  }
+}
+

@@ -1,9 +1,9 @@
 import { QueryCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { DynamoDbService } from "../../aws/dynamodb.service";
-import { Student } from "src/domain/student/Student";
+import { Student } from "src/domain/user/student/Student";
 import { Injectable } from "@nestjs/common";
 import { Repository } from "./repository";
-import { StudentEmail } from "src/domain/student/StudentEmail";
+import { StudentEmail } from "src/domain/user/student/StudentEmail";
 import { Select } from "@aws-sdk/client-dynamodb";
 
 @Injectable()
@@ -19,7 +19,8 @@ export class StudentRepository implements Repository<Student> {
       TableName: "Users",
       Item: {
         pk: `Student#${student.email}`,
-        sk: student.name,
+        sk: "Identity",
+        role: "Student",
         ...JSON.parse(JSON.stringify(student)),
       },
     }));

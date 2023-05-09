@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { StudentRepository } from "src/infrastructure/persistance/repositories/student.repository";
 import { CoachRepository } from "src/infrastructure/persistance/repositories/coach.repository";
-import { Student } from "src/domain/student/Student";
-import { Coach } from "src/domain/coach/Coach";
+import { Student } from "src/domain/user/student/Student";
+import { Coach } from "src/domain/user/coach/Coach";
 
 @Injectable()
 export class IdentityManagerService {

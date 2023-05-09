@@ -2,7 +2,7 @@ import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { DynamoDbService } from "../../aws/dynamodb.service";
 import { Injectable } from "@nestjs/common";
 import { Repository } from "./repository";
-import { Coach } from "src/domain/coach/Coach";
+import { Coach } from "src/domain/user/coach/Coach";
 
 @Injectable()
 export class CoachRepository implements Repository<Coach> {
@@ -17,7 +17,8 @@ export class CoachRepository implements Repository<Coach> {
       TableName: "Users",
       Item: {
         pk: `Coach#${coach.email}`,
-        sk: coach.name,
+        sk: "Identity",
+        role: "Coach",
         ...JSON.parse(JSON.stringify(coach)),
       },
     }));
