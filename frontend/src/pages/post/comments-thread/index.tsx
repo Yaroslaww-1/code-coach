@@ -12,8 +12,6 @@ interface IProps {
 export const CommentsThread: React.FC<IProps> = observer(({ level, parent, comments }) => {
   const rootComments = comments.filter(comment => comment.replyTo === parent);
 
-  console.log(level, rootComments);
-
   return (
     <div style={{ marginLeft: level === 0 ? 0 : 50 }}>
       {rootComments.map(rootComment => (

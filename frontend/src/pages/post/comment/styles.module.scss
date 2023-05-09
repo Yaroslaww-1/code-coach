@@ -1,29 +1,48 @@
 @import '../../../variables.scss';
 
 .root {
-  display: flex;
-  flex-direction: column;
-
-  border: 1px solid $colorLightBlue;
-  border-radius: 4px;
   margin: 8px;
-  padding: 8px;
-  background-color: $colorLightGray;
 
-  .user {
+  .comment {
     display: flex;
-    flex-direction: row;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
 
-    .userName {
-      margin-left: 12px;
-      font-weight: bold;
+    border: 1px solid $colorLightBlue;
+    border-radius: 4px;
+    padding: 8px;
+    background-color: $colorLightGray;
+
+    .user {
+      display: flex;
+      flex-direction: row;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .userName {
+        margin-left: 12px;
+        font-weight: bold;
+      }
+    }
+
+    .content {
+
+    }
+
+    .actions {
+      
     }
   }
 
-  .content {
+  .reply {
+    width: 100%;
+    margin-top: 8px;
 
+    display: flex;
+    flex-direction: row;
+
+    .replyInput {
+      width: 95%;
+    }
   }
 }

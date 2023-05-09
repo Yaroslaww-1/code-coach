@@ -1,3 +1,4 @@
+import commentsService from "api/comments.service";
 import { makeAutoObservable } from "mobx";
 
 export class Comment {
@@ -17,5 +18,9 @@ export class Comment {
 
   public createdByUrl() {
     return "https://styles.redditmedia.com/t5_2qh84/styles/communityIcon_pc026nky6a221.png";
+  }
+
+  public reply(content: string) {
+    commentsService.replyToComment(this.id, content);
   }
 }

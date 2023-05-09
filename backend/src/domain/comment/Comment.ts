@@ -2,6 +2,7 @@ import { nanoid } from "nanoid";
 import { Entity } from "../lib/Entity";
 import { CommentId } from "./CommentId";
 import { PostId } from "../post/PostId";
+import { RemoveMethods } from "../lib/typings";
 
 export class Comment extends Entity<Comment> {
   public id: CommentId;
@@ -10,6 +11,10 @@ export class Comment extends Entity<Comment> {
   public replyTo: PostId | CommentId;
   public postId: PostId;
   public createdAt: Date;
+
+  public static initialize(comment: RemoveMethods<Comment>) {
+    return new Comment({ ...comment })
+  }
 
   public static replyToPost(postId: PostId, content: string, user: string): Comment {
     return new Comment({
@@ -22,13 +27,13 @@ export class Comment extends Entity<Comment> {
     });
   }
 
-  public static replyToOtherComment(comment: Comment, content: string, user: string): Comment {
+  public replyToOtherComment(content: string, user: string): Comment {
     return new Comment({
-      id: `${comment.id}#${nanoid(8)}`,
+      id: `${this.id}#${nanoid(8)}`,
       content,
       createdBy: user,
-      replyTo: comment.id,
-      postId: comment.postId,
+      replyTo: this.id,
+      postId: this.postId,
       createdAt: new Date(),
     });
   }

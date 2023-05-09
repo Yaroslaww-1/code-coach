@@ -6,8 +6,18 @@ import { PostsModule } from "./posts/posts.module";
 import { FairsModule } from "./fairs/fairs.module";
 import { ChatsModule } from "./chats/chats.module";
 import { AuthModule } from "./auth/auth.module";
+import { CommentsModule } from "./comments/comments.module";
 
 @Module({
-  imports: [CommunitiesModule, CoachesModule, StudentsModule, PostsModule, FairsModule, ChatsModule, AuthModule],
+  imports: [
+    CommunitiesModule,
+    CoachesModule,
+    StudentsModule,
+    PostsModule,
+    FairsModule,
+    ChatsModule,
+    AuthModule,
+    CommentsModule,
+  ],
 })
 export class AppModule {}
