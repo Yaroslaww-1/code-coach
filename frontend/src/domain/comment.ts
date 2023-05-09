@@ -12,10 +12,6 @@ export class Comment {
     makeAutoObservable(this);
   }
 
-  public createdByName() {
-    return this.createdBy.split("@", 1)[0];
-  }
-
   public createdByUrl() {
     return "https://styles.redditmedia.com/t5_2qh84/styles/communityIcon_pc026nky6a221.png";
   }

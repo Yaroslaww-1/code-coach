@@ -14,6 +14,7 @@ import { CommunityLogoName } from "pages/communities/community-logo-name";
 import styles from "./styles.module.scss";
 import { generatePath, useNavigate } from "react-router-dom";
 import { AppRoute } from "common/enums/app-route.enum";
+import { UserName } from "pages/profile/user-name";
 
 interface IProps {
   post: Post;
@@ -36,7 +37,7 @@ export const PostListItem: React.FC<IProps> = ({ post }) => {
           />
         }
         title={post.title}
-        subheader={`Created by ${post.createdByName()} at ${post.createdAtReadable()}`}
+        subheader={<>Created by <UserName email={post.createdBy} /> at {post.createdAtReadable()}</>}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary" style={{ whiteSpace: "pre-line" }}>

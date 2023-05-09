@@ -4,6 +4,7 @@ import { Avatar, Button, TextField } from "@mui/material";
 import { observer } from "mobx-react-lite";
 
 import styles from "./styles.module.scss";
+import { UserName } from "pages/profile/user-name";
 
 interface IProps {
   comment: Comment;
@@ -23,7 +24,7 @@ export const CommentComponent: React.FC<IProps> = observer(({ comment }) => {
       <div className={styles.comment}>
         <div className={styles.user}>
           <Avatar src={comment.createdByUrl()}/>
-          <span className={styles.userName}>{comment.createdByName()}</span>
+          <UserName email={comment.createdBy} className={styles.userName} />
         </div>
         <div className={styles.content}>
           <p>{comment.content}</p>

@@ -6,6 +6,8 @@ import { Post } from "domain/post";
 import { Link } from "react-router-dom";
 import { AppRoute } from "common/enums/app-route.enum";
 import { Avatar, Button, TextField } from "@mui/material";
+import { CommunityName } from "pages/community/community-name";
+import { UserName } from "pages/profile/user-name";
 
 interface IProps {
   post: Post;
@@ -25,8 +27,9 @@ export const PostDetailed: React.FC<IProps> = observer(({ post }) => {
       <div className={styles.header}>
         <Avatar src={post.createdByUrl()}/>
         <div className={styles.createdBy}>
-          <span>{post.createdByName()} posted at </span>
-          <Link to={`${AppRoute.COMMUNITIES}/${post.community}`}>{post.community}</Link>
+          <UserName email={post.createdBy} />
+          <span> posted at </span>
+          <CommunityName name={post.community} />
         </div>
       </div>
       <div className={styles.content}>
