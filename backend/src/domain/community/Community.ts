@@ -24,8 +24,6 @@ export class Community extends Entity<Community> {
 
   public leave(userId: string) {
     this.events.push(new UserLeftCommunityEvent(userId, this.name));
-    console.log(this.membersCount);
     this.membersCount--;
-    console.log(this.membersCount);
   }
 }
