@@ -13,6 +13,10 @@ export class Community extends Entity<Community> {
     return new Community({ ...community, membersCount: 0 })
   }
 
+  public static initialize(community: RemoveMethods<Community>) {
+    return new Community({ ...community })
+  }
+
   public join(userId: string) {
     this.events.push(new UserJoinedCommunityEvent(userId, this.name));
     this.membersCount++;
@@ -20,6 +24,8 @@ export class Community extends Entity<Community> {
 
   public leave(userId: string) {
     this.events.push(new UserLeftCommunityEvent(userId, this.name));
+    console.log(this.membersCount);
     this.membersCount--;
+    console.log(this.membersCount);
   }
 }

@@ -10,11 +10,13 @@ interface IProps {
 }
 
 export const CommunityJoinButton: React.FC<IProps> = observer(({ community }) => {
-  const join = () => {
+  const join = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     community.join();
   };
 
-  const leave = () => {
+  const leave = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     community.leave();
   };
 

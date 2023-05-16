@@ -65,7 +65,7 @@ export class CommunityRepository implements Repository<Community> {
     });
 
     const community = (await this.dynamoDb.client().send(query)).Items[0] as any;
-    return Community.createNew(community);
+    return Community.initialize(community);
   }
 
   // async deleteOne(id: CommunityName) {
