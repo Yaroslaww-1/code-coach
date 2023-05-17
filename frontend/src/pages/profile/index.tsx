@@ -8,16 +8,21 @@ import { ProfileHeader } from "./profile-header";
 import { Languages } from "./languages";
 import { ProgrammingLanguages } from "./programming-languages";
 import styles from "./styles.module.scss";
+import { Coach } from "domain/user/coach/coach";
+import coachesService from "api/coaches.service";
 
 export const ProfilePage: React.FC = () => {
   const { id } = useParams();
 
-  const [user, setUser] = useState<User>();
+  const [coach, setCoach] = useState<Coach>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetch = async () => {
-      setUser(await usersService.getById(id!));
+      const user = await usersService.getById(id!);
+      if (user.role === "Coach") {
+        setCoach(await coachesService.getById(id!));
+      }
       setIsLoading(false);
     };
 
@@ -28,10 +33,10 @@ export const ProfilePage: React.FC = () => {
 
   return (
     <Page>
-      <ProfileHeader user={user!} />
+      <ProfileHeader user={coach!} />
       <div className={styles.firstRow}>
-        <Languages user={user!} />
-        <ProgrammingLanguages user={user!} />
+        <Languages user={coach!} />
+        <ProgrammingLanguages user={coach!} />
       </div>
     </Page>
   );

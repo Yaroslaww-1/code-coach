@@ -23,4 +23,26 @@ export class CoachRepository implements Repository<Coach> {
       },
     }));
   }
+
+  // async deleteOne(email: CoachEmail) {
+  //   const query = new ScanCommand({
+  //     TableName: "Users",
+  //     FilterExpression: "#pk = :pk",
+  //     ExpressionAttributeNames: { "#pk": "pk" },
+  //     ExpressionAttributeValues: { ":pk": `Coach#${email}` },
+  //   });
+
+  //   const elements = (await this.dynamoDb.client().send(query)).Items;
+
+  //   for (const element of elements) {
+  //     const deleteQ = new DeleteCommand({
+  //       TableName: "Users",
+  //       Key: {
+  //         "pk": `Community#${email}`, "sk": element.sk,
+  //       },
+  //     })
+
+  //     await this.dynamoDb.client().send(deleteQ)
+  //   }
+  // }
 }

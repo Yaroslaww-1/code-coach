@@ -7,4 +7,6 @@ export enum AppRoute {
   
   USERS = "/users",
   USER = "/users/:id",
+
+  COACH = "/coach",
 }

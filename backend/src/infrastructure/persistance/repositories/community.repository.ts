@@ -67,27 +67,4 @@ export class CommunityRepository implements Repository<Community> {
     const community = (await this.dynamoDb.client().send(query)).Items[0] as any;
     return Community.initialize(community);
   }
-
-  // async deleteOne(id: CommunityName) {
-  //   const query = new ScanCommand({
-  //     TableName: "Communities",
-  //     Select: Select.ALL_ATTRIBUTES,
-  //     FilterExpression: "#pk = :pk",
-  //     ExpressionAttributeNames: { "#pk": "pk" },
-  //     ExpressionAttributeValues: { ":pk": `Community#${id}` },
-  //   });
-
-  //   const communityElements = (await this.dynamoDb.client().send(query)).Items;
-
-  //   for (const element of communityElements) {
-  //     const deleteQ = new DeleteCommand({
-  //       TableName: "Communities",
-  //       Key: {
-  //         "pk": `Community#${id}`, "sk": element.sk,
-  //       },
-  //     })
-
-  //     await this.dynamoDb.client().send(deleteQ)
-  //   }
-  // }
 }

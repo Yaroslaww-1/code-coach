@@ -2,10 +2,10 @@ import React from "react";
 
 import styles from "./styles.module.scss";
 import { Chip } from "@mui/material";
-import { User } from "domain/user/user";
+import { Coach } from "domain/user/coach/coach";
 
 interface IProps {
-  user: User;
+  user: Coach;
 }
 
 export const ProgrammingLanguages: React.FC<IProps> = ({ user }) => {

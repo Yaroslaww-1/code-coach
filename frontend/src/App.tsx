@@ -8,10 +8,12 @@ import { PostsFeedPage } from "pages/posts-feed";
 import { CommunityPage } from "pages/community";
 import { PostPage } from "pages/post";
 import { ProfilePage } from "pages/profile";
+import { AuthContext, auth } from "common/auth/auth-context";
+import { CoachPage } from "pages/coach";
 
 function App() {
   return (
-    <>
+    <AuthContext.Provider value={auth}>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.COMMUNITIES} >
@@ -24,12 +26,12 @@ function App() {
             <Route path={""} element={<PostsFeedPage />} />
           </Route>
 
-          <Route path={AppRoute.USERS} >
-            <Route path={AppRoute.USER} element={<ProfilePage />} />
+          <Route path={AppRoute.COACH} >
+            <Route path={""} element={<CoachPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </AuthContext.Provider>
   );
 }
 

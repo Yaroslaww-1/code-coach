@@ -1,9 +1,14 @@
-export class User {
+import { Location } from "./location";
+
+export class Student {
   constructor(
     public email: string,
     public role: string,
 
     public name: string,
+    public location: Location,
+    public languages: string[],
+    public programmingLanguages: string[],
   ){}
 
   public avatar() {
