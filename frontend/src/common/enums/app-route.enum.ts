@@ -9,4 +9,6 @@ export enum AppRoute {
   USER = "/users/:id",
 
   COACH = "/coach",
+
+  CHAT = "/chats/:id",
 }

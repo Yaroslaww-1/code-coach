@@ -6,6 +6,7 @@ import { Location } from "../Location";
 import { StudentEmail } from "../student/StudentEmail";
 import { CoachStudent } from "./CoachStudent";
 import { Student } from "../student/Student";
+import { ChatId } from "src/domain/chat/ChatId";
 
 export class Coach extends Entity<Coach> {
   public email: CoachEmail;
@@ -35,9 +36,9 @@ export class Coach extends Entity<Coach> {
     this.mentorshipRequests.push(student);
   }
 
-  public approveMentorship(student: StudentEmail) {
+  public approveMentorship(student: StudentEmail, chat: ChatId) {
     if (!this.mentorshipRequests.includes(student)) throw new Error("Student is not in the applicants list");
-    this.students.push(CoachStudent.createNew(student, ""));
+    this.students.push(CoachStudent.createNew(student, chat));
     this.mentorshipRequests = this.mentorshipRequests.filter(s => s !== student);
   }
 }

@@ -1,30 +1,23 @@
 import { Location } from "src/domain/user/Location";
 import { Coach } from "src/domain/user/coach/Coach";
 import { WorkExperience } from "src/domain/user/WorkExperience";
-import students from "./students";
 
 class Coaches {
   public readonly data: Coach[];
 
   constructor() {
-    const coach1 = Coach.createNew({
-      email: "abe.ryland@gmail.com",
-      name: "Abe Ryland",
-      programmingLanguages: ["Java", "Kotlin"],
-      languages: ["English"],
-      workExperience: [
-        WorkExperience.createFinished("Amazon", new Date(2015, 1), new Date(2022, 10)),
-        WorkExperience.createUnfinished("Netflix", new Date(2023, 3)),
-      ],
-      location: Location.createNew("UK", "London"),
-    });
-
-    coach1.applyForMentorship(students.data[0].email);
-    coach1.applyForMentorship(students.data[1].email);
-    coach1.approveMentorship(students.data[0].email);
-
     this.data = [
-      coach1,
+      Coach.createNew({
+        email: "abe.ryland@gmail.com",
+        name: "Abe Ryland",
+        programmingLanguages: ["Java", "Kotlin"],
+        languages: ["English"],
+        workExperience: [
+          WorkExperience.createFinished("Amazon", new Date(2015, 1), new Date(2022, 10)),
+          WorkExperience.createUnfinished("Netflix", new Date(2023, 3)),
+        ],
+        location: Location.createNew("UK", "London"),
+      }),
       Coach.createNew({
         email: "abigail@gmail.com",
         name: "Abigail McGinty",

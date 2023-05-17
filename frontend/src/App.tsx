@@ -10,6 +10,7 @@ import { PostPage } from "pages/post";
 import { ProfilePage } from "pages/profile";
 import { AuthContext, auth } from "common/auth/auth-context";
 import { CoachPage } from "pages/coach";
+import { ChatPage } from "pages/chat";
 
 function App() {
   return (
@@ -26,8 +27,16 @@ function App() {
             <Route path={""} element={<PostsFeedPage />} />
           </Route>
 
+          <Route path={AppRoute.USERS} >
+            <Route path={AppRoute.USER} element={<ProfilePage />} />
+          </Route>
+
           <Route path={AppRoute.COACH} >
             <Route path={""} element={<CoachPage />} />
+          </Route>
+
+          <Route path={AppRoute.CHAT} >
+            <Route path={""} element={<ChatPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

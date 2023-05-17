@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Page } from "components/page";
 import { useParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
-import { User } from "domain/user/user";
 import usersService from "api/users.service";
 import { ProfileHeader } from "./profile-header";
 import { Languages } from "./languages";

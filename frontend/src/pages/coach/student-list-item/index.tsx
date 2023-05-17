@@ -18,7 +18,7 @@ export const StudentListItem: React.FC<IProps> = observer(({ student }) => {
   const navigate = useNavigate();
 
   const sendMessage = () => {
-    navigate(generatePath(AppRoute.COMMUNITY, { id: student.chat }));
+    navigate(generatePath(AppRoute.CHAT, { id: student.chat }));
   };
 
   return (

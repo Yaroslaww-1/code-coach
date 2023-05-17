@@ -10,13 +10,13 @@ export class ChatsController {
     private readonly getMessagesQuery: GetMessagesQuery
   ) {}
 
-  @Get("mine")
-  getMine() {
-    return this.getMineQuery.execute(Identity.STUDENT);
-  }
+  // @Get("mine")
+  // getMine() {
+  //   return this.getMineQuery.execute(Identity.STUDENT);
+  // }
 
-  @Get(":chatId/messages")
-  getMessages(@Param("chatId") chatId: string) {
+  @Get(":id/messages")
+  getMessages(@Param("id") chatId: string) {
     return this.getMessagesQuery.execute(chatId);
   }
 }

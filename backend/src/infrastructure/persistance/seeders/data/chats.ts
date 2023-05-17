@@ -15,6 +15,10 @@ class Chats {
     chat1.send("Hey!", chat1.member1);
     chat1.send("Hello!", chat1.member2);
 
+    coaches[0].applyForMentorship(students[0].email);
+    coaches[0].applyForMentorship(students[1].email);
+    coaches[0].approveMentorship(students[0].email, chat1.id);
+
     this.data = [chat1, chat2];
   }
 }

@@ -16,9 +16,8 @@ export class GetMineQuery {
       FilterExpression: "#member1 = :member or #member2 = :member",
       ExpressionAttributeNames: { "#member1": "member1", "#member2": "member2" },
       ExpressionAttributeValues: { ":member": authenticatedUserId },
-      Limit: 10,
     });
 
-    return await this.dynamoDb.client().send(query);
+    return (await this.dynamoDb.client().send(query)).Items;
   }
 }
