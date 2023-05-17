@@ -38,6 +38,6 @@ export class Coach extends Entity<Coach> {
   public approveMentorship(student: StudentEmail) {
     if (!this.mentorshipRequests.includes(student)) throw new Error("Student is not in the applicants list");
     this.students.push(CoachStudent.createNew(student, ""));
-    this.mentorshipRequests.filter(s => s !== student);
+    this.mentorshipRequests = this.mentorshipRequests.filter(s => s !== student);
   }
 }

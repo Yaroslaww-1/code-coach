@@ -26,6 +26,11 @@ class CoachesService {
         new CoachStudent(s.student, s.chat)),
     );
   }
+
+  async approveMentorship(student: string): Promise<CoachStudent> {
+    const { chat } = await api.post<any>(`${endpoint}/approveMentorshipRequest`, { student });
+    return new CoachStudent(student, chat);
+  }
 }
 
 export default new CoachesService();

@@ -6,6 +6,7 @@ import { Coach } from "domain/user/coach/coach";
 import coachesService from "api/coaches.service";
 import { observer } from "mobx-react-lite";
 import { AuthContext } from "common/auth/auth-context";
+import { MentorshipRequestListItem } from "./mentorship-request-list-item";
 
 export const CoachPage: React.FC = observer(() => {
   const auth = useContext(AuthContext);
@@ -29,6 +30,9 @@ export const CoachPage: React.FC = observer(() => {
       <List sx={{ width: "100%", maxWidth: 800, bgcolor: "background.paper" }}>
         {coach?.students.map(student => (
           <StudentListItem key={student.email} student={student} />
+        ))}
+        {coach?.mentorshipRequests.map(applicant => (
+          <MentorshipRequestListItem coach={coach} key={applicant} applicant={applicant} />
         ))}
       </List>
     </Page>

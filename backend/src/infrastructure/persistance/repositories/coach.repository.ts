@@ -1,8 +1,9 @@
-import { PutCommand } from "@aws-sdk/lib-dynamodb";
+import { DeleteCommand, GetCommand, PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { DynamoDbService } from "../../aws/dynamodb.service";
 import { Injectable } from "@nestjs/common";
 import { Repository } from "./repository";
 import { Coach } from "src/domain/user/coach/Coach";
+import { CoachEmail } from "src/domain/user/coach/CoachEmail";
 
 @Injectable()
 export class CoachRepository implements Repository<Coach> {
@@ -24,6 +25,19 @@ export class CoachRepository implements Repository<Coach> {
     }));
   }
 
+  async findOne(id: CoachEmail): Promise<Coach> {
+    const query = new GetCommand({
+      TableName: "Users",
+      Key: {
+        "pk": `Coach#${id}`,
+        "sk": "Identity",
+      },
+    });
+
+    const coach = (await this.dynamoDb.client().send(query)).Item as any;
+    return Coach.initialize(coach);
+  }
+
   // async deleteOne(email: CoachEmail) {
   //   const query = new ScanCommand({
   //     TableName: "Users",
@@ -34,11 +48,13 @@ export class CoachRepository implements Repository<Coach> {
 
   //   const elements = (await this.dynamoDb.client().send(query)).Items;
 
+  //   console.log(elements);
+
   //   for (const element of elements) {
   //     const deleteQ = new DeleteCommand({
   //       TableName: "Users",
   //       Key: {
-  //         "pk": `Community#${email}`, "sk": element.sk,
+  //         "pk": `Coach#${email}`, "sk": element.sk,
   //       },
   //     })
 
