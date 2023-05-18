@@ -1,10 +1,11 @@
 import { makeAutoObservable } from "mobx";
+import { ChatMember } from "./ChatMember";
 
 export class Chat {
   constructor (
     public id: string,
-    public member1: string,
-    public member2: string,
+    public student: ChatMember,
+    public coach: ChatMember,
   ) {
     makeAutoObservable(this);
   }

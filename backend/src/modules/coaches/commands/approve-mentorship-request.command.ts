@@ -11,7 +11,7 @@ export class ApproveMentorshipRequestCommand {
   ) {}
 
   async execute(authenticatedCoachId: string, studentId: string) {
-    const chat = Chat.createNew({ member1: authenticatedCoachId, member2: studentId });
+    const chat = Chat.createNew({ coach: authenticatedCoachId, student: studentId });
     await this.chatRepository.save(chat);
 
     const coach = await this.coachRepository.findOne(authenticatedCoachId);

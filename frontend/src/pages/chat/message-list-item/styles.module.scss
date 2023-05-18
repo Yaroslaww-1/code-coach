@@ -1,7 +1,26 @@
 @import '../../../variables.scss';
 
 .root {
-  margin: 10px;
-  background-color: $colorLighterGray;
-  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  width: 100% !important;
+  margin-top: 12px;
+
+  .content {
+    width: 600px;
+    padding: 0px 8px 0px 8px;
+    margin: 0px !important;
+  }
+}
+
+.mine {
+  flex-direction: row-reverse;
+
+  .content {
+    background-color: $colorLightBlue;
+  }
+}
+
+.other {
+  flex-direction: row;
 }

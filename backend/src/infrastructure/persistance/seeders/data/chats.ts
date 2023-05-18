@@ -9,11 +9,13 @@ class Chats {
     const students = Students.data;
     const coaches = Coaches.data;
 
-    const chat1 = Chat.createNew({ member1: students[0].email, member2: coaches[0].email });
-    const chat2 = Chat.createNew({ member1: students[1].email, member2: coaches[1].email });
+    const chat1 = Chat.createNew({ student: students[0].email, coach: coaches[0].email });
+    const chat2 = Chat.createNew({ student: students[1].email, coach: coaches[1].email });
 
-    chat1.send("Hey!", chat1.member1);
-    chat1.send("Hello!", chat1.member2);
+    chat1.send("Hey!", chat1.student);
+    const now = new Date().getTime();
+    while (new Date().getTime() < now + 1) {}
+    chat1.send("Hello!", chat1.coach);
 
     coaches[0].applyForMentorship(students[0].email);
     coaches[0].applyForMentorship(students[1].email);

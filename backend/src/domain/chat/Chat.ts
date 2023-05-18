@@ -9,11 +9,15 @@ import { MessageSent } from "./events/MessageSent.event";
 
 export class Chat extends Entity<Chat> {
   public id: ChatId;
-  public member1: CoachEmail | StudentEmail;
-  public member2: CoachEmail | StudentEmail;
+  public coach: CoachEmail;
+  public student: StudentEmail;
 
   public static createNew(chat: Omit<RemoveMethods<Chat>, "id" | "messages">) {
     return new Chat({ ...chat, id: nanoid(8) })
+  }
+
+  public static initialize(chat: RemoveMethods<Chat>) {
+    return new Chat({ ...chat })
   }
 
   public send(messageContent: string, userId: CoachEmail | StudentEmail) {
