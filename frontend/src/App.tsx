@@ -2,8 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { AppRoute } from "common/enums/app-route.enum";
 import { Communities } from "pages/communities";
-import useWebSocket, { ReadyState } from "react-use-websocket";
-
 
 import { PostsFeedPage } from "pages/posts-feed";
 import { CommunityPage } from "pages/community";
@@ -12,12 +10,23 @@ import { ProfilePage } from "pages/profile";
 import { AuthContext, auth } from "common/auth/auth-context";
 import { CoachPage } from "pages/coach";
 import { ChatPage } from "pages/chat";
-import ws from "api/ws/ws";
+import ws from "api/ws";
+import { useEffect, useState } from "react";
 
 function App() {
-  const { sendMessage, lastMessage, readyState } = useWebSocket("ws://localhost:8001/chats/messages");
-  if (readyState !== ReadyState.OPEN) return (<>Loading</>);
-  ws.initialize(sendMessage);
+  const [isConnected, setIsConnected] = useState(ws.connected);
+
+  useEffect(() => {
+    ws.on("connect", () => setIsConnected(true));
+    ws.on("disconnect", () => setIsConnected(false));
+
+    return () => {
+      ws.off("connect");
+      ws.off("disconnect");
+    };
+  }, []);
+
+  if (!isConnected) return (<p>Loading</p>);
 
   return (
     <AuthContext.Provider value={auth}>

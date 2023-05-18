@@ -7,7 +7,7 @@ class MessagesService {
     const messages = await api.get<any[]>(`/chats/${chatId}/messages`);
     return messages.map((
       { id, content, chat, createdAt, author }) =>
-      new Message(id, content, chat, new Date(createdAt), author));
+      new Message(id, content, chat, author));
   }
 }
 

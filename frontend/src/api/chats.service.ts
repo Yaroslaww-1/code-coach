@@ -3,6 +3,7 @@ import api from "./api";
 import { Chat } from "domain/chat/Chat";
 import usersService from "./users.service";
 import { ChatMember } from "domain/chat/ChatMember";
+import ws from "./ws";
 
 class ChatsService {
   async getById(chatId: string): Promise<Chat> {
@@ -15,6 +16,12 @@ class ChatsService {
       chatId,
       new ChatMember(student.email, student.avatar()),
       new ChatMember(coach.email, coach.avatar()));
+  }
+
+  async emitMessage(chatId: string, message: string, author: string): Promise<void> {
+    ws.emit(
+      "chats/messages",
+      { chatId, message, author });
   }
 }
 

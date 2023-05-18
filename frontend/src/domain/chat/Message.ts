@@ -5,7 +5,6 @@ export class Message {
     public id: string,
     public content: string,
     public chat: string,
-    public createdAt: Date,
     public author: string,
   ) {
     makeAutoObservable(this);

@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { ChatMember } from "./ChatMember";
-import ws from "api/ws/ws";
+import chatsService from "api/chats.service";
 
 export class Chat {
   constructor (
@@ -12,6 +12,6 @@ export class Chat {
   }
 
   public send(messageContent: string, userId: string) {
-    ws.sendMessage(this.id, messageContent, userId);
+    chatsService.emitMessage(this.id, messageContent, userId);
   }
 }
