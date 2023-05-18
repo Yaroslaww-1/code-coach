@@ -5,6 +5,7 @@ import { observer } from "mobx-react-lite";
 
 import styles from "./styles.module.scss";
 import { UserName } from "pages/profile/user-name";
+import { Paper } from "components/paper";
 
 interface IProps {
   comment: Comment;
@@ -20,7 +21,7 @@ export const CommentComponent: React.FC<IProps> = observer(({ comment }) => {
   };
 
   return (
-    <div className={styles.root}>
+    <Paper className={styles.root}>
       <div className={styles.comment}>
         <div className={styles.user}>
           <Avatar src={comment.createdByUrl()}/>
@@ -49,6 +50,6 @@ export const CommentComponent: React.FC<IProps> = observer(({ comment }) => {
           <Button size="small" onClick={reply}>Reply</Button>
           <Button size="small" color="error" onClick={() => setIsReplying(false)}>Cancel</Button>
         </div>)}
-    </div>
+    </Paper>
   );
 });

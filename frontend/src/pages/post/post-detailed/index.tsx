@@ -8,6 +8,7 @@ import { AppRoute } from "common/enums/app-route.enum";
 import { Avatar, Button, TextField } from "@mui/material";
 import { CommunityName } from "pages/community/community-name";
 import { UserName } from "pages/profile/user-name";
+import { Paper } from "components/paper";
 
 interface IProps {
   post: Post;
@@ -23,7 +24,7 @@ export const PostDetailed: React.FC<IProps> = observer(({ post }) => {
   };
 
   return (
-    <div className={styles.root}>
+    <Paper className={styles.root}>
       <div className={styles.header}>
         <Avatar src={post.createdByUrl()}/>
         <div className={styles.createdBy}>
@@ -54,6 +55,6 @@ export const PostDetailed: React.FC<IProps> = observer(({ post }) => {
           <Button size="small" onClick={reply}>Reply</Button>
           <Button size="small" color="error" onClick={() => setIsReplying(false)}>Cancel</Button>
         </div>)}
-    </div>
+    </Paper>
   );
 });

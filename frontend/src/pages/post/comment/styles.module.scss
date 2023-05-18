@@ -1,16 +1,13 @@
 @import '../../../variables.scss';
 
 .root {
-  margin: 8px;
+  margin-bottom: 8px;
 
   .comment {
     display: flex;
     flex-direction: column;
 
-    border: 1px solid $colorLightBlue;
-    border-radius: 4px;
     padding: 8px;
-    background-color: $colorLightGray;
 
     .user {
       display: flex;

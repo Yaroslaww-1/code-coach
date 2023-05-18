@@ -14,7 +14,9 @@ export const Page: React.FC<PropsWithChildren<IProps>> = ({
 }) => {
   return (
     <div className={`${styles.page} ${classes.root || ""}`}>
-      {children}
+      <div className={styles.content}>
+        {children}
+      </div>
     </div>
   );
 };

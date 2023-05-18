@@ -4,7 +4,7 @@ import { Post } from "domain/post";
 import postsService from "api/posts.service";
 import { useParams } from "react-router-dom";
 import { Comment } from "domain/comment";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Divider } from "@mui/material";
 import { CommentsThread } from "./comments-thread";
 import { PostDetailed } from "./post-detailed";
 
@@ -30,6 +30,7 @@ export const PostPage: React.FC = () => {
   return (
     <Page>
       <PostDetailed post={post!} />
+      <Divider style={{ marginTop: "12px", marginBottom: "12px" }}>Comments</Divider>
       <CommentsThread parent={post!.id} comments={comments} level={0} />
     </Page>
   );

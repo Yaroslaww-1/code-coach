@@ -3,11 +3,12 @@ import { Page } from "components/page";
 import { Post } from "domain/post";
 import postsService from "api/posts.service";
 import { useParams } from "react-router-dom";
-import { PostsList } from "pages/posts-feed/post-list";
 import { Community } from "domain/community";
 import { CircularProgress } from "@mui/material";
 import communitiesService from "api/communities.service";
 import { CommunityHeader } from "./community-header";
+import { PageList } from "components/page-list";
+import { PostListItem } from "pages/posts-feed/post-list-item";
 
 export const CommunityPage: React.FC = () => {
   const { id } = useParams();
@@ -33,7 +34,11 @@ export const CommunityPage: React.FC = () => {
   return (
     <Page>
       <CommunityHeader community={community}/>
-      <PostsList posts={posts} />
+      <PageList>
+        {posts.map(post => (
+          <PostListItem key={post.id} post={post} />
+        ))}
+      </PageList>
     </Page>
   );
 };

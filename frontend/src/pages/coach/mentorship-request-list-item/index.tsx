@@ -1,12 +1,10 @@
 import React from "react";
 
-import styles from "./styles.module.scss";
-
-import ListItem from "@mui/material/ListItem";
 import { ListItemButton, Button } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { UserName } from "pages/profile/user-name";
 import { Coach } from "domain/user/coach/coach";
+import { PageListItem } from "components/page-list-item";
 
 interface IProps {
   applicant: string;
@@ -19,11 +17,11 @@ export const MentorshipRequestListItem: React.FC<IProps> = observer(({ applicant
   };
 
   return (
-    <ListItem alignItems="flex-start" classes={{ "root": styles.root }}>
+    <PageListItem>
       <UserName email={applicant} />
       <ListItemButton>
         <Button variant="outlined" color="success" onClick={approve}>Approve</Button>
       </ListItemButton>
-    </ListItem>
+    </PageListItem>
   );
 });

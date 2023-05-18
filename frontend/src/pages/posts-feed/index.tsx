@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Page } from "components/page";
 import { Post } from "domain/post";
 import postsService from "api/posts.service";
-import { PostsList } from "./post-list";
+import { PageList } from "components/page-list";
+import { PostListItem } from "./post-list-item";
 
 export const PostsFeedPage: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -18,7 +19,11 @@ export const PostsFeedPage: React.FC = () => {
 
   return (
     <Page>
-      <PostsList posts={posts} />
+      <PageList>
+        {posts.map(post => (
+          <PostListItem key={post.id} post={post} />
+        ))}
+      </PageList>
     </Page>
   );
 };

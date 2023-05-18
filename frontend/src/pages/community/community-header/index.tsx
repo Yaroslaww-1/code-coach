@@ -4,6 +4,7 @@ import { Community } from "domain/community";
 import styles from "./styles.module.scss";
 import { Avatar } from "@mui/material";
 import { CommunityJoinButton } from "../community-join-button";
+import { Paper } from "components/paper";
 
 interface IProps {
   community: Community;
@@ -12,7 +13,7 @@ interface IProps {
 export const CommunityHeader: React.FC<IProps> = ({ community }) => {
   return (
     <>
-      <div className={styles.general}>
+      <Paper className={styles.general}>
         <div className={styles.logoAndName}>
           <Avatar src={community.logoUrl()} sx={{ width: 76, height: 76 }}/>
           <span className={styles.name}>{community.name}</span>
@@ -21,10 +22,10 @@ export const CommunityHeader: React.FC<IProps> = ({ community }) => {
         <div>
           <CommunityJoinButton community={community} />
         </div>
-      </div>
-      <div className={styles.details}>
+      </Paper>
+      <Paper className={styles.details}>
         <p>{community.description}</p>
-      </div>
+      </Paper>
     </>
   );
 };

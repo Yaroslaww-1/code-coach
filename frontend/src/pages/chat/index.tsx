@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Page } from "components/page";
-import { CircularProgress, List } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { MessageListItem } from "./message-list-item";
 import { observer } from "mobx-react-lite";
 import { Message } from "domain/chat/Message";
 import { useParams } from "react-router-dom";
 import messagesService from "api/messages.service";
+import { PageList } from "components/page-list";
 
 export const ChatPage: React.FC = observer(() => {
   const { id } = useParams();
@@ -26,11 +27,11 @@ export const ChatPage: React.FC = observer(() => {
 
   return (
     <Page>
-      <List sx={{ width: "100%", maxWidth: 800, bgcolor: "background.paper" }}>
+      <PageList>
         {messages.map(message => (
           <MessageListItem key={message.id} message={message} />
         ))}
-      </List>
+      </PageList>
     </Page>
   );
 });

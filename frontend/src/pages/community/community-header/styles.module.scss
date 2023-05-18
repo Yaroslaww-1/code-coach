@@ -1,9 +1,7 @@
 @import '../../../variables.scss';
 
 .general {
-  background-color: $colorLightBlue;
   padding: 12px 20px 12px 20px;
-  border-radius: 6px;
   margin-bottom: 12px;
 
   display: flex;
@@ -31,8 +29,5 @@
 }
 
 .details {
-  background-color: $colorLightBlue;
   padding: 6px 20px 6px 20px;
-  border-radius: 6px;
-  margin-bottom: 12px;
 }

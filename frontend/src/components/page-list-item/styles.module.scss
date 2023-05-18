@@ -1,0 +1,12 @@
+@import '../../variables.scss';
+
+.root {
+  width: 100% !important;
+  margin: 16px 0px 16px 0px;
+  padding: 0px !important;
+
+  &:hover {
+    opacity: 0.85;
+    cursor: pointer;
+  }
+}

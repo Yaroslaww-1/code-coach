@@ -1,0 +1,8 @@
+@import '../../variables.scss';
+
+.root {
+  background-color: $colorLighterGray;
+
+  border: 1px groove $colorGray;
+  border-radius: 6px;
+}
