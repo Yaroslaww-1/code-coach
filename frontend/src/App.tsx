@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { AppRoute } from "common/enums/app-route.enum";
 import { Communities } from "pages/communities";
+import useWebSocket, { ReadyState } from "react-use-websocket";
 
 
 import { PostsFeedPage } from "pages/posts-feed";
@@ -11,8 +12,13 @@ import { ProfilePage } from "pages/profile";
 import { AuthContext, auth } from "common/auth/auth-context";
 import { CoachPage } from "pages/coach";
 import { ChatPage } from "pages/chat";
+import ws from "api/ws/ws";
 
 function App() {
+  const { sendMessage, lastMessage, readyState } = useWebSocket("ws://localhost:8001/chats/messages");
+  if (readyState !== ReadyState.OPEN) return (<>Loading</>);
+  ws.initialize(sendMessage);
+
   return (
     <AuthContext.Provider value={auth}>
       <BrowserRouter>

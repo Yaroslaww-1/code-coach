@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Page } from "components/page";
 import { CircularProgress } from "@mui/material";
 import { MessageListItem } from "./message-list-item";
@@ -9,6 +9,7 @@ import messagesService from "api/messages.service";
 import { PageList } from "components/page-list";
 import { Chat } from "domain/chat/Chat";
 import chatsService from "api/chats.service";
+import { MessageInput } from "./message-input";
 
 export const ChatPage: React.FC = observer(() => {
   const { id } = useParams();
@@ -36,6 +37,7 @@ export const ChatPage: React.FC = observer(() => {
           <MessageListItem key={message.id} message={message} chat={chat!} />
         ))}
       </PageList>
+      <MessageInput chat={chat!} />
     </Page>
   );
 });

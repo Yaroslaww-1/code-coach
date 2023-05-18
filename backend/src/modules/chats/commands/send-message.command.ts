@@ -8,12 +8,12 @@ export class SendMessageCommand {
   ) {}
 
   async execute(
-    { chatId, message, userId }:
-    { chatId: string, message: string,userId: string }
+    { chatId, message, author }:
+    { chatId: string, message: string, author: string }
   ) {
     const chat = await this.chatRepository.findOne(chatId);
 
-    chat.send(message, userId);
+    chat.send(message, author);
     
     await this.chatRepository.save(chat);
   }
