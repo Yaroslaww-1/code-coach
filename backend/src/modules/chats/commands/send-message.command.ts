@@ -15,10 +15,8 @@ export class SendMessageCommand {
     { chatId: string, message: string, author: string }
   ) {
     const chat = await this.chatRepository.findOne(chatId);
-    const replyAuthor = author === chat.coach ? chat.student : chat.coach;
 
     chat.send(message, author);
-    chat.send(`Automatic reply to "${message}"`, replyAuthor);
 
     await this.chatRepository.save(chat);
 
