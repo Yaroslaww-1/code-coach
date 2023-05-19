@@ -4,6 +4,7 @@ import styles from "./styles.module.scss";
 import { PageHeader } from "../page-header";
 
 interface IProps {
+  withHeader?: boolean;
   classes?: {
     root?: string;
   },
@@ -12,10 +13,11 @@ interface IProps {
 export const Page: React.FC<PropsWithChildren<IProps>> = ({
   children,
   classes = {},
+  withHeader = true,
 }) => {
   return (
     <div className={`${styles.page} ${classes.root || ""}`}>
-      <PageHeader />
+      {withHeader && <PageHeader />}
       <div className={styles.content}>
         {children}
       </div>

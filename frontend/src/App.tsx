@@ -59,6 +59,8 @@ function App() {
           <Route path={AppRoute.CHAT} >
             <Route path={""} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
           </Route>
+
+          <Route path={AppRoute.BASE} element={<PrivateRoute><PostsFeedPage /></PrivateRoute>} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

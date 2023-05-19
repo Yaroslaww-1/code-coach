@@ -1,4 +1,6 @@
 export enum AppRoute {
+  BASE = "/",
+
   COMMUNITIES = "/communities",
   COMMUNITY = "/communities/:id",
 

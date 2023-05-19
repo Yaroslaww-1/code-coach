@@ -21,7 +21,7 @@ export class Auth {
   }
 
   isAuthenticated() {
-    return this.authenticatedUser !== null;
+    return this.authenticatedUser;
   }
 
   login(user: User, password: string) {
