@@ -22,7 +22,7 @@ export const MessageInput: React.FC<IProps> = observer(({ chat }) => {
   return (
     <div className={`${styles.root}`}>
       <TextField
-        id="message-input"
+        id="message-input1"
         label="Message text"
         variant="outlined"
         value={message}

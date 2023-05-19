@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { Auth } from "common/auth/auth-context";
 
 const BASE_URL = process.env.REACT_APP_API_URL || "/api";
 
@@ -11,6 +12,11 @@ class Api {
       headers: {
         "Content-Type": "application/json",
       },
+    });
+
+    this.instance.interceptors.request.use(config => {
+      config.headers.Authorization = `Bearer ${Auth.getToken()}`;
+      return config;
     });
   }
 

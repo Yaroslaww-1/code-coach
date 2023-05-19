@@ -12,6 +12,8 @@ import { CoachPage } from "pages/coach";
 import { ChatPage } from "pages/chat";
 import ws from "api/ws";
 import { useEffect, useState } from "react";
+import { LoginPage } from "pages/auth";
+import { PrivateRoute } from "components/private-route";
 
 function App() {
   const [isConnected, setIsConnected] = useState(ws.connected);
@@ -33,25 +35,27 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.COMMUNITIES} >
-            <Route path={AppRoute.COMMUNITY} element={<CommunityPage />} />
-            <Route path={""} element={<Communities />} />
+            <Route path={AppRoute.COMMUNITY} element={<PrivateRoute><CommunityPage /></PrivateRoute>}/>
+            <Route path={""} element={<PrivateRoute><Communities /></PrivateRoute>}/>
           </Route>
 
           <Route path={AppRoute.POSTS} >
-            <Route path={AppRoute.POST} element={<PostPage />} />
-            <Route path={""} element={<PostsFeedPage />} />
+            <Route path={AppRoute.POST} element={<PrivateRoute><PostPage /></PrivateRoute>}/>
+            <Route path={""} element={<PrivateRoute><PostsFeedPage /></PrivateRoute>}/>
           </Route>
 
           <Route path={AppRoute.USERS} >
-            <Route path={AppRoute.USER} element={<ProfilePage />} />
+            <Route path={AppRoute.USER} element={<PrivateRoute><ProfilePage /></PrivateRoute>}/>
           </Route>
 
+          <Route path={AppRoute.LOGIN} element={<LoginPage />}/>
+
           <Route path={AppRoute.COACH} >
-            <Route path={""} element={<CoachPage />} />
+            <Route path={""} element={<PrivateRoute><CoachPage /></PrivateRoute>} />
           </Route>
 
           <Route path={AppRoute.CHAT} >
-            <Route path={""} element={<ChatPage />} />
+            <Route path={""} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -13,6 +13,10 @@ class UsersService {
       name,
     );
   }
+
+  async login(email: string, password: string): Promise<{ email: string }> {
+    return await api.post<any>("/auth/login", { email, password });
+  }
 }
 
 export default new UsersService();
