@@ -17,7 +17,7 @@ export const CommentComponent: React.FC<IProps> = observer(({ comment }) => {
 
   const reply = () => {
     comment.reply(replyContent);
-    // location.reload();
+    location.reload();
   };
 
   return (

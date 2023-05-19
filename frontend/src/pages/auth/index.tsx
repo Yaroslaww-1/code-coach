@@ -11,8 +11,8 @@ export const LoginPage: React.FC = () => {
 
   const login = async () => {
     try {
-      await usersService.login(email, password);
-      auth.login(email, password);
+      const user = await usersService.login(email, password);
+      auth.login(user, password);
     } catch (e) {
       console.error(e);
     }

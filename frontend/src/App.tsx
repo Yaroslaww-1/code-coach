@@ -17,10 +17,12 @@ import { PrivateRoute } from "components/private-route";
 
 function App() {
   const [isConnected, setIsConnected] = useState(ws.connected);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     ws.on("connect", () => setIsConnected(true));
     ws.on("disconnect", () => setIsConnected(false));
+    auth.initialize().then(() => setIsLoading(false));
 
     return () => {
       ws.off("connect");
@@ -28,7 +30,7 @@ function App() {
     };
   }, []);
 
-  if (!isConnected) return (<p>Loading</p>);
+  if (!isConnected || isLoading) return (<p>Loading</p>);
 
   return (
     <AuthContext.Provider value={auth}>

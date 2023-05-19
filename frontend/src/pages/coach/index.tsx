@@ -17,7 +17,7 @@ export const CoachPage: React.FC = observer(() => {
 
   useEffect(() => {
     const fetch = async () => {
-      setCoach(await coachesService.getById(auth.authenticatedUser));
+      setCoach(await coachesService.getById(auth.authenticatedUser!.email));
       setIsLoading(false);
     };
 

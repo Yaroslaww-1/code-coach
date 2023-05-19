@@ -6,12 +6,17 @@
   background-color: $colorLightGray;
 
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
   .content {
     width: 100%;
     max-width: 1000px;
     padding: 0px 40px 0px 40px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     // background-color: $colorLighterGray;
   }
 }

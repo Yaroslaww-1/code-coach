@@ -14,8 +14,9 @@ class UsersService {
     );
   }
 
-  async login(email: string, password: string): Promise<{ email: string }> {
-    return await api.post<any>("/auth/login", { email, password });
+  async login(email: string, password: string): Promise<User> {
+    await api.post<any>("/auth/login", { email, password });
+    return await this.getById(email);
   }
 }
 

@@ -16,7 +16,6 @@ export class GetAllPostsQuery {
       FilterExpression: "contains(#pk, :pk) and contains(#sk, :sk)",
       ExpressionAttributeNames: { "#pk": "pk", "#sk": "sk" },
       ExpressionAttributeValues: { ":pk": "Post#", ":sk": "Identity#" },
-      Limit: 10,
     });
 
     return (await this.dynamoDb.client().send(query)).Items;
