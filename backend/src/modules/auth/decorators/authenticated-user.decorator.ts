@@ -3,11 +3,11 @@ import { createParamDecorator, ExecutionContext } from "@nestjs/common";
 export const AuthenticatedUser = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();
-    const token = request.headers["authorization"].split(" ")[1];
+    const decoded = Buffer.from(request.headers["authorization"], "base64").toString();
 
-    const decoded = Buffer.from(token, "base64").toString();
-    const email = decoded.split(":")[0];
-    const password = decoded.split(":")[1];
+    const token = decoded.split(" ")[1];
+    const email = token.split(":")[0];
+    const password = token.split(":")[1];
 
     return email;
   },

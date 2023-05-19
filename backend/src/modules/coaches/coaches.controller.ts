@@ -2,7 +2,7 @@ import { Controller, Get, Param, Post, Body } from "@nestjs/common";
 import { GetAllCoachesQuery } from "src/modules/coaches/queries/get-all.query";
 import { GetCoachByIdQuery } from "./queries/get-by-id.query";
 import { ApproveMentorshipRequestCommand } from "./commands/approve-mentorship-request.command";
-import { Identity } from "../auth/identity";
+import { AuthenticatedUser } from "../auth/decorators/authenticated-user.decorator";
 
 @Controller("coaches")
 export class CoachesController {
@@ -23,7 +23,10 @@ export class CoachesController {
   }
 
   @Post("approveMentorshipRequest")
-  approveMentorshipRequest(@Body("student") student: string) {
-    return this.approveMentorshipRequestCommand.execute(Identity.COACH, student);
+  approveMentorshipRequest(
+    @Body("student") student: string,
+    @AuthenticatedUser() authenticatedUser: string
+  ) {
+    return this.approveMentorshipRequestCommand.execute(authenticatedUser, student);
   }
 }

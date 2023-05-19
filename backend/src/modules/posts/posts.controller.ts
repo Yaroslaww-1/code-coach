@@ -4,7 +4,7 @@ import { GetCommentsByPostQuery } from "./queries/get-comments-by-post.query";
 import { GetByCommunityIdPostsQuery } from "./queries/get-by-community-id.query";
 import { GetByIdPostQuery } from "./queries/get-by-id.query";
 import { ReplyToPostCommand } from "./commands/reply-to-post.command";
-import { Identity } from "../auth/identity";
+import { AuthenticatedUser } from "../auth/decorators/authenticated-user.decorator";
 
 @Controller("posts")
 export class PostsController {
@@ -37,7 +37,10 @@ export class PostsController {
   }
 
   @Post(":id/reply")
-  reply(@Param("id") id: string, @Body("content") content: string) {
-    return this.replyToPostCommand.execute(Identity.STUDENT, id, content);
+  reply(
+    @AuthenticatedUser() authenticatedUser: string,
+    @Param("id") id: string,
+    @Body("content") content: string) {
+    return this.replyToPostCommand.execute(authenticatedUser, id, content);
   }
 }

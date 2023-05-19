@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { ReplyToCommentCommand } from "./commands/reply-to-comment.command";
-import { Identity } from "../auth/identity";
+import { AuthenticatedUser } from "../auth/decorators/authenticated-user.decorator";
 
 @Controller("comments")
 export class CommentsController {
@@ -9,7 +9,11 @@ export class CommentsController {
   ) {}
 
   @Post(":id/reply")
-  reply(@Body("content") content: string, @Param("id") id: string) {
-    return this.replyToCommentCommand.execute(Identity.STUDENT, id, content);
+  reply(
+    @Body("content") content: string,
+    @Param("id") id: string,
+    @AuthenticatedUser() authenticatedUser: string
+  ) {
+    return this.replyToCommentCommand.execute(authenticatedUser, id, content);
   }
 }

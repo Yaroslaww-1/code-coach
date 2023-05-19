@@ -2,18 +2,14 @@ import { Select } from "@aws-sdk/client-dynamodb";
 import { ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { Injectable } from "@nestjs/common";
 import { DynamoDbService } from "src/infrastructure/aws/dynamodb.service";
-import { IdentityManagerService } from "src/modules/auth/services/identity-manager.service";
 
 @Injectable()
 export class GetAllCommunitiesQuery {
   constructor (
     private readonly dynamoDb: DynamoDbService,
-    private readonly identityManagerService: IdentityManagerService
   ) {}
 
-  async execute(authenticatedUserId: string) {
-    const authenticatedUser = await this.identityManagerService.getAuthenticatedUser(authenticatedUserId);
-
+  async execute(authenticatedUser: string) {
     const query = new ScanCommand({
       TableName: "Communities",
       Select: Select.ALL_ATTRIBUTES,
@@ -32,7 +28,7 @@ export class GetAllCommunitiesQuery {
         ExpressionAttributeNames: { "#pk": "pk", "#sk": "sk" },
         ExpressionAttributeValues: {
           ":pk": `Community#${community.name}`,
-          ":sk": `Member#${authenticatedUser.email}`,
+          ":sk": `Member#${authenticatedUser}`,
         },
       });
 

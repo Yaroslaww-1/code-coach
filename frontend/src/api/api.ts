@@ -15,7 +15,7 @@ class Api {
     });
 
     this.instance.interceptors.request.use(config => {
-      config.headers.Authorization = `Bearer ${Auth.getToken()}`;
+      config.headers.Authorization = btoa(`Bearer ${Auth.getToken()}`);
       return config;
     });
   }

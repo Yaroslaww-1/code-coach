@@ -1,7 +1,6 @@
 import { Controller, Get, Param } from "@nestjs/common";
 import { GetByIdQuery } from "./queries/get-by-id.query";
 import { GetMessagesQuery } from "./queries/get-messages.query";
-import { Identity } from "../auth/identity";
 
 @Controller("chats")
 export class ChatsController {
