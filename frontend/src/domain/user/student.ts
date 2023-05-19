@@ -10,6 +10,7 @@ export class Student {
     public location: Location,
     public languages: string[],
     public programmingLanguages: string[],
+    public chatWithCoach: string,
   ){
     makeAutoObservable(this);
   }

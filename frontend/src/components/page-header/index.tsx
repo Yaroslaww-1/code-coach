@@ -3,7 +3,7 @@ import React, { PropsWithChildren, useContext } from "react";
 import styles from "./styles.module.scss";
 import { AuthContext } from "common/auth/auth-context";
 import { Avatar, ButtonGroup, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, generatePath } from "react-router-dom";
 import { UserName } from "pages/profile/user-name";
 import { AppRoute } from "common/enums/app-route.enum";
 
@@ -14,29 +14,31 @@ interface IProps {
 }
 
 export const PageHeader: React.FC<PropsWithChildren<IProps>> = ({
-  children,
   classes = {},
 }) => {
   const auth = useContext(AuthContext);
   const user = auth.authenticatedUser!;
 
-  const basicLinks = [
-    AppRoute.COMMUNITIES, AppRoute.POSTS,
+  const links = [
+    { name: "Communities", link: AppRoute.COMMUNITIES },
+    { name: "Posts", link: `${AppRoute.POSTS}` },
   ];
 
-  const coachLinks = [
-    AppRoute.COACH,
-  ];
-
-  const links = auth.isCoach() ? [...basicLinks, ...coachLinks] : basicLinks;
+  if (auth.isCoach()) {
+    links.push({ name: "My students", link: AppRoute.STUDENTS });
+  }
+  
+  if (!auth.isCoach() && auth.authenticatedStudent!.chatWithCoach) {
+    links.push({ name: "Chat with coach", link: generatePath(AppRoute.CHAT, { id: auth.authenticatedStudent!.chatWithCoach }) });
+  }
 
   return (
     <div className={`${styles.root} ${classes.root || ""}`}>
       <div className={styles.links}>
         <ButtonGroup variant="text" aria-label="text button group">
-          {links.map(link => (
+          {links.map(({ link, name }) => (
             <Button key={link}>
-              <Link to={link}>{link}</Link>
+              <Link to={link}>{name}</Link>
             </Button>
           ))}
         </ButtonGroup>     

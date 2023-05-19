@@ -20,6 +20,7 @@ class Chats {
     coaches[0].applyForMentorship(students[0].email);
     coaches[0].applyForMentorship(students[1].email);
     coaches[0].approveMentorship(students[0].email, chat1.id);
+    students[0].joinChatWithCoach(chat1.id);
 
     this.data = [chat1, chat2];
   }

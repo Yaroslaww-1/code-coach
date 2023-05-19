@@ -9,7 +9,7 @@ import { AuthContext } from "common/auth/auth-context";
 import { MentorshipRequestListItem } from "./mentorship-request-list-item";
 import { PageList } from "components/page-list";
 
-export const CoachPage: React.FC = observer(() => {
+export const StudentsPage: React.FC = observer(() => {
   const auth = useContext(AuthContext);
 
   const [coach, setCoach] = useState<Coach>();
@@ -17,7 +17,7 @@ export const CoachPage: React.FC = observer(() => {
 
   useEffect(() => {
     const fetch = async () => {
-      setCoach(await coachesService.getById(auth.authenticatedUser!.email));
+      setCoach((await coachesService.getById(auth.authenticatedUser!.email))!);
       setIsLoading(false);
     };
 

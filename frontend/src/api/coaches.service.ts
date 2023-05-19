@@ -8,10 +8,12 @@ import { CoachStudent } from "domain/user/coach/coach-student";
 const endpoint = "/coaches";
 
 class CoachesService {
-  async getById(email: string): Promise<Coach> {
+  async getById(email: string): Promise<Coach | null> {
+    const coach = await api.get<any>(`${endpoint}/${email}`);
+    if (!coach?.role) return null;
     const {
       role, name, location, languages, programmingLanguages, mentorshipRequests, students, workExperience,
-    } = await api.get<any>(`${endpoint}/${email}`);
+    } = coach;
     return new Coach(
       email,
       role,

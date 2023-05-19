@@ -12,6 +12,8 @@ export class Student extends Entity<Student> {
   public languages: string[];
   public location: Location;
 
+  public chatWithCoach?: string;
+
   public static createNew(student: { email: string, passwordHashed: string }) {
     return new Student({
       ...student,
@@ -20,5 +22,9 @@ export class Student extends Entity<Student> {
       languages: [],
       location: Location.unknown(),
     })
+  }
+
+  public joinChatWithCoach(chatId: string) {
+    this.chatWithCoach = chatId;
   }
 }

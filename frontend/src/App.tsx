@@ -8,12 +8,13 @@ import { CommunityPage } from "pages/community";
 import { PostPage } from "pages/post";
 import { ProfilePage } from "pages/profile";
 import { AuthContext, auth } from "common/auth/auth-context";
-import { CoachPage } from "pages/coach";
+import { StudentsPage } from "pages/students";
 import { ChatPage } from "pages/chat";
 import ws from "api/ws";
 import { useEffect, useState } from "react";
 import { LoginPage } from "pages/auth";
 import { PrivateRoute } from "components/private-route";
+import { CircularProgress } from "@mui/material";
 
 function App() {
   const [isConnected, setIsConnected] = useState(ws.connected);
@@ -30,7 +31,7 @@ function App() {
     };
   }, []);
 
-  if (!isConnected || isLoading) return (<p>Loading</p>);
+  if (!isConnected || isLoading) return (<CircularProgress />);
 
   return (
     <AuthContext.Provider value={auth}>
@@ -52,8 +53,8 @@ function App() {
 
           <Route path={AppRoute.LOGIN} element={<LoginPage />}/>
 
-          <Route path={AppRoute.COACH} >
-            <Route path={""} element={<PrivateRoute><CoachPage /></PrivateRoute>} />
+          <Route path={AppRoute.STUDENTS} >
+            <Route path={""} element={<PrivateRoute><StudentsPage /></PrivateRoute>} />
           </Route>
 
           <Route path={AppRoute.CHAT} >
