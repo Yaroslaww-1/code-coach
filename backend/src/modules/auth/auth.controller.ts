@@ -1,14 +1,24 @@
-// import { Controller, Get } from "@nestjs/common";
-// import { GetAuthenticatedUserQuery } from "./queries/get-authenticated-user.query";
+import { Body, Controller, Get, Post } from "@nestjs/common";
+import { RegisterCommand } from "./commands/register.command";
+import { LoginCommand } from "./commands/login.command";
 
-// @Controller("auth")
-// export class StudentsController {
-//   constructor(
-//     private readonly getAuthenticatedUserQuery: GetAuthenticatedUserQuery
-//   ) {}
+@Controller("auth")
+export class AuthController {
+  constructor(
+    private readonly registerCommand: RegisterCommand,
+    private readonly loginCommand: LoginCommand
+  ) {}
 
-//   @Get("user")
-//   getAll() {
-//     return this.getAuthenticatedUserQuery.execute();
-//   }
-// }
+  @Post("login")
+  login(@Body("email") email: string, @Body("password") password: string) {
+    return this.loginCommand.execute(email, password);
+  }
+
+  @Post("register")
+  register(
+    @Body("email") email: string,
+    @Body("password") password: string,
+    @Body("role") role: string) {
+    return this.registerCommand.execute(email, password, role);
+  }
+}

@@ -7,4 +7,8 @@ export class Location extends ValueObject<Location> {
   public static createNew(country: string, city: string) {
     return new Location({ city, country })
   }
+
+  public static unknown() {
+    return new Location({ city: "Unknown", country: "Unknown" })
+  }
 }
