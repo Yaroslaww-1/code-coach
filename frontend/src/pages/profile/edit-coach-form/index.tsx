@@ -10,6 +10,7 @@ import { Chip, Divider } from "@mui/material";
 import styles from "./styles.module.scss";
 import { Coach } from "domain/user/coach/coach";
 import coachesService from "api/coaches.service";
+import { observer } from "mobx-react-lite";
 
 interface IProps {
   coach: Coach;
@@ -17,7 +18,7 @@ interface IProps {
   close: (coach: Coach) => void;
 }
 
-export const EditCoachForm: React.FC<IProps> = ({ open, close, coach }) => {
+export const EditCoachForm: React.FC<IProps> = observer(({ open, close, coach }) => {
   const [languages, setLanguages] = useState(coach.languages);
   const [newLanguage, setNewLanguage] = useState("");
 
@@ -67,7 +68,6 @@ export const EditCoachForm: React.FC<IProps> = ({ open, close, coach }) => {
             fullWidth
             variant="standard"
             value={newLanguage}
-            multiline
             onChange={e => setNewLanguage(e.target.value)}
           />
           <Button variant="outlined" onClick={addLanguage}>Save</Button>
@@ -87,10 +87,35 @@ export const EditCoachForm: React.FC<IProps> = ({ open, close, coach }) => {
             fullWidth
             variant="standard"
             value={newProgrammingLanguage}
-            multiline
             onChange={e => setNewProgrammingLanguage(e.target.value)}
           />
           <Button variant="outlined" onClick={addProgrammingLanguage}>Save</Button>
+        </div>
+
+        <Divider style={{ marginTop: "12px", marginBottom: "12px" }}>Location</Divider>
+        <div className={styles.edit}>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="city"
+            label="Edit city"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={coach.location.city}
+            onChange={e => { coach.location.city = e.target.value; }}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="country"
+            label="Edit country"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={coach.location.country}
+            onChange={e => { coach.location.country = e.target.value; }}
+          />
         </div>
       </DialogContent>
       <DialogActions className={styles.actions}>
@@ -98,4 +123,4 @@ export const EditCoachForm: React.FC<IProps> = ({ open, close, coach }) => {
       </DialogActions>
     </Dialog>
   );
-};
+});

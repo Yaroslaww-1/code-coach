@@ -10,6 +10,7 @@ import { Chip, Divider } from "@mui/material";
 
 import styles from "./styles.module.scss";
 import studentsService from "api/students.service";
+import { observer } from "mobx-react-lite";
 
 interface IProps {
   student: Student;
@@ -17,7 +18,7 @@ interface IProps {
   close: (student: Student) => void;
 }
 
-export const EditStudentForm: React.FC<IProps> = ({ open, close, student }) => {
+export const EditStudentForm: React.FC<IProps> = observer(({ open, close, student }) => {
   const [languages, setLanguages] = useState(student.languages);
   const [newLanguage, setNewLanguage] = useState("");
 
@@ -92,10 +93,36 @@ export const EditStudentForm: React.FC<IProps> = ({ open, close, student }) => {
           />
           <Button variant="outlined" onClick={addProgrammingLanguage}>Save</Button>
         </div>
+
+        <Divider style={{ marginTop: "12px", marginBottom: "12px" }}>Location</Divider>
+        <div className={styles.edit}>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="city"
+            label="Edit city"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={student.location.city}
+            onChange={e => { student.location.city = e.target.value; }}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="country"
+            label="Edit country"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={student.location.country}
+            onChange={e => { student.location.country = e.target.value; }}
+          />
+        </div>
       </DialogContent>
       <DialogActions className={styles.actions}>
         <Button variant="outlined" color="success" onClick={save}>Save</Button>
       </DialogActions>
     </Dialog>
   );
-};
+});
