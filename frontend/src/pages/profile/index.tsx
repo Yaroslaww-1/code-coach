@@ -13,6 +13,7 @@ import { AuthContext } from "common/auth/auth-context";
 import { StudentInfo } from "./student-info";
 import { CoachInfo } from "./coach-info";
 import { EditStudentForm } from "./edit-student-form";
+import { EditCoachForm } from "./edit-coach-form";
 
 export const ProfilePage: React.FC = () => {
   // const { id } = useParams();
@@ -47,7 +48,11 @@ export const ProfilePage: React.FC = () => {
         ? <CoachInfo coach={auth.authenticatedCoach!} />
         : <StudentInfo student={auth.authenticatedStudent!} />}
       {auth.isCoach()
-        ? <p>Student</p>
+        ? <EditCoachForm
+          coach={auth.authenticatedCoach!}
+          open={isEditFormOpen}
+          close={() => setIsEditFormOpen(false)}
+        />
         : <EditStudentForm
           student={auth.authenticatedStudent!}
           open={isEditFormOpen}

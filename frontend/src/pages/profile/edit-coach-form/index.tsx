@@ -5,29 +5,29 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Student } from "domain/user/student";
 import { Chip, Divider } from "@mui/material";
 
 import styles from "./styles.module.scss";
-import studentsService from "api/students.service";
+import { Coach } from "domain/user/coach/coach";
+import coachesService from "api/coaches.service";
 
 interface IProps {
-  student: Student;
+  coach: Coach;
   open: boolean;
-  close: (student: Student) => void;
+  close: (coach: Coach) => void;
 }
 
-export const EditStudentForm: React.FC<IProps> = ({ open, close, student }) => {
-  const [languages, setLanguages] = useState(student.languages);
+export const EditCoachForm: React.FC<IProps> = ({ open, close, coach }) => {
+  const [languages, setLanguages] = useState(coach.languages);
   const [newLanguage, setNewLanguage] = useState("");
 
-  const [programmingLanguages, setProgrammingLanguages] = useState(student.programmingLanguages);
+  const [programmingLanguages, setProgrammingLanguages] = useState(coach.programmingLanguages);
   const [newProgrammingLanguage, setNewProgrammingLanguage] = useState("");
 
   const save = async () => {
-    student.languages = languages;
-    student.programmingLanguages = programmingLanguages;
-    await studentsService.edit(student);
+    coach.languages = languages;
+    coach.programmingLanguages = programmingLanguages;
+    await coachesService.edit(coach);
     window.location.reload();
   };
 

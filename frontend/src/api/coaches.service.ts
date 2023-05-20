@@ -33,6 +33,10 @@ class CoachesService {
     const { chat } = await api.post<any>(`${endpoint}/approveMentorshipRequest`, { student });
     return new CoachStudent(student, chat);
   }
+
+  async edit(coach: Coach): Promise<void> {
+    await api.post<any>(`${endpoint}/self`, coach);
+  }
 }
 
 export default new CoachesService();
