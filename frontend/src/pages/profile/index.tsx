@@ -12,9 +12,10 @@ import coachesService from "api/coaches.service";
 import { AuthContext } from "common/auth/auth-context";
 import { StudentInfo } from "./student-info";
 import { CoachInfo } from "./coach-info";
+import { EditStudentForm } from "./edit-student-form";
 
 export const ProfilePage: React.FC = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
 
   // const [coach, setCoach] = useState<Coach>();
   // const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -37,12 +38,21 @@ export const ProfilePage: React.FC = () => {
 
   const user = (auth.authenticatedCoach || auth.authenticatedStudent)!;
 
+  const [isEditFormOpen, setIsEditFormOpen] = useState(false);
+
   return (
     <Page>
-      <ProfileHeader user={user} />
+      <ProfileHeader user={user} openEditingForm={() => setIsEditFormOpen(true)} />
       {auth.isCoach()
         ? <CoachInfo coach={auth.authenticatedCoach!} />
         : <StudentInfo student={auth.authenticatedStudent!} />}
+      {auth.isCoach()
+        ? <p>Student</p>
+        : <EditStudentForm
+          student={auth.authenticatedStudent!}
+          open={isEditFormOpen}
+          close={() => setIsEditFormOpen(false)}
+        />}
     </Page>
   );
 };

@@ -22,6 +22,10 @@ class StudentsService {
       chatWithCoach,
     );
   }
+
+  async edit(student: Student): Promise<void> {
+    await api.post<any>(`${endpoint}/self`, student);
+  }
 }
 
 export default new StudentsService();
