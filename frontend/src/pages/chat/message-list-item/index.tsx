@@ -18,7 +18,7 @@ export const MessageListItem: React.FC<IProps> = observer(({ message, chat }) =>
   const auth = useContext(AuthContext);
 
   const authorAvatar = chat.coach.email === message.author ? chat.coach.avatar : chat.student.avatar;
-  const isMine = auth.authenticatedUser!.email === message.author;
+  const isMine = auth.authenticatedUser().email === message.author;
 
   return (
     <div className={`${styles.root} ${isMine ? styles.mine : styles.other}`}>

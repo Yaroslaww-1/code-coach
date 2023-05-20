@@ -7,4 +7,8 @@ export class Location {
   ){
     makeAutoObservable(this);
   }
+
+  toString() {
+    return `${this.city}, ${this.country}`;
+  }
 }

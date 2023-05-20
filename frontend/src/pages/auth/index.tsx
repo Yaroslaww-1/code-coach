@@ -14,8 +14,8 @@ export const LoginPage: React.FC = () => {
 
   const login = async () => {
     try {
-      const user = await usersService.login(email, password);
-      auth.login(user, password);
+      await usersService.login(email, password);
+      await auth.login(email, password);
       navigate(generatePath(AppRoute.BASE));
     } catch (e) {
       console.error(e);

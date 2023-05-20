@@ -7,6 +7,7 @@ export class Student {
     public role: string,
 
     public name: string,
+
     public location: Location,
     public languages: string[],
     public programmingLanguages: string[],

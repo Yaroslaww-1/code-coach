@@ -16,7 +16,7 @@ export const MessageInput: React.FC<IProps> = observer(({ chat }) => {
   const [message, setMessage] = useState<string>("");
 
   const sendMessage = () => {
-    chat.send(message, auth.authenticatedUser!.email);
+    chat.send(message, auth.authenticatedUser().email);
   };
 
   return (

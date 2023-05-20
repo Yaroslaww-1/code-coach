@@ -8,9 +8,9 @@ export const PrivateRoute: React.FC<PropsWithChildren> = ({
 }) => {
   const auth = useContext(AuthContext);
 
-  if (!auth.isAuthenticated()) {
+  if (!auth.isAuthenticated) {
     return <Navigate to={AppRoute.LOGIN} replace />;
-  }
+  } 
 
   return (<>{children}</>);
 };

@@ -1,13 +1,18 @@
 @import '../../../variables.scss';
 
 .root {
-  background-color: $colorLightBlue;
   padding: 12px 20px 12px 20px;
   border-radius: 6px;
   margin-bottom: 12px;
 
   display: flex;
-  justify-content: left;
-  align-items: center;
+  // justify-content: left;
+  align-items: left;
+  flex-direction: column;
+
+  div {
+    margin: 6px 0px 6px 0px;
+    width: fit-content;
+  }
 }
 

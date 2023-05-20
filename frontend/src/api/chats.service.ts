@@ -1,21 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import api from "./api";
 import { Chat } from "domain/chat/Chat";
-import usersService from "./users.service";
 import { ChatMember } from "domain/chat/ChatMember";
 import ws from "./ws";
+import coachesService from "./coaches.service";
+import studentsService from "./students.service";
 
 class ChatsService {
   async getById(chatId: string): Promise<Chat> {
     const chat = await api.get<any>(`/chats/${chatId}`);
 
-    const coach = await usersService.getById(chat.coach);
-    const student = await usersService.getById(chat.student);
+    const coach = await coachesService.getById(chat.coach);
+    const student = await studentsService.getById(chat.student);
 
     return new Chat(
       chatId,
-      new ChatMember(student.email, student.avatar()),
-      new ChatMember(coach.email, coach.avatar()));
+      new ChatMember(student!.email, student!.avatar()),
+      new ChatMember(coach!.email, coach!.avatar()));
   }
 
   async emitMessage(chatId: string, message: string, author: string): Promise<void> {

@@ -1,16 +1,14 @@
 import coachesService from "api/coaches.service";
 import studentsService from "api/students.service";
-import usersService from "api/users.service";
 import { Coach } from "domain/user/coach/coach";
 import { Student } from "domain/user/student";
-import { User } from "domain/user/user";
 import { makeAutoObservable, runInAction } from "mobx";
 import { createContext } from "react";
 
 export class Auth {
-  authenticatedUser?: User;
   authenticatedCoach?: Coach;
   authenticatedStudent?: Student;
+  isAuthenticated: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -19,32 +17,28 @@ export class Auth {
   async initialize() {
     if (Auth.getToken()) {
       const email = Auth.getToken()!.split(":")[0];
-      const user = await usersService.getById(email);
+
+      const coach = await coachesService.getById(email);
       runInAction(() => {
-        this.authenticatedUser = user;
+        if (coach) {
+          this.authenticatedCoach = coach;
+          this.isAuthenticated = true;
+        }
       });
 
-      if (user.isCoach()) {
-        const coach = await coachesService.getById(email);
-        runInAction(() => {
-          this.authenticatedCoach = coach!;
-        });
-      } else {
-        const student = await studentsService.getById(email);
-        runInAction(() => {
-          this.authenticatedStudent = student!;
-        });
-      }
+      const student = await studentsService.getById(email);
+      runInAction(() => {
+        if (student) {
+          this.authenticatedStudent = student;
+          this.isAuthenticated = true;
+        }
+      });
     }
   }
 
-  isAuthenticated() {
-    return this.authenticatedUser;
-  }
-
-  login(user: User, password: string) {
-    localStorage.setItem("accessToken", `${user.email}:${password}`);
-    this.authenticatedUser = user;
+  async login(email: string, password: string) {
+    localStorage.setItem("accessToken", `${email}:${password}`);
+    await this.initialize();
   }
 
   static getToken() {
@@ -53,6 +47,10 @@ export class Auth {
 
   isCoach() {
     return this.authenticatedCoach;
+  }
+
+  authenticatedUser(): Student | Coach {
+    return (this.authenticatedStudent ?? this.authenticatedCoach)!;
   }
 }
 

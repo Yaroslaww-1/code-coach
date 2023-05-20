@@ -2,19 +2,18 @@ import React from "react";
 
 import styles from "./styles.module.scss";
 import { Chip } from "@mui/material";
-import { Coach } from "domain/user/coach/coach";
-import { Student } from "domain/user/student";
+import { Paper } from "components/paper";
 
 interface IProps {
-  user: Coach | Student;
+  programmingLanguages: string[];
 }
 
-export const ProgrammingLanguages: React.FC<IProps> = ({ user }) => {
+export const ProgrammingLanguages: React.FC<IProps> = ({ programmingLanguages }) => {
   return (
-    <div className={styles.root}>
-      {user.programmingLanguages.map(language => (
+    <Paper className={styles.root}>
+      {programmingLanguages.map(language => (
         <Chip key={language} label={language} color="warning" />
       ))}
-    </div>
+    </Paper>
   );
 };

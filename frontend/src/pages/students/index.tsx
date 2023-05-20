@@ -12,28 +12,28 @@ import { PageList } from "components/page-list";
 export const StudentsPage: React.FC = observer(() => {
   const auth = useContext(AuthContext);
 
-  const [coach, setCoach] = useState<Coach>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  // const [coach, setCoach] = useState<Coach>();
+  // const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    const fetch = async () => {
-      setCoach((await coachesService.getById(auth.authenticatedUser!.email))!);
-      setIsLoading(false);
-    };
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     setCoach((await coachesService.getById(auth.authenticatedCoach!.email))!);
+  //     setIsLoading(false);
+  //   };
 
-    fetch();
-  }, []);
+  //   fetch();
+  // }, []);
 
-  if (isLoading) return (<CircularProgress />);
+  // if (isLoading) return (<CircularProgress />);
 
   return (
     <Page>
       <PageList>
-        {coach?.students.map(student => (
+        {auth.authenticatedCoach?.students.map(student => (
           <StudentListItem key={student.email} student={student} />
         ))}
-        {coach?.mentorshipRequests.map(applicant => (
-          <MentorshipRequestListItem coach={coach} key={applicant} applicant={applicant} />
+        {auth.authenticatedCoach?.mentorshipRequests.map(applicant => (
+          <MentorshipRequestListItem coach={auth.authenticatedCoach!} key={applicant} applicant={applicant} />
         ))}
       </PageList>
     </Page>

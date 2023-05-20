@@ -22,7 +22,7 @@ class CoachesService {
       languages,
       programmingLanguages,
       workExperience.map((w: any) =>
-        new WorkExperience(w.company, new Date(Date.parse(w.start)), new Date(Date.parse(w.end)))),
+        new WorkExperience(w.company, new Date(Date.parse(w.start)), w.end && new Date(Date.parse(w.end)))),
       mentorshipRequests,
       students.map((s: any) =>
         new CoachStudent(s.student, s.chat)),

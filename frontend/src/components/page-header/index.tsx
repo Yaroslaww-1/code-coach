@@ -17,7 +17,7 @@ export const PageHeader: React.FC<PropsWithChildren<IProps>> = ({
   classes = {},
 }) => {
   const auth = useContext(AuthContext);
-  const user = auth.authenticatedUser!;
+  const user = auth.authenticatedUser();
 
   const links = [
     { name: "Communities", link: AppRoute.COMMUNITIES },

@@ -10,6 +10,8 @@ import styles from "./styles.module.scss";
 import { Coach } from "domain/user/coach/coach";
 import coachesService from "api/coaches.service";
 import { AuthContext } from "common/auth/auth-context";
+import { StudentInfo } from "./student-info";
+import { CoachInfo } from "./coach-info";
 
 export const ProfilePage: React.FC = () => {
   const { id } = useParams();
@@ -37,11 +39,10 @@ export const ProfilePage: React.FC = () => {
 
   return (
     <Page>
-      <ProfileHeader user={auth.authenticatedUser!} />
-      <div className={styles.firstRow}>
-        <Languages user={user} />
-        <ProgrammingLanguages user={user} />
-      </div>
+      <ProfileHeader user={user} />
+      {auth.isCoach()
+        ? <CoachInfo coach={auth.authenticatedCoach!} />
+        : <StudentInfo student={auth.authenticatedStudent!} />}
     </Page>
   );
 };

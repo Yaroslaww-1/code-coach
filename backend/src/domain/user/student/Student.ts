@@ -17,11 +17,18 @@ export class Student extends Entity<Student> {
   public static createNew(student: { email: string, passwordHashed: string }) {
     return new Student({
       ...student,
-      name: student.email.split("@", 1)[0],
+      name: "Unknown",
       programmingLanguages: [],
       languages: [],
       location: Location.unknown(),
     })
+  }
+
+  public edit(student: Omit<RemoveMethods<Student>, "chatWithCoach" | "passwordHashed" | "email">) {
+    this.name = student.name;
+    this.programmingLanguages = student.programmingLanguages;
+    this.languages = student.languages;
+    this.location = student.location;
   }
 
   public joinChatWithCoach(chatId: string) {
