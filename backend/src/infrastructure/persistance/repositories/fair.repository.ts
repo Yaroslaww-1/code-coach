@@ -3,7 +3,10 @@ import { Injectable } from "@nestjs/common";
 import { Repository } from "./repository";
 import { Fair } from "src/domain/fair/Fair";
 import { TransactWriteItemsCommand } from "@aws-sdk/client-dynamodb";
-import { TransactWriteCommand } from "@aws-sdk/lib-dynamodb";
+import { QueryCommand, TransactWriteCommand } from "@aws-sdk/lib-dynamodb";
+import { CommunityName } from "src/domain/community/CommunityName";
+import { CoachLeftFairEvent } from "src/domain/fair/events/CoachLeftFairEvent.event";
+import { CoachJoinedFairEvent } from "src/domain/fair/events/CoachJoinedFairEvent.event";
 
 @Injectable()
 export class FairRepository implements Repository<Fair> {
@@ -12,7 +15,11 @@ export class FairRepository implements Repository<Fair> {
   ) {}
 
   async save(fairE: Fair) {
-    const { events, students, coaches, ...fair } = fairE;
+    const { events, ...fair } = fairE;
+
+    const leftEvents = events.filter(e => e instanceof CoachLeftFairEvent).map(e => e as CoachLeftFairEvent);
+    const joinEvents = events.filter(e => e instanceof CoachJoinedFairEvent)
+      .map(e => e as CoachJoinedFairEvent);
 
     await this.dynamoDb.client().send(new TransactWriteCommand({
       TransactItems: [
@@ -20,32 +27,43 @@ export class FairRepository implements Repository<Fair> {
           Put: {
             TableName: "Fairs",
             Item: {
-              pk: `Fair#${fair.id}`,
+              pk: `Fair#${fair.community}`,
               sk: "Identity",
               ...JSON.parse(JSON.stringify(fair)),
             },
           },
         },
-        ...students.map(student => ({
+        ...joinEvents.map(e => ({
           Put: {
             TableName: "Fairs",
             Item: {
-              pk: `Fair#${fair.id}`,
-              sk: `Student#${student}`,
-              email: student,
+              pk: `Fair#${fair.community}`,
+              sk: `Coach#${e.coachId}`,
+              email: e.coachId,
             },
           },
         })),
-        ...coaches.map(coach => ({
-          Put: {
+        ...leftEvents.map(e => ({
+          Delete : {
             TableName: "Fairs",
-            Item: {
-              pk: `Fair#${fair.id}`,
-              sk: `Student#${coach}`,
-              email: coach,
+            Key: {
+              pk: `Fair#${fair.community}`,
+              sk: `Coach#${e.coachId}`,
             },
           },
         })),
       ] }));
+  }
+
+  async findOne(id: CommunityName): Promise<Fair> {
+    const query = new QueryCommand({
+      TableName: "Fairs",
+      KeyConditionExpression: "#pk = :pk and #sk = :sk",
+      ExpressionAttributeNames: { "#pk": "pk", "#sk": "sk" },
+      ExpressionAttributeValues: { ":pk": `Fair#${id}`, ":sk": "Identity" },
+    });
+
+    const fair = (await this.dynamoDb.client().send(query)).Items[0] as any;
+    return Fair.initialize(fair);
   }
 }

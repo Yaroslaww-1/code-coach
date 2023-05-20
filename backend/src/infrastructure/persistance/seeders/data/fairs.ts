@@ -7,14 +7,10 @@ export class Fairs {
 
   constructor() {
     const fair = Fair.createNew({
-      startAt: new Date(2023, 4, 20),
-      endAt: new Date(2023, 4, 21),
-      title: "Weekly Fair",
-      community: "c/Vue",
+      community: "vue",
     });
 
-    Students.data.forEach(student => fair.joinAsStudent(student));
-    Coaches.data.forEach(coach => fair.joinAsCoach(coach));
+    Coaches.data.forEach(coach => fair.join(coach));
 
     this.data = [fair];
   }

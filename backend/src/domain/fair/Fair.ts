@@ -1,34 +1,30 @@
-import { nanoid } from "nanoid";
+import { CommunityName } from "../community/CommunityName";
 import { Entity } from "../lib/Entity";
 import { RemoveMethods } from "../lib/typings";
-import { Student } from "../user/student/Student";
 import { Coach } from "../user/coach/Coach";
-import { StudentEmail } from "../user/student/StudentEmail";
-import { CoachEmail } from "../user/coach/CoachEmail";
+import { FairCoach } from "./FairCoach";
+import { CoachJoinedFairEvent } from "./events/CoachJoinedFairEvent.event";
+import { CoachLeftFairEvent } from "./events/CoachLeftFairEvent.event";
 
 export class Fair extends Entity<Fair> {
-  public id: string;
-  
-  public startAt: Date;
-  public endAt: Date;
+  public community: CommunityName;
+  public membersCount: number;
 
-  public title: string;
-  public community: string;
-
-  public students: StudentEmail[];
-  public coaches: CoachEmail[];
-
-  public static createNew(fair: Omit<RemoveMethods<Fair>, "id" | "students" | "coaches">) {
-    return new Fair({ ...fair, id: nanoid(8), students: [], coaches: [] })
+  public static createNew(fair: Omit<RemoveMethods<Fair>, "coaches" | "membersCount">) {
+    return new Fair({ ...fair, membersCount: 0 })
   }
 
-  public joinAsStudent(student: Student) {
-    this.students.push(student.email);
-    // TODO: new StudentJoinedFairEvent()
+  public static initialize(fair: RemoveMethods<Fair>) {
+    return new Fair({ ...fair })
   }
 
-  public joinAsCoach(coach: Coach) {
-    this.coaches.push(coach.email);
-    // TODO: new CoachJoinedFairEvent() 
+  public join(coach: Coach) {
+    this.events.push(new CoachJoinedFairEvent(coach.email, this.community));
+    this.membersCount++;
+  }
+
+  public leave(coach: Coach) {
+    this.events.push(new CoachLeftFairEvent(coach.email, this.community));
+    this.membersCount--;
   }
 }

@@ -10,8 +10,10 @@ import { CommunityHeader } from "./community-header";
 import { PageList } from "components/page-list";
 import { PostListItem } from "pages/posts-feed/post-list-item";
 import { CreatePostForm } from "./create-post-form";
+import { CommunityFair } from "./community-fair";
+import { observer } from "mobx-react-lite";
 
-export const CommunityPage: React.FC = () => {
+export const CommunityPage: React.FC = observer(() => {
   const { id } = useParams();
 
   const [community, setCommunity] = useState<Community>();
@@ -41,12 +43,13 @@ export const CommunityPage: React.FC = () => {
   return (
     <Page>
       <CommunityHeader community={community} openPostForm={() => setIsPostFormOpened(true)} />
-      <CreatePostForm open={isPostFormOpened} community={community} close={savePost} />
+      <CommunityFair community={community.name} />
       <PageList>
         {posts.map(post => (
           <PostListItem key={post.id} post={post} />
         ))}
       </PageList>
+      <CreatePostForm open={isPostFormOpened} community={community} close={savePost} />
     </Page>
   );
-};
+});

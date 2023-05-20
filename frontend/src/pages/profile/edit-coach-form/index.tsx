@@ -54,6 +54,21 @@ export const EditCoachForm: React.FC<IProps> = observer(({ open, close, coach })
     <Dialog open={open} fullWidth={true} >
       <DialogTitle>Edit user</DialogTitle>
       <DialogContent>
+        <Divider style={{ marginTop: "12px", marginBottom: "12px" }}>Name</Divider>
+        <div className={styles.edit}>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Edit name"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={coach.name}
+            onChange={e => { coach.name = e.target.value; }}
+          />
+        </div>
+
         <Divider style={{ marginTop: "12px", marginBottom: "12px" }}>Languages</Divider>
         {languages.map(language => (
           <Chip key={language} label={language} variant="outlined" onDelete={() => deleteLanguage(language)} />
