@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { LoginPage } from "pages/auth";
 import { PrivateRoute } from "components/private-route";
 import { CircularProgress } from "@mui/material";
+import { CoachesPage } from "pages/coaches";
 
 function App() {
   const [isConnected, setIsConnected] = useState(ws.connected);
@@ -59,6 +60,10 @@ function App() {
 
           <Route path={AppRoute.CHAT} >
             <Route path={""} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
+          </Route>
+
+          <Route path={AppRoute.COACHES} >
+            <Route path={""} element={<PrivateRoute><CoachesPage /></PrivateRoute>} />
           </Route>
 
           <Route path={AppRoute.BASE} element={<PrivateRoute><PostsFeedPage /></PrivateRoute>} />

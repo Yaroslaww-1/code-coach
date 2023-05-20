@@ -6,13 +6,19 @@ export class Fairs {
   public readonly data: Fair[];
 
   constructor() {
-    const fair = Fair.createNew({
+    const fair1 = Fair.createNew({
       community: "vue",
     });
 
-    Coaches.data.forEach(coach => fair.join(coach));
+    Coaches.data.forEach(coach => fair1.join(coach));
 
-    this.data = [fair];
+    const fair2 = Fair.createNew({
+      community: "react",
+    });
+
+    Coaches.data.forEach(coach => fair2.join(coach));
+
+    this.data = [fair1, fair2];
   }
 }
 

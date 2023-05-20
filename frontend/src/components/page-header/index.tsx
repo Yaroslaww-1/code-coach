@@ -32,6 +32,10 @@ export const PageHeader: React.FC<PropsWithChildren<IProps>> = ({
     links.push({ name: "Chat with coach", link: generatePath(AppRoute.CHAT, { id: auth.authenticatedStudent!.chatWithCoach }) });
   }
 
+  if (!auth.isCoach()) {
+    links.push({ name: "Coaches search", link: AppRoute.COACHES });
+  }
+
   return (
     <div className={`${styles.root} ${classes.root || ""}`}>
       <div className={styles.links}>

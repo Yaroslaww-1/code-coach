@@ -1,13 +1,12 @@
 import { Community } from "src/domain/community/Community";
+import fairs from "./fairs";
 
 class Communities {
   public readonly data: Community[];
 
   constructor() {
-    const vue = Community.createNew({ name: "vue", description: "The largest Vue developers community." });
-    const react = Community.createNew({ name: "react", description: "The largest Vue developers community." });
-
-    const communities = [vue, react];
+    const vue = Community.createNew({ name: "vue", description: "The largest Vue developers community." }, fairs.data[0]);
+    const react = Community.createNew({ name: "react", description: "The largest Vue developers community." }, fairs.data[1]);
 
     vue.join("abe.ryland@gmail.com");
     vue.join("abigail@gmail.com");

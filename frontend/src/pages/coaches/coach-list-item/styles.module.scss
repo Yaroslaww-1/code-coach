@@ -1,0 +1,10 @@
+@import '../../../variables.scss';
+
+.root {
+  padding: 10px !important;
+
+  .communities {
+    display: flex;
+    flex-direction: row;
+  }
+}

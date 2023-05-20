@@ -1,3 +1,4 @@
+import { Fair } from "../fair/Fair";
 import { Entity } from "../lib/Entity";
 import { RemoveMethods } from "../lib/typings";
 import { CommunityName } from "./CommunityName";
@@ -9,7 +10,7 @@ export class Community extends Entity<Community> {
   public description: string;
   public membersCount: number;
 
-  public static createNew(community: Omit<RemoveMethods<Community>, "membersCount">) {
+  public static createNew(community: Omit<RemoveMethods<Community>, "membersCount">, fair: Fair) {
     return new Community({ ...community, membersCount: 0 })
   }
 
