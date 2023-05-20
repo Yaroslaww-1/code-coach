@@ -2,15 +2,16 @@ import React from "react";
 import { Community } from "domain/community";
 
 import styles from "./styles.module.scss";
-import { Avatar } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import { CommunityJoinButton } from "../community-join-button";
 import { Paper } from "components/paper";
 
 interface IProps {
   community: Community;
+  openPostForm: () => void;
 }
 
-export const CommunityHeader: React.FC<IProps> = ({ community }) => {
+export const CommunityHeader: React.FC<IProps> = ({ community, openPostForm }) => {
   return (
     <>
       <Paper className={styles.general}>
@@ -20,6 +21,7 @@ export const CommunityHeader: React.FC<IProps> = ({ community }) => {
           <span className={styles.members}>{community.membersCount} members</span>
         </div>
         <div>
+          <Button variant="outlined" onClick={openPostForm}>Post</Button>
           <CommunityJoinButton community={community} />
         </div>
       </Paper>

@@ -5,6 +5,7 @@ import { GetByCommunityIdPostsQuery } from "./queries/get-by-community-id.query"
 import { GetByIdPostQuery } from "./queries/get-by-id.query";
 import { ReplyToPostCommand } from "./commands/reply-to-post.command";
 import { AuthenticatedUser } from "../auth/decorators/authenticated-user.decorator";
+import { CreateNewPostCommand } from "./commands/create-new.command";
 
 @Controller("posts")
 export class PostsController {
@@ -13,7 +14,8 @@ export class PostsController {
     private readonly getByCommunityIdPostsQuery: GetByCommunityIdPostsQuery,
     private readonly getCommentsByPostQuery: GetCommentsByPostQuery,
     private readonly getByIdPostQuery: GetByIdPostQuery,
-    private readonly replyToPostCommand: ReplyToPostCommand
+    private readonly replyToPostCommand: ReplyToPostCommand,
+    private readonly createNewPostCommand: CreateNewPostCommand
   ) {}
 
   @Get("feed")
@@ -34,6 +36,15 @@ export class PostsController {
   @Get(":id/comments")
   getByPost(@Param("id") id: string) {
     return this.getCommentsByPostQuery.execute(id);
+  }
+
+  @Post("")
+  create(
+    @AuthenticatedUser() authenticatedUser: string,
+    @Body("title") title: string,
+    @Body("content") content: string,
+    @Body("community") community: string) {
+    return this.createNewPostCommand.execute(authenticatedUser, title, content, community);
   }
 
   @Post(":id/reply")

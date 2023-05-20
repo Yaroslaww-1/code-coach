@@ -18,6 +18,10 @@ export class GetAllPostsQuery {
       ExpressionAttributeValues: { ":pk": "Post#", ":sk": "Identity#" },
     });
 
-    return (await this.dynamoDb.client().send(query)).Items;
+    const allPosts = (await this.dynamoDb.client().send(query)).Items;
+
+    allPosts.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
+
+    return allPosts;
   }
 }

@@ -6,6 +6,7 @@ import { GetCommentsByPostQuery } from "./queries/get-comments-by-post.query";
 import { GetByCommunityIdPostsQuery } from "./queries/get-by-community-id.query";
 import { GetByIdPostQuery } from "./queries/get-by-id.query";
 import { ReplyToPostCommand } from "./commands/reply-to-post.command";
+import { CreateNewPostCommand } from "./commands/create-new.command";
 
 @Module({
   imports: [InfrastructureModule],
@@ -16,6 +17,7 @@ import { ReplyToPostCommand } from "./commands/reply-to-post.command";
     GetByCommunityIdPostsQuery,
     GetByIdPostQuery,
     ReplyToPostCommand,
+    CreateNewPostCommand,
   ],
 })
 export class PostsModule {}

@@ -20,7 +20,7 @@ export class Post {
   }
 
   public createdAtReadable() {
-    return this.createdAt?.toLocaleDateString();
+    return this.createdAt?.toLocaleDateString() + " " + this.createdAt?.toLocaleTimeString();
   }
 
   public reply(content: string) {

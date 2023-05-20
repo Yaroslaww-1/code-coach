@@ -17,7 +17,7 @@ export class PostRepository implements Repository<Post> {
       TableName: "Posts",
       Item: {
         pk: `Post#${post.id}`,
-        sk: `Identity#${post.community}`,
+        sk: `Identity#${post.createdAt.toISOString()}`,
         ...JSON.parse(JSON.stringify(post)),
       },
     }));

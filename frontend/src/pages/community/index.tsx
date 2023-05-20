@@ -9,12 +9,14 @@ import communitiesService from "api/communities.service";
 import { CommunityHeader } from "./community-header";
 import { PageList } from "components/page-list";
 import { PostListItem } from "pages/posts-feed/post-list-item";
+import { CreatePostForm } from "./create-post-form";
 
 export const CommunityPage: React.FC = () => {
   const { id } = useParams();
 
   const [community, setCommunity] = useState<Community>();
   const [posts, setPosts] = useState<Post[]>([]);
+  const [isPostFormOpened, setIsPostFormOpened] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -29,11 +31,17 @@ export const CommunityPage: React.FC = () => {
     fetchCommunity();
   }, []);
 
+  const savePost = (post: Post) => {
+    setPosts(posts => [post, ...posts]);
+    setIsPostFormOpened(false);
+  };
+
   if (!community) return (<CircularProgress />);
 
   return (
     <Page>
-      <CommunityHeader community={community}/>
+      <CommunityHeader community={community} openPostForm={() => setIsPostFormOpened(true)} />
+      <CreatePostForm open={isPostFormOpened} community={community} close={savePost} />
       <PageList>
         {posts.map(post => (
           <PostListItem key={post.id} post={post} />

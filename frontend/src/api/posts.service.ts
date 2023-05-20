@@ -35,6 +35,11 @@ class PostsService {
   async replyToPost(postId: string, content: string): Promise<void> {
     await api.post<any[]>(`${endpoint}/${encodeURIComponent(postId)}/reply`, { content });
   }
+
+  async create(title: string, content: string, community: string): Promise<Post> {
+    const newPost = await api.post<any>(endpoint, { title, content, community });
+    return await this.getById(newPost.id);
+  }
 }
 
 export default new PostsService();
