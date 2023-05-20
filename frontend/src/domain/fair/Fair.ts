@@ -17,7 +17,9 @@ export class Fair  {
     await fairsService.join(this.community);
   }
 
-  public leave(coach: Coach) {
+  public async leave(coach: Coach) {
     this.membersCount -= 1;
+    this.isJoined = false;
+    await fairsService.leave(this.community);
   }
 }

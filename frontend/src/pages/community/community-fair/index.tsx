@@ -31,6 +31,10 @@ export const CommunityFair: React.FC<IProps> = observer(({ community }) => {
     await fair?.join(auth.authenticatedCoach!);
   };
 
+  const leave = async () => {
+    await fair?.leave(auth.authenticatedCoach!);
+  };
+
   if (isLoading) return (<CircularProgress />);
 
   return (
@@ -38,6 +42,7 @@ export const CommunityFair: React.FC<IProps> = observer(({ community }) => {
       <p>There are {fair?.membersCount} coaches currently looking for students.</p>
       <div>
         {auth.isCoach() && !fair?.isJoined && <Button variant="outlined" onClick={join}>Join</Button>}
+        {auth.isCoach() && fair?.isJoined && <Button variant="outlined" color="warning" onClick={leave}>Leave</Button>}
       </div>
     </Paper>
   );
