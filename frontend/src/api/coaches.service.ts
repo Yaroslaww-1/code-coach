@@ -34,6 +34,10 @@ class CoachesService {
     return new CoachStudent(student, chat);
   }
 
+  async requestMentorship(coach: string) {
+    await api.post(`${endpoint}/${coach}/requestMentorship`, {});
+  } 
+
   async edit(coach: Coach): Promise<void> {
     await api.post<any>(`${endpoint}/self`, coach);
   }

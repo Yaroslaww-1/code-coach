@@ -5,6 +5,7 @@ import { Avatar, Button, Chip, Paper } from "@mui/material";
 import { Coach } from "domain/user/coach/coach";
 import { Student } from "domain/user/student";
 import { AuthContext } from "common/auth/auth-context";
+import coachesService from "api/coaches.service";
 
 interface IProps {
   user: Coach | Student;
@@ -14,6 +15,11 @@ interface IProps {
 export const ProfileHeader: React.FC<IProps> = ({ user, openEditingForm }) => {
   const auth = useContext(AuthContext);
   const ownProfile = auth.authenticatedUser()?.email === user.email;
+  const requestMentorship = !ownProfile && user.role.toLowerCase() === "coach";
+
+  const applyForMentorship = async () => {
+    await coachesService.requestMentorship(user.email);
+  };
 
   return (
     <Paper className={styles.root}>
@@ -22,6 +28,7 @@ export const ProfileHeader: React.FC<IProps> = ({ user, openEditingForm }) => {
       <Chip label={user.role} color="success" sx={{ marginLeft: 2 }} />
       <Chip label={user.location.toString()} color="default" sx={{ marginLeft: 2 }} />
       {ownProfile && <Button variant="outlined" onClick={openEditingForm}>Edit</Button>}
+      {requestMentorship && <Button variant="outlined" onClick={applyForMentorship}>Apply for mentorship</Button>}
     </Paper>
   );
 };

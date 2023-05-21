@@ -4,6 +4,7 @@ import { GetCoachByIdQuery } from "./queries/get-by-id.query";
 import { ApproveMentorshipRequestCommand } from "./commands/approve-mentorship-request.command";
 import { AuthenticatedUser } from "../auth/decorators/authenticated-user.decorator";
 import { EditCoachCommand } from "./commands/edit-coach.command";
+import { RequestMentorshipCommand } from "./commands/request-mentorship.command";
 
 @Controller("coaches")
 export class CoachesController {
@@ -11,7 +12,8 @@ export class CoachesController {
     private readonly getAllCoaches: GetAllCoachesQuery,
     private readonly getCoachByIdQuery: GetCoachByIdQuery,
     private readonly approveMentorshipRequestCommand: ApproveMentorshipRequestCommand,
-    private readonly editCoachCommand: EditCoachCommand
+    private readonly editCoachCommand: EditCoachCommand,
+    private readonly requestMentorshipCommand: RequestMentorshipCommand,
   ) {}
 
   @Get()
@@ -22,6 +24,14 @@ export class CoachesController {
   @Get(":id")
   getById(@Param("id") id: string) {
     return this.getCoachByIdQuery.execute(id);
+  }
+
+  @Post(":id/requestMentorship")
+  requestMentorship(
+    @Param("id") coach: string,
+    @AuthenticatedUser() authenticatedStudent: string
+  ) {
+    return this.requestMentorshipCommand.execute(authenticatedStudent, coach);
   }
 
   @Post("approveMentorshipRequest")
