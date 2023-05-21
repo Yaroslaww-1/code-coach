@@ -10,7 +10,7 @@ class StudentsService {
     const student = await api.get<any>(`${endpoint}/${email}`);
     if (!student?.role) return null;
     const {
-      role, name, location, languages, programmingLanguages, coaches,
+      role, name, location, languages, programmingLanguages, coaches, mentorshipRequests,
     } = student;
     return new Student(
       email,
@@ -20,6 +20,7 @@ class StudentsService {
       languages,
       programmingLanguages,
       coaches,
+      mentorshipRequests,
     );
   }
 

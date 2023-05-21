@@ -7,6 +7,7 @@ import { AppRoute } from "common/enums/app-route.enum";
 import { UserName } from "pages/profile/user-name";
 import { CoachStudent } from "domain/user/coach/coach-student";
 import { PageListItem } from "components/page-list-item";
+import styles from "./styles.module.scss";
 
 interface IProps {
   coach: CoachStudent;
@@ -20,9 +21,9 @@ export const CoachListItem: React.FC<IProps> = observer(({ coach }) => {
   };
 
   return (
-    <PageListItem>
+    <PageListItem className={styles.root}>
       <UserName email={coach.coach} />
-      <ListItemButton>
+      <ListItemButton sx={{ maxWidth: 180 }}>
         <Button variant="outlined" onClick={sendMessage}>Send message</Button>
       </ListItemButton>
     </PageListItem>

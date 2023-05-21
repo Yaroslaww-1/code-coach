@@ -14,6 +14,7 @@ export class Student {
     public programmingLanguages: string[],
 
     public coaches: CoachStudent[],
+    public mentorshipRequests: string[],
   ){
     makeAutoObservable(this);
   }

@@ -18,6 +18,7 @@ export class Student extends Entity<Student> {
   public location: Location;
 
   public coaches: CoachStudent[];
+  public mentorshipRequests: CoachEmail[];
 
   public static createNew(student: { email: string, passwordHashed: string }) {
     return new Student({
@@ -27,6 +28,7 @@ export class Student extends Entity<Student> {
       languages: [],
       location: Location.unknown(),
       coaches: [],
+      mentorshipRequests: [],
     })
   }
 
@@ -36,14 +38,19 @@ export class Student extends Entity<Student> {
     })
   }
 
-  public edit(student: Omit<RemoveMethods<Student>, "chatWithCoach" | "passwordHashed" | "email" | "coaches">) {
+  public edit(student: Omit<RemoveMethods<Student>, "chatWithCoach" | "passwordHashed" | "email" | "coaches" | "mentorshipRequests">) {
     this.name = student.name;
     this.programmingLanguages = student.programmingLanguages;
     this.languages = student.languages;
     this.location = student.location;
   }
 
+  public applyForMentorship(coach: CoachEmail) {
+    this.mentorshipRequests.push(coach);
+  }
+
   public joinChatWithCoach(coach: CoachEmail, chat: ChatId) {
     this.coaches.push(CoachStudent.createNew(coach, this.email, chat));
+    this.mentorshipRequests = this.mentorshipRequests.filter(s => s !== coach);
   }
 }
