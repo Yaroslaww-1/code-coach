@@ -10,7 +10,6 @@ export class WorkExperience {
   }
 
   toString() {
-    console.log(this.end);
     return `${this.company}, from ${this.start.toLocaleDateString()} to ${this.end?.toLocaleDateString() ?? "now"}`;
   }
 }

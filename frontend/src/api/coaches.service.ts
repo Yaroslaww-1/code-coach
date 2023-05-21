@@ -25,13 +25,13 @@ class CoachesService {
         new WorkExperience(w.company, new Date(Date.parse(w.start)), w.end && new Date(Date.parse(w.end)))),
       mentorshipRequests,
       students.map((s: any) =>
-        new CoachStudent(s.student, s.chat)),
+        new CoachStudent(s.coach, s.student, s.chat)),
     );
   }
 
-  async approveMentorship(student: string): Promise<CoachStudent> {
+  async approveMentorship(coach: string, student: string): Promise<CoachStudent> {
     const { chat } = await api.post<any>(`${endpoint}/approveMentorshipRequest`, { student });
-    return new CoachStudent(student, chat);
+    return new CoachStudent(coach, student, chat);
   }
 
   async requestMentorship(coach: string) {

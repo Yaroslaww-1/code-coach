@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, useContext } from "react";
 
 import styles from "./styles.module.scss";
-import { AuthContext } from "common/auth/auth-context";
+import { Auth, AuthContext } from "common/auth/auth-context";
 import { Avatar, ButtonGroup, Button } from "@mui/material";
 import { Link, generatePath } from "react-router-dom";
 import { UserName } from "pages/profile/user-name";
@@ -28,8 +28,8 @@ export const PageHeader: React.FC<PropsWithChildren<IProps>> = ({
     links.push({ name: "My students", link: AppRoute.STUDENTS });
   }
   
-  if (!auth.isCoach() && auth.authenticatedStudent!.chatWithCoach) {
-    links.push({ name: "Chat with coach", link: generatePath(AppRoute.CHAT, { id: auth.authenticatedStudent!.chatWithCoach }) });
+  if (!auth.isCoach()) {
+    links.push({ name: "My coaches", link: AppRoute.COACHES_MY });
   }
 
   if (!auth.isCoach()) {
@@ -50,6 +50,7 @@ export const PageHeader: React.FC<PropsWithChildren<IProps>> = ({
       <div className={styles.user}>
         <UserName email={user.email} className={styles.name} />
         <Avatar src={user.avatar()} sx={{ height: 48, width: 48 }} />
+        <Button onClick={() => auth.logout()}>Logout</Button>
       </div>
     </div>
   );

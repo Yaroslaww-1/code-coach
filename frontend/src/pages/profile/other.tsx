@@ -31,8 +31,6 @@ export const OtherProfilePage: React.FC = () => {
       if (coach) setUser(coach);
       else setUser(student!);
 
-      console.log(user);
-      
       setIsLoading(false);
     };
 

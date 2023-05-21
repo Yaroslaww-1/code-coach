@@ -17,4 +17,5 @@ export enum AppRoute {
   CHAT = "/chats/:id",
 
   COACHES = "/coaches",
+  COACHES_MY = "/coaches/my",
 }

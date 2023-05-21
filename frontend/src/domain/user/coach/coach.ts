@@ -27,7 +27,7 @@ export class Coach {
   }
 
   public async approveMentorship(student: string) {
-    const coachStudent = await coachesService.approveMentorship(student);
+    const coachStudent = await coachesService.approveMentorship(this.email, student);
     this.mentorshipRequests = this.mentorshipRequests.filter(a => a !== student);
     this.students.push(coachStudent);
   }

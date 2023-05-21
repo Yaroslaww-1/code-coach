@@ -41,6 +41,11 @@ export class Auth {
     await this.initialize();
   }
 
+  async logout() {
+    localStorage.removeItem("accessToken");
+    window.location.reload();
+  }
+
   static getToken() {
     return localStorage.getItem("accessToken");
   }

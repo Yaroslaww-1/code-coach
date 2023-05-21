@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { Location } from "./location";
+import { CoachStudent } from "./coach/coach-student";
 
 export class Student {
   constructor(
@@ -11,7 +12,8 @@ export class Student {
     public location: Location,
     public languages: string[],
     public programmingLanguages: string[],
-    public chatWithCoach: string,
+
+    public coaches: CoachStudent[],
   ){
     makeAutoObservable(this);
   }

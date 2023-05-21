@@ -17,6 +17,7 @@ import { CircularProgress } from "@mui/material";
 import { CoachesPage } from "pages/coaches";
 import { MyProfilePage } from "pages/profile/my";
 import { OtherProfilePage } from "pages/profile/other";
+import { MyCoachesPage } from "pages/my-coaches";
 
 function App() {
   const [isConnected, setIsConnected] = useState(ws.connected);
@@ -65,6 +66,7 @@ function App() {
           </Route>
 
           <Route path={AppRoute.COACHES} >
+            <Route path={AppRoute.COACHES_MY} element={<PrivateRoute><MyCoachesPage /></PrivateRoute>} />
             <Route path={""} element={<PrivateRoute><CoachesPage /></PrivateRoute>} />
           </Route>
 

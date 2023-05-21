@@ -17,8 +17,6 @@ export class GetStudentByIdQuery {
       },
     });
 
-    console.log(id)
-
     return (await this.dynamoDb.client().send(query)).Item;
   }
 }

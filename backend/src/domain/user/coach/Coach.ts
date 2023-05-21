@@ -54,12 +54,13 @@ export class Coach extends Entity<Coach> {
   }
 
   public applyForMentorship(student: StudentEmail) {
+    if (this.mentorshipRequests.includes(student)) throw new Error("Student is already in the applicants list");
     this.mentorshipRequests.push(student);
   }
 
   public approveMentorship(student: StudentEmail, chat: ChatId) {
     if (!this.mentorshipRequests.includes(student)) throw new Error("Student is not in the applicants list");
-    this.students.push(CoachStudent.createNew(student, chat));
+    this.students.push(CoachStudent.createNew(this.email, student, chat));
     this.mentorshipRequests = this.mentorshipRequests.filter(s => s !== student);
   }
 }

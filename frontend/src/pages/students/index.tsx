@@ -30,7 +30,7 @@ export const StudentsPage: React.FC = observer(() => {
     <Page>
       <PageList>
         {auth.authenticatedCoach?.students.map(student => (
-          <StudentListItem key={student.email} student={student} />
+          <StudentListItem key={student.student} student={student} />
         ))}
         {auth.authenticatedCoach?.mentorshipRequests.map(applicant => (
           <MentorshipRequestListItem coach={auth.authenticatedCoach!} key={applicant} applicant={applicant} />

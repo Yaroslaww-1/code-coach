@@ -16,8 +16,6 @@ export class JoinFairCommand {
     const fair = await this.fairRepository.findOne(community);
     const coach = await this.coachRepository.findOne(authenticatedCoachId);
 
-    console.log(fair, coach, authenticatedCoachId, community);
-
     fair.join(coach);
 
     await this.fairRepository.save(fair);

@@ -9,19 +9,19 @@ import { CoachStudent } from "domain/user/coach/coach-student";
 import { PageListItem } from "components/page-list-item";
 
 interface IProps {
-  student: CoachStudent;
+  coach: CoachStudent;
 }
 
-export const StudentListItem: React.FC<IProps> = observer(({ student }) => {
+export const CoachListItem: React.FC<IProps> = observer(({ coach }) => {
   const navigate = useNavigate();
 
   const sendMessage = () => {
-    navigate(generatePath(AppRoute.CHAT, { id: student.chat }));
+    navigate(generatePath(AppRoute.CHAT, { id: coach.chat }));
   };
 
   return (
     <PageListItem>
-      <UserName email={student.student} />
+      <UserName email={coach.coach} />
       <ListItemButton>
         <Button variant="outlined" onClick={sendMessage}>Send message</Button>
       </ListItemButton>

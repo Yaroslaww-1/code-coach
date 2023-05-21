@@ -21,7 +21,7 @@ export class ApproveMentorshipRequestCommand {
     await this.coachRepository.save(coach);
 
     const student = await this.studentRepository.findOne(studentId);
-    student.joinChatWithCoach(chat.id);
+    student.joinChatWithCoach(coach.email, chat.id);
     await this.studentRepository.save(student);
 
     return coach.students.filter(s => s.student === studentId)[0];

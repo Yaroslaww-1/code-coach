@@ -1,7 +1,10 @@
+import { ChatId } from "src/domain/chat/ChatId";
 import { Entity } from "../../lib/Entity";
 import { RemoveMethods } from "../../lib/typings";
 import { Location } from "../Location";
+import { CoachStudent } from "../coach/CoachStudent";
 import { StudentEmail } from "./StudentEmail";
+import { CoachEmail } from "../coach/CoachEmail";
 
 export class Student extends Entity<Student> {
   public email: StudentEmail;
@@ -12,7 +15,7 @@ export class Student extends Entity<Student> {
   public languages: string[];
   public location: Location;
 
-  public chatWithCoach?: string;
+  public coaches: CoachStudent[];
 
   public static createNew(student: { email: string, passwordHashed: string }) {
     return new Student({
@@ -21,6 +24,7 @@ export class Student extends Entity<Student> {
       programmingLanguages: [],
       languages: [],
       location: Location.unknown(),
+      coaches: [],
     })
   }
 
@@ -30,14 +34,14 @@ export class Student extends Entity<Student> {
     })
   }
 
-  public edit(student: Omit<RemoveMethods<Student>, "chatWithCoach" | "passwordHashed" | "email">) {
+  public edit(student: Omit<RemoveMethods<Student>, "chatWithCoach" | "passwordHashed" | "email" | "coaches">) {
     this.name = student.name;
     this.programmingLanguages = student.programmingLanguages;
     this.languages = student.languages;
     this.location = student.location;
   }
 
-  public joinChatWithCoach(chatId: string) {
-    this.chatWithCoach = chatId;
+  public joinChatWithCoach(coach: CoachEmail, chat: ChatId) {
+    this.coaches.push(CoachStudent.createNew(coach, this.email, chat));
   }
 }
