@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import styles from "./styles.module.scss";
 import { Avatar, Button, Chip, Paper } from "@mui/material";
@@ -15,10 +15,11 @@ interface IProps {
 export const ProfileHeader: React.FC<IProps> = ({ user, openEditingForm }) => {
   const auth = useContext(AuthContext);
   const ownProfile = auth.authenticatedUser()?.email === user.email;
-  const requestMentorship = !ownProfile && user.role.toLowerCase() === "coach";
+  const [requestMentorshipAvailable, setrequestMentorshipAvailable] = useState(!ownProfile && user.role.toLowerCase() === "coach");
 
   const applyForMentorship = async () => {
     await coachesService.requestMentorship(user.email);
+    setrequestMentorshipAvailable(false);
   };
 
   return (
@@ -28,7 +29,7 @@ export const ProfileHeader: React.FC<IProps> = ({ user, openEditingForm }) => {
       <Chip label={user.role} color="success" sx={{ marginLeft: 2 }} />
       <Chip label={user.location.toString()} color="default" sx={{ marginLeft: 2 }} />
       {ownProfile && <Button variant="outlined" onClick={openEditingForm}>Edit</Button>}
-      {requestMentorship && <Button variant="outlined" onClick={applyForMentorship}>Apply for mentorship</Button>}
+      {requestMentorshipAvailable && <Button variant="outlined" onClick={applyForMentorship}>Apply for mentorship</Button>}
     </Paper>
   );
 };
