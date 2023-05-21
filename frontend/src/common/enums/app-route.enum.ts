@@ -8,6 +8,7 @@ export enum AppRoute {
   POST = "/posts/:id",
   
   USERS = "/users",
+  USER_MY = "/users/my",
   USER = "/users/:id",
   LOGIN = "/login",
 

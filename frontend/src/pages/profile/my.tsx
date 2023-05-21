@@ -15,7 +15,7 @@ import { CoachInfo } from "./coach-info";
 import { EditStudentForm } from "./edit-student-form";
 import { EditCoachForm } from "./edit-coach-form";
 
-export const ProfilePage: React.FC = () => {
+export const MyProfilePage: React.FC = () => {
   // const { id } = useParams();
 
   // const [coach, setCoach] = useState<Coach>();

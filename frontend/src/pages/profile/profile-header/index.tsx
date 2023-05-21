@@ -13,7 +13,7 @@ interface IProps {
 
 export const ProfileHeader: React.FC<IProps> = ({ user, openEditingForm }) => {
   const auth = useContext(AuthContext);
-  const ownProfile = auth.authenticatedUser().email === user.email;
+  const ownProfile = auth.authenticatedUser()?.email === user.email;
 
   return (
     <Paper className={styles.root}>

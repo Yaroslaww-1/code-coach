@@ -6,7 +6,6 @@ import { Communities } from "pages/communities";
 import { PostsFeedPage } from "pages/posts-feed";
 import { CommunityPage } from "pages/community";
 import { PostPage } from "pages/post";
-import { ProfilePage } from "pages/profile";
 import { AuthContext, auth } from "common/auth/auth-context";
 import { StudentsPage } from "pages/students";
 import { ChatPage } from "pages/chat";
@@ -16,6 +15,8 @@ import { LoginPage } from "pages/auth";
 import { PrivateRoute } from "components/private-route";
 import { CircularProgress } from "@mui/material";
 import { CoachesPage } from "pages/coaches";
+import { MyProfilePage } from "pages/profile/my";
+import { OtherProfilePage } from "pages/profile/other";
 
 function App() {
   const [isConnected, setIsConnected] = useState(ws.connected);
@@ -49,7 +50,8 @@ function App() {
           </Route>
 
           <Route path={AppRoute.USERS} >
-            <Route path={AppRoute.USER} element={<PrivateRoute><ProfilePage /></PrivateRoute>}/>
+            <Route path={AppRoute.USER_MY} element={<PrivateRoute><MyProfilePage /></PrivateRoute>}/>
+            <Route path={AppRoute.USER} element={<PrivateRoute><OtherProfilePage /></PrivateRoute>}/>
           </Route>
 
           <Route path={AppRoute.LOGIN} element={<LoginPage />}/>
