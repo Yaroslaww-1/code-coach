@@ -8,6 +8,7 @@ import communitiesService from "api/communities.service";
 import { PageList } from "components/page-list";
 import fairsService from "api/fairs.service";
 import { FairCoach } from "domain/fair/FairCoach";
+import { Button } from "@mui/material";
 
 export const CoachesPage: React.FC = observer(() => {
   const [coaches, setCoaches] = useState<FairCoach[]>([]);
@@ -21,8 +22,16 @@ export const CoachesPage: React.FC = observer(() => {
     fetch();
   }, []);
 
+  const findRecommended = async () => {
+    const coaches = await fairsService.getMembersRanked();
+    setCoaches(coaches);
+  };
+
   return (
     <Page>
+      <div>
+        <Button variant="outlined" onClick={findRecommended}>Find recommended</Button>
+      </div>
       <PageList>
         {coaches.map(coach => (
           <CoachListItem key={coach.email} coach={coach} />

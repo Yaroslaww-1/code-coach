@@ -20,6 +20,11 @@ class FairsService {
     return coaches.map(({ email, communities }) => new FairCoach(email, communities));
   }
 
+  async getMembersRanked(): Promise<FairCoach[]> {
+    const coaches = await api.get<any[]>(`${endpoint}/all/members/ranked`);
+    return coaches.map(({ email, communities, recommended }) => new FairCoach(email, communities, recommended));
+  }
+
   async join(communityId: string): Promise<void> {
     await api.post(`${endpoint}/${communityId}/join`, { });
   }

@@ -36,6 +36,6 @@ export class StudentRepository implements Repository<Student> {
     });
 
     const student = (await this.dynamoDb.client().send(query)).Items[0] as any;
-    return Student.createNew(student);
+    return Student.initialize(student);
   }
 }

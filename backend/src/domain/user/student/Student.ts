@@ -24,6 +24,12 @@ export class Student extends Entity<Student> {
     })
   }
 
+  public static initialize(student: RemoveMethods<Student>) {
+    return new Student({
+      ...student,
+    })
+  }
+
   public edit(student: Omit<RemoveMethods<Student>, "chatWithCoach" | "passwordHashed" | "email">) {
     this.name = student.name;
     this.programmingLanguages = student.programmingLanguages;

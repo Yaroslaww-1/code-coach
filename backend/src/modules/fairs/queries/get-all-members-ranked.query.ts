@@ -123,6 +123,8 @@ export class GetAllMembersRankedQuery {
       const haveCommonProgrammingLanguages = coach.programmingLanguages
         .some(r=> student.programmingLanguages.includes(r));
 
+      console.log(coach.programmingLanguages, student.programmingLanguages, haveCommonProgrammingLanguages);
+
       results.push({ ...fairCoach, recommended: haveCommonProgrammingLanguages });
     }
 
