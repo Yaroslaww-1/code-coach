@@ -65,7 +65,7 @@ class Students {
     });
     student3.edit({
       name: "Beatrice Lippincott",
-      programmingLanguages: ["Scala"],
+      programmingLanguages: ["Scala", "Java"],
       languages: ["English", "Italian"],
       location: Location.createNew("Italy", "Rome"),
     });
@@ -76,7 +76,7 @@ class Students {
     });
     student4.edit({
       name: "Bella Duveen",
-      programmingLanguages: ["Haskell", "Scala"],
+      programmingLanguages: ["Kotlin", "Scala"],
       languages: ["English"],
       location: Location.createNew("UK", "London"),
     });

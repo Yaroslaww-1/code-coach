@@ -4,12 +4,14 @@ import { GetByCommunityFairQuery } from "./queries/get-by-community.query";
 import { JoinFairCommand } from "./commands/join-fair.command";
 import { LeaveFairCommand } from "./commands/leave-fair.command";
 import { GetAllMembersQuery } from "./queries/get-all-members.query";
+import { GetAllMembersRankedQuery } from "./queries/get-all-members-ranked.query";
 
 @Controller("fairs")
 export class FairsController {
   constructor(
     private readonly getByCommunityFairQuery: GetByCommunityFairQuery,
     private readonly getAllMembersQuery: GetAllMembersQuery,
+    private readonly getAllMembersRankedQuery: GetAllMembersRankedQuery,
     private readonly joinFairCommand: JoinFairCommand,
     private readonly leaveFairCommand: LeaveFairCommand,
   ) {}
@@ -22,6 +24,11 @@ export class FairsController {
   @Get("all/members")
   getAllMembers(@AuthenticatedUser() student: string) {
     return this.getAllMembersQuery.execute(student);
+  }
+
+  @Get("all/members/ranked")
+  getAllMembersRanked(@AuthenticatedUser() student: string) {
+    return this.getAllMembersRankedQuery.execute(student);
   }
 
   @Post(":community/join")

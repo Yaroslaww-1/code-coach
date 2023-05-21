@@ -83,8 +83,36 @@ class Coaches {
       ],
       location: Location.createNew("USA", "Seattle"),
     });
+
+    const coach4 = Coach.createNew({
+      email: "carl.reiter@gmail.com",
+      passwordHashed: bcrypt.hashSync("carl@coach", 10),
+    });
+    coach4.edit({
+      name: "Carl Reiter",
+      programmingLanguages: ["Python", "C++"],
+      languages: ["English", "Japanese"],
+      workExperience: [
+        WorkExperience.createUnfinished("Tesla", new Date(2018, 10)),
+      ],
+      location: Location.createNew("USA", "San Francisco"),
+    });
+
+    const coach5 = Coach.createNew({
+      email: "carlotta.adams@gmail.com",
+      passwordHashed: bcrypt.hashSync("carlotta@coach", 10),
+    });
+    coach5.edit({
+      name: "Carlotta Adams",
+      programmingLanguages: ["C++", "Assembly"],
+      languages: ["English", "German"],
+      workExperience: [
+        WorkExperience.createUnfinished("Mercedes", new Date(2012, 8)),
+      ],
+      location: Location.createNew("Germany", "Berlin"),
+    });
         
-    this.data = [coach1, coach2, coach3];
+    this.data = [coach1, coach2, coach3, coach4, coach5];
   }
 }
 
