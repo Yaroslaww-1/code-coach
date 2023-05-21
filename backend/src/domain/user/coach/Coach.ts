@@ -7,6 +7,7 @@ import { StudentEmail } from "../student/StudentEmail";
 import { CoachStudent } from "./CoachStudent";
 import { Student } from "../student/Student";
 import { ChatId } from "src/domain/chat/ChatId";
+import { BadRequestException } from "@nestjs/common";
 
 export class Coach extends Entity<Coach> {
   public email: CoachEmail;
@@ -54,12 +55,13 @@ export class Coach extends Entity<Coach> {
   }
 
   public applyForMentorship(student: StudentEmail) {
-    if (this.mentorshipRequests.includes(student)) throw new Error("Student is already in the applicants list");
+    if (this.mentorshipRequests.includes(student)) throw new BadRequestException("Student is already in the applicants list");
+    if (this.students.map(s => s.student).includes(student)) throw new BadRequestException("Student is already in the students list");
     this.mentorshipRequests.push(student);
   }
 
   public approveMentorship(student: StudentEmail, chat: ChatId) {
-    if (!this.mentorshipRequests.includes(student)) throw new Error("Student is not in the applicants list");
+    if (!this.mentorshipRequests.includes(student)) throw new BadRequestException("Student is not in the applicants list");
     this.students.push(CoachStudent.createNew(this.email, student, chat));
     this.mentorshipRequests = this.mentorshipRequests.filter(s => s !== student);
   }

@@ -13,13 +13,16 @@ import ws from "api/ws";
 import { useEffect, useState } from "react";
 import { LoginPage } from "pages/auth";
 import { PrivateRoute } from "components/private-route";
-import { CircularProgress } from "@mui/material";
+import { Alert, CircularProgress } from "@mui/material";
 import { CoachesPage } from "pages/coaches";
 import { MyProfilePage } from "pages/profile/my";
 import { OtherProfilePage } from "pages/profile/other";
 import { MyCoachesPage } from "pages/my-coaches";
+import { Toast } from "components/toast";
+import api, { Api } from "api/api";
+import { observer } from "mobx-react-lite";
 
-function App() {
+const App = observer(() => {
   const [isConnected, setIsConnected] = useState(ws.connected);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -72,9 +75,10 @@ function App() {
 
           <Route path={AppRoute.BASE} element={<PrivateRoute><PostsFeedPage /></PrivateRoute>} />
         </Routes>
+        <Toast />
       </BrowserRouter>
     </AuthContext.Provider>
   );
-}
+});
 
 export default App;

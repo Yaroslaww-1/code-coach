@@ -5,6 +5,8 @@ import { Location } from "../Location";
 import { CoachStudent } from "../coach/CoachStudent";
 import { StudentEmail } from "./StudentEmail";
 import { CoachEmail } from "../coach/CoachEmail";
+import { BadRequestException } from "@nestjs/common";
+
 
 export class Student extends Entity<Student> {
   public email: StudentEmail;
