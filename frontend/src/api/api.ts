@@ -22,7 +22,7 @@ export class Api {
     });
 
     this.instance.interceptors.response.use(response => {
-      console.log("DASsa", response.status, response.data);
+      console.log("response", response.status, response.data);
       if (response.status !== 200) {
         console.log(response.data);
       }

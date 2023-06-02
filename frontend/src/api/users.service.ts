@@ -8,39 +8,16 @@ import studentsService from "./students.service";
 const endpoint = "/users";
 
 class UsersService {
-  // async getById(email: string): Promise<User> {
-  //   const user = await api.get<any>(`${endpoint}/${email}`);
-  //   if (!coach?.role) return null;
-  //   const {
-  //     role, name, location, languages, programmingLanguages, mentorshipRequests, students, workExperience,
-  //   } = coach;
-  //   return new Coach(
-  //     email,
-  //     role,
-  //     name,
-  //     new Location(location.city, location.country),
-  //     languages,
-  //     programmingLanguages,
-  //     workExperience.map((w: any) =>
-  //       new WorkExperience(w.company, new Date(Date.parse(w.start)), new Date(Date.parse(w.end)))),
-  //     mentorshipRequests,
-  //     students.map((s: any) =>
-  //       new CoachStudent(s.student, s.chat)),
-  //   );
-
-  //   const { role, name, location } = await api.get<any>(`${endpoint}/${email}`);
-  //   return new User(
-  //     email,
-  //     role,
-  //     name,
-  //   );
-  // }
-
-  async login(email: string, password: string): Promise<Coach | Student> {
-    await api.post<any>("/auth/login", { email, password });
+  async login(email: string, password: string): Promise<Coach | Student | null> {
+    const login = await api.post<any>("/auth/login", { email, password });
+    if (login.error) return null;
     const coach = await coachesService.getById(email);
     const student = await studentsService.getById(email);
-    return (coach ?? student)!;
+    return coach ?? student ?? null;
+  }
+
+  async register(email: string, password: string, role: string): Promise<any> {
+    return await api.post<any>("/auth/register", { email, password, role });
   }
 }
 

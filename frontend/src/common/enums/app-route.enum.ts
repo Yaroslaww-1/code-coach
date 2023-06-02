@@ -11,6 +11,7 @@ export enum AppRoute {
   USER_MY = "/users/my",
   USER = "/users/:id",
   LOGIN = "/login",
+  REGISTER = "/register",
 
   STUDENTS = "/students",
 

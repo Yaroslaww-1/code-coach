@@ -11,16 +11,16 @@ import { StudentsPage } from "pages/students";
 import { ChatPage } from "pages/chat";
 import ws from "api/ws";
 import { useEffect, useState } from "react";
-import { LoginPage } from "pages/auth";
 import { PrivateRoute } from "components/private-route";
-import { Alert, CircularProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { CoachesPage } from "pages/coaches";
 import { MyProfilePage } from "pages/profile/my";
 import { OtherProfilePage } from "pages/profile/other";
 import { MyCoachesPage } from "pages/my-coaches";
 import { Toast } from "components/toast";
-import api, { Api } from "api/api";
 import { observer } from "mobx-react-lite";
+import { RegisterPage } from "pages/register";
+import { LoginPage } from "pages/login";
 
 const App = observer(() => {
   const [isConnected, setIsConnected] = useState(ws.connected);
@@ -59,6 +59,7 @@ const App = observer(() => {
           </Route>
 
           <Route path={AppRoute.LOGIN} element={<LoginPage />}/>
+          <Route path={AppRoute.REGISTER} element={<RegisterPage />}/>
 
           <Route path={AppRoute.STUDENTS} >
             <Route path={""} element={<PrivateRoute><StudentsPage /></PrivateRoute>} />

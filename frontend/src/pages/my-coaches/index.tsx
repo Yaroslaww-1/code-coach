@@ -12,8 +12,6 @@ export const MyCoachesPage: React.FC = observer(() => {
 
   const student = auth.authenticatedStudent!;
 
-  console.log(student);
-
   return (
     <Page>
       <PageList>

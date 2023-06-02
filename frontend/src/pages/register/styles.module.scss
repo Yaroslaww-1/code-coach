@@ -1,0 +1,20 @@
+@import '../../variables.scss';
+
+.root {
+  .actions {
+    display: flex;
+    flex-direction: column;
+
+    .register {
+      font-size: 24px;
+    }
+  }
+
+  .input {
+    margin-top: 18px;
+    margin-bottom: 18px;
+    width: 100%;
+    height: 48px;
+  }
+}
+

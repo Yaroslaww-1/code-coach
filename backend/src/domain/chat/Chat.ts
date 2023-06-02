@@ -21,7 +21,6 @@ export class Chat extends Entity<Chat> {
   }
 
   public send(messageContent: string, userId: CoachEmail | StudentEmail) {
-    // TODO: check whether userId is member1/2
     const message = Message.createNew({
       content: messageContent,
       author: userId,
