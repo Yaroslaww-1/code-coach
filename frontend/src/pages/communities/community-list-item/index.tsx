@@ -26,7 +26,7 @@ export const CommunityListItem: React.FC<IProps> = observer(({ community }) => {
   return (
     <PageListItem onClick={goToCommunity}>
       <ListItemAvatar>
-        <Avatar src={community.logoUrl()} />
+        <Avatar src={community.logo} />
       </ListItemAvatar>
       <ListItemText
         primary={community.name}

@@ -10,6 +10,8 @@ interface IProps {
 }
 
 export const CommunityLogoName: React.FC<IProps> = ({ avatarUrl, name }) => {
+  console.log(avatarUrl);
+
   return (
     <div className={styles.root}>
       <Avatar sx={{ width: 24, height: 24 }} src={avatarUrl} />

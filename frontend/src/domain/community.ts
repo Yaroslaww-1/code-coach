@@ -7,12 +7,9 @@ export class Community {
     public description: string,
     public isJoined: boolean,
     public membersCount: number,
+    public logo: string,
   ) {
     makeAutoObservable(this);
-  }
-
-  public logoUrl() {
-    return "https://styles.redditmedia.com/t5_2qh84/styles/communityIcon_pc026nky6a221.png";
   }
 
   public join() {

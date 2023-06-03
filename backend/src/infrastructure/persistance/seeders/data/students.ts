@@ -40,6 +40,7 @@ class Students {
     const student1 = Student.createNew({
       email: "barbara.amory@gmail.com",
       passwordHashed: bcrypt.hashSync("barbara@student", 10),
+      avatar: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/female3.png",
     });
     student1.edit({
       name: "Barbara Amory",
@@ -51,6 +52,7 @@ class Students {
     const student2 = Student.createNew({
       email: "barbara.franklin@gmail.com",
       passwordHashed: bcrypt.hashSync("barbara@student", 10),
+      avatar: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/female4.png",
     });
     student2.edit({
       name: "Barbara Franklin",
@@ -62,6 +64,7 @@ class Students {
     const student3 = Student.createNew({
       email: "beatrice.lippincott@gmail.com",
       passwordHashed: bcrypt.hashSync("beatrice@student", 10),
+      avatar: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/new-user.png",
     });
     student3.edit({
       name: "Beatrice Lippincott",
@@ -73,6 +76,7 @@ class Students {
     const student4 = Student.createNew({
       email: "bella.duveen@gmail.com",
       passwordHashed: bcrypt.hashSync("bella@student", 10),
+      avatar: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/new-user.png",
     });
     student4.edit({
       name: "Bella Duveen",

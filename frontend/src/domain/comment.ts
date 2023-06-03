@@ -6,14 +6,11 @@ export class Comment {
     public id: string,
     public content: string,
     public createdBy: string,
+    public createdByAvatar: string,
     public createdAt: Date,
     public replyTo: string,
   ) {
     makeAutoObservable(this);
-  }
-
-  public createdByUrl() {
-    return "https://styles.redditmedia.com/t5_2qh84/styles/communityIcon_pc026nky6a221.png";
   }
 
   public reply(content: string) {

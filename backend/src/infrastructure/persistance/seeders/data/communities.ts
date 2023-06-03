@@ -5,8 +5,16 @@ class Communities {
   public readonly data: Community[];
 
   constructor() {
-    const vue = Community.createNew({ name: "vue", description: "The largest Vue developers community." }, fairs.data[0]);
-    const react = Community.createNew({ name: "react", description: "The largest Vue developers community." }, fairs.data[1]);
+    const vue = Community.createNew({
+      name: "vue",
+      description: "The largest Vue developers community.",
+      logo: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/vue.png",
+    }, fairs.data[0]);
+    const react = Community.createNew({
+      name: "react",
+      description: "The largest Vue developers community.",
+      logo: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/react.png",
+    }, fairs.data[1]);
 
     vue.join("abe.ryland@gmail.com");
     vue.join("abigail@gmail.com");

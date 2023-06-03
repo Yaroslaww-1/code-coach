@@ -1,4 +1,6 @@
 import { Post } from "src/domain/post/Post";
+import students from "./students";
+import communities from "./communities";
 
 class Posts {
   public readonly data: Post[];
@@ -8,8 +10,10 @@ class Posts {
       Post.createNew({
         title: "What should I use - Vite or Nuxt?",
         content: "I'm very new to Vue and I have a couple of questions. I want to start my new pet-project using Vue so that I could add Vue to my resume. And Vite or Nuxt are essentials to have a nice pet-project I guess. My main question is if I choose to use Nuxt does it affect my back-end and do I need to rewrite some code there so that Nuxt would function better?",
-        createdBy: "barbara.amory@gmail.com",
-        community: "vue",
+        createdBy: students.data[0].email,
+        createdByAvatar: students.data[0].avatar,
+        community: communities.data[0].name,
+        communityLogo: communities.data[0].logo,
       }),
       Post.createNew({
         title: "Vue+Nuxt: Scope of .this and context, how do I know I have access to my nuxt module",
@@ -21,8 +25,10 @@ class Posts {
         I tried the same thing with i18n but it doesnt work, strangely enough even nuxt-universal-cookies works like that only in one of my components and I dont get why.
         TLDR: why do I sometimes have access to modules in my components through "this.$module" and sometimes only through importing "useContext" ?
         Thanks in advance!`,
-        createdBy: "barbara.franklin@gmail.com",
-        community: "vue",
+        createdBy: students.data[1].email,
+        createdByAvatar: students.data[1].avatar,
+        community: communities.data[0].name,
+        communityLogo: communities.data[0].logo,
       }),
     ];
   }

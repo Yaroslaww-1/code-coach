@@ -9,8 +9,10 @@ export class Post extends Entity<Post> {
   public title: string;
   public content: string;
   public community: string;
+  public communityLogo: string;
 
   public createdBy: string;
+  public createdByAvatar: string;
   public createdAt: Date;
 
   public static createNew(post: Omit<RemoveMethods<Post>, "id" | "createdAt">) {

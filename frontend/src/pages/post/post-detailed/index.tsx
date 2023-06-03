@@ -26,7 +26,7 @@ export const PostDetailed: React.FC<IProps> = observer(({ post }) => {
   return (
     <Paper className={styles.root}>
       <div className={styles.header}>
-        <Avatar src={post.createdByUrl()}/>
+        <Avatar src={post.createdByAvatar}/>
         <div className={styles.createdBy}>
           <UserName email={post.createdBy} />
           <span> posted at </span>

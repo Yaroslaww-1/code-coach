@@ -44,6 +44,7 @@ class Coaches {
     const coach1 = Coach.createNew({
       email: "abe.ryland@gmail.com",
       passwordHashed: bcrypt.hashSync("abe@coach", 10),
+      avatar: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/female1.png",
     });
     coach1.edit({
       name: "Abe Ryland",
@@ -59,6 +60,7 @@ class Coaches {
     const coach2 = Coach.createNew({
       email: "abigail@gmail.com",
       passwordHashed: bcrypt.hashSync("abigail@coach", 10),
+      avatar: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/new-user.png",
     });
     coach2.edit({
       name: "Abigail McGinty",
@@ -73,6 +75,7 @@ class Coaches {
     const coach3 = Coach.createNew({
       email: "adela.marchmont@gmail.com",
       passwordHashed: bcrypt.hashSync("adela@coach", 10),
+      avatar: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/female2.png",
     });
     coach3.edit({
       name: "Adela Marchmont",
@@ -87,6 +90,7 @@ class Coaches {
     const coach4 = Coach.createNew({
       email: "carl.reiter@gmail.com",
       passwordHashed: bcrypt.hashSync("carl@coach", 10),
+      avatar: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/new-user.png",
     });
     coach4.edit({
       name: "Carl Reiter",
@@ -101,6 +105,7 @@ class Coaches {
     const coach5 = Coach.createNew({
       email: "carlotta.adams@gmail.com",
       passwordHashed: bcrypt.hashSync("carlotta@coach", 10),
+      avatar: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/new-user.png",
     });
     coach5.edit({
       name: "Carlotta Adams",

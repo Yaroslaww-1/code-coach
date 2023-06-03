@@ -15,8 +15,8 @@ class ChatsService {
 
     return new Chat(
       chatId,
-      new ChatMember(student!.email, student!.avatar()),
-      new ChatMember(coach!.email, coach!.avatar()));
+      new ChatMember(student!.email, student!.avatar),
+      new ChatMember(coach!.email, coach!.avatar));
   }
 
   async emitMessage(chatId: string, message: string, author: string): Promise<void> {

@@ -37,12 +37,20 @@ export class RegisterCommand {
     const passwordHashed = await bcrypt.hash(password, 10);
 
     if (role.toLowerCase() === "coach") {
-      const coach = Coach.createNew({ email, passwordHashed });
+      const coach = Coach.createNew({
+        email,
+        passwordHashed,
+        avatar: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/new-user.png",
+      });
       await this.coachRepository.save(coach);
     }
 
     if (role.toLowerCase() === "student") {
-      const student = Student.createNew({ email, passwordHashed });
+      const student = Student.createNew({
+        email,
+        passwordHashed,
+        avatar: "https://codecoach.s3.eu-central-1.amazonaws.com/data/images/new-user.png",
+      });
       await this.studentRepository.save(student);
     }
   }

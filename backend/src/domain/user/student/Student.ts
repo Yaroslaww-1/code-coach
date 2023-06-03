@@ -13,6 +13,7 @@ export class Student extends Entity<Student> {
   public passwordHashed: string;
 
   public name: string;
+  public avatar: string;
   public programmingLanguages: string[];
   public languages: string[];
   public location: Location;
@@ -20,7 +21,7 @@ export class Student extends Entity<Student> {
   public coaches: CoachStudent[];
   public mentorshipRequests: CoachEmail[];
 
-  public static createNew(student: { email: string, passwordHashed: string }) {
+  public static createNew(student: { email: string, passwordHashed: string, avatar: string }) {
     return new Student({
       ...student,
       name: "Unknown",
@@ -38,7 +39,7 @@ export class Student extends Entity<Student> {
     })
   }
 
-  public edit(student: Omit<RemoveMethods<Student>, "chatWithCoach" | "passwordHashed" | "email" | "coaches" | "mentorshipRequests">) {
+  public edit(student: Omit<RemoveMethods<Student>, "chatWithCoach" | "passwordHashed" | "email" | "coaches" | "mentorshipRequests" | "avatar">) {
     this.name = student.name;
     this.programmingLanguages = student.programmingLanguages;
     this.languages = student.languages;

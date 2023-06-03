@@ -24,7 +24,7 @@ export const CommentComponent: React.FC<IProps> = observer(({ comment }) => {
     <Paper className={styles.root}>
       <div className={styles.comment}>
         <div className={styles.user}>
-          <Avatar src={comment.createdByUrl()}/>
+          <Avatar src={comment.createdByAvatar}/>
           <UserName email={comment.createdBy} className={styles.userName} />
         </div>
         <div className={styles.content}>

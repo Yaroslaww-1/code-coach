@@ -12,12 +12,13 @@ class CoachesService {
     const coach = await api.get<any>(`${endpoint}/${email}`);
     if (!coach?.role) return null;
     const {
-      role, name, location, languages, programmingLanguages, mentorshipRequests, students, workExperience,
+      role, name, location, languages, programmingLanguages, mentorshipRequests, students, workExperience, avatar,
     } = coach;
     return new Coach(
       email,
       role,
       name,
+      avatar,
       new Location(location.city, location.country),
       languages,
       programmingLanguages,

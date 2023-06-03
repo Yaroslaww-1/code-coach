@@ -30,7 +30,7 @@ export const PostListItem: React.FC<IProps> = ({ post }) => {
         <CardHeader
           avatar={
             <CommunityLogoName
-              avatarUrl="https://styles.redditmedia.com/t5_2qh84/styles/communityIcon_pc026nky6a221.png"
+              avatarUrl={post.communityLogo}
               name={post.community}
             />
           }

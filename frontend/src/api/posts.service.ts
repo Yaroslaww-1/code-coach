@@ -9,27 +9,27 @@ class PostsService {
   async getFeed(): Promise<Post[]> {
     const posts = await api.get<any[]>(`${endpoint}/feed`);
     return posts.map((
-      { id, title, content, community, createdBy, createdAt }) =>
-      new Post(id, title, content, community, createdBy, new Date(Date.parse(createdAt))));
+      { id, title, content, community, communityLogo, createdBy, createdByAvatar, createdAt }) =>
+      new Post(id, title, content, community, communityLogo, createdBy, createdByAvatar, new Date(Date.parse(createdAt))));
   }
 
   async getByCommunity(communityId: string): Promise<Post[]> {
     const posts = await api.get<any[]>(endpoint, { communityId });
     return posts.map((
-      { id, title, content, community, createdBy, createdAt }) =>
-      new Post(id, title, content, community, createdBy, new Date(Date.parse(createdAt))));
+      { id, title, content, community, communityLogo, createdBy, createdByAvatar, createdAt }) =>
+      new Post(id, title, content, community, communityLogo, createdBy, createdByAvatar, new Date(Date.parse(createdAt))));
   }
 
   async getById(postId: string): Promise<Post> {
-    const { id, title, content, community, createdBy, createdAt } = await api.get<any>(`${endpoint}/${postId}`);
-    return new Post(id, title, content, community, createdBy, new Date(Date.parse(createdAt)));
+    const { id, title, content, community, communityLogo, createdBy, createdByAvatar, createdAt } = await api.get<any>(`${endpoint}/${postId}`);
+    return new Post(id, title, content, community, communityLogo, createdBy, createdByAvatar, new Date(Date.parse(createdAt)));
   }
 
   async getComments(postId: string): Promise<Comment[]> {
     const comments = await api.get<any[]>(`${endpoint}/${postId}/comments`);
     return comments.map((
-      { id, content, createdBy, createdAt, replyTo }) =>
-      new Comment(id, content, createdBy, new Date(Date.parse(createdAt)), replyTo));
+      { id, content, createdBy, createdByAvatar, createdAt, replyTo }) =>
+      new Comment(id, content, createdBy, createdByAvatar, new Date(Date.parse(createdAt)), replyTo));
   }
 
   async replyToPost(postId: string, content: string): Promise<void> {

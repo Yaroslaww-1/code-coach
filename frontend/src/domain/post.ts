@@ -8,15 +8,13 @@ export class Post {
     public title: string,
     public content: string,
     public community: string,
+    public communityLogo: string,
 
     public createdBy: string,
+    public createdByAvatar: string,
     public createdAt: Date,
   ){
     makeAutoObservable(this);
-  }
-
-  public createdByUrl() {
-    return "https://styles.redditmedia.com/t5_2qh84/styles/communityIcon_pc026nky6a221.png";
   }
 
   public createdAtReadable() {

@@ -49,7 +49,7 @@ export const PageHeader: React.FC<PropsWithChildren<IProps>> = ({
       </div>
       <div className={styles.user}>
         <UserName email={user.email} className={styles.name} />
-        <Avatar src={user.avatar()} sx={{ height: 48, width: 48 }} />
+        <Avatar src={user.avatar} sx={{ height: 48, width: 48 }} />
         <Button onClick={() => auth.logout()}>Logout</Button>
       </div>
     </div>

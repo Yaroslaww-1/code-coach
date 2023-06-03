@@ -9,6 +9,7 @@ export class Student {
 
     public name: string,
 
+    public avatar: string,
     public location: Location,
     public languages: string[],
     public programmingLanguages: string[],
@@ -17,9 +18,5 @@ export class Student {
     public mentorshipRequests: string[],
   ){
     makeAutoObservable(this);
-  }
-
-  public avatar() {
-    return "https://styles.redditmedia.com/t5_2qh84/styles/communityIcon_pc026nky6a221.png";
   }
 }

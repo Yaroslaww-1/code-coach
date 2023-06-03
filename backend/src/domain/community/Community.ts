@@ -7,6 +7,7 @@ import { UserLeftCommunityEvent } from "./events/UserLeftCommunityEvent.event";
 
 export class Community extends Entity<Community> {
   public name: CommunityName;
+  public logo: string;
   public description: string;
   public membersCount: number;
 
