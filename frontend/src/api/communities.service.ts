@@ -23,6 +23,10 @@ class CommunitiesService {
   async leaveCommunity(communityId: string): Promise<void> {
     await api.post(`${endpoint}/${communityId}/leave`, { });
   }
+
+  async create(name: string, description: string): Promise<any> {
+    return await api.post(`${endpoint}`, { name, description });
+  }
 }
 
 export default new CommunitiesService();

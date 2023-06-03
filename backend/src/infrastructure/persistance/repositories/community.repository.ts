@@ -55,7 +55,7 @@ export class CommunityRepository implements Repository<Community> {
       ] }));
   }
 
-  async findOne(id: CommunityName): Promise<Community> {
+  async findOne(id: CommunityName): Promise<Community | null> {
     const query = new QueryCommand({
       TableName: "Communities",
       Select: Select.ALL_ATTRIBUTES,
@@ -65,6 +65,7 @@ export class CommunityRepository implements Repository<Community> {
     });
 
     const community = (await this.dynamoDb.client().send(query)).Items[0] as any;
+    if (!community) return null;
     return Community.initialize(community);
   }
 }

@@ -12,6 +12,8 @@ import { AppRoute } from "common/enums/app-route.enum";
 import { CommunityJoinButton } from "pages/community/community-join-button";
 import { PageListItem } from "components/page-list-item";
 
+import styles from "./styles.module.scss";
+
 interface IProps {
   community: Community;
 }
@@ -32,9 +34,11 @@ export const CommunityListItem: React.FC<IProps> = observer(({ community }) => {
         primary={community.name}
         secondary={community.description}
       />
-      <ListItemButton>
-        <CommunityJoinButton community={community} />
-      </ListItemButton>
+      <div className={styles.actions}>
+        <ListItemButton>
+          <CommunityJoinButton community={community} />
+        </ListItemButton>
+      </div>
     </PageListItem>
   );
 });

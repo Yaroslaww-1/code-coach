@@ -6,10 +6,11 @@ import { AuthModule } from "../auth/auth.module";
 import { JoinCommunityCommand } from "./commands/join-community.command";
 import { LeaveCommunityCommand } from "./commands/leave-community.command";
 import { GetByIdCommunityQuery } from "./queries/get-by-id.query";
+import { CreateCommunityCommand } from "./commands/create-community.command";
 
 @Module({
   imports: [InfrastructureModule, AuthModule],
   controllers: [CommunitiesController],
-  providers: [GetAllCommunitiesQuery, GetByIdCommunityQuery, JoinCommunityCommand, LeaveCommunityCommand],
+  providers: [GetAllCommunitiesQuery, GetByIdCommunityQuery, JoinCommunityCommand, LeaveCommunityCommand, CreateCommunityCommand],
 })
 export class CommunitiesModule {}
