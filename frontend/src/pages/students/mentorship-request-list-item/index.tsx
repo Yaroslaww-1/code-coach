@@ -6,6 +6,8 @@ import { UserName } from "pages/profile/user-name";
 import { Coach } from "domain/user/coach/coach";
 import { PageListItem } from "components/page-list-item";
 
+import styles from "./styles.module.scss";
+
 interface IProps {
   applicant: string;
   coach: Coach;
@@ -18,10 +20,12 @@ export const MentorshipRequestListItem: React.FC<IProps> = observer(({ applicant
 
   return (
     <PageListItem>
-      <UserName email={applicant} />
-      <ListItemButton>
-        <Button variant="outlined" color="success" onClick={approve}>Approve</Button>
-      </ListItemButton>
+      <div className={styles.root}>
+        <UserName email={applicant} />
+        <div className={styles.actions}>
+          <Button variant="outlined" color="success" onClick={approve}>Approve</Button>
+        </div>
+      </div>
     </PageListItem>
   );
 });

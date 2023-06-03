@@ -1,7 +1,18 @@
 @import '../../../variables.scss';
 
 .root {
-  margin: 10px;
-  background-color: $colorLighterGray;
-  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 8px;
+  width: 100%;
+
+  .actions {
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: space-around;
+    // width: 100%;
+  }
 }

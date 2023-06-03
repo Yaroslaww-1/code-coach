@@ -8,6 +8,8 @@ import { UserName } from "pages/profile/user-name";
 import { CoachStudent } from "domain/user/coach/coach-student";
 import { PageListItem } from "components/page-list-item";
 
+import styles from "./styles.module.scss";
+
 interface IProps {
   student: CoachStudent;
 }
@@ -21,10 +23,12 @@ export const StudentListItem: React.FC<IProps> = observer(({ student }) => {
 
   return (
     <PageListItem>
-      <UserName email={student.student} />
-      <ListItemButton>
-        <Button variant="outlined" onClick={sendMessage}>Send message</Button>
-      </ListItemButton>
+      <div className={styles.root}>
+        <UserName email={student.student} />
+        <div className={styles.actions}>
+          <Button variant="outlined" onClick={sendMessage}>Send message</Button>
+        </div>
+      </div>
     </PageListItem>
   );
 });
