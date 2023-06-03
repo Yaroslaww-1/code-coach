@@ -2,14 +2,15 @@
 
 .root {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 100% !important;
-  margin-top: 12px;
+  margin-top: 24px;
+  padding: 12px;
+  max-width: 1000px !important;
 
-  .content {
-    width: 600px;
-    padding: 0px 8px 0px 8px;
-    margin: 0px !important;
+  .input {
+    width: 100%;
   }
 }
 

@@ -6,6 +6,7 @@ import { observer } from "mobx-react-lite";
 import { Chat } from "domain/chat/Chat";
 import { TextField, Button } from "@mui/material";
 import { AuthContext } from "common/auth/auth-context";
+import { Paper } from "components/paper";
 
 interface IProps {
   chat: Chat;
@@ -20,15 +21,16 @@ export const MessageInput: React.FC<IProps> = observer(({ chat }) => {
   };
 
   return (
-    <div className={`${styles.root}`}>
+    <Paper className={`${styles.root}`}>
       <TextField
         id="message-input1"
         label="Message text"
-        variant="outlined"
+        variant="standard"
+        className={styles.input}
         value={message}
         onChange={e => setMessage(e.target.value)}
       />
       <Button variant="outlined" onClick={sendMessage}>Send</Button>
-    </div>
+    </Paper>
   );
 });
