@@ -37,7 +37,6 @@ export const PostDetailed: React.FC<IProps> = observer(({ post }) => {
         <p>{post.content}</p>
       </div>
       <div className={styles.actions}>
-        <Button size="small">Share</Button>
         {!isReplying && <Button size="small" onClick={() => setIsReplying(true)}>Reply</Button>}
       </div>
       {isReplying && (

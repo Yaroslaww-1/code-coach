@@ -31,7 +31,6 @@ export const CommentComponent: React.FC<IProps> = observer(({ comment }) => {
           <p>{comment.content}</p>
         </div>
         <div className={styles.actions}>
-          <Button size="small">Share</Button>
           {!isReplying && <Button size="small" onClick={() => setIsReplying(true)}>Reply</Button>}
         </div>
       </div>
