@@ -8,7 +8,7 @@ export class DynamoDbService {
 
   constructor() {
     this.#client = DynamoDBDocument.from(
-      new DynamoDB({}),
+      new DynamoDB({ region: "eu-central-1" }),
       {
         marshallOptions: {
           removeUndefinedValues: true,

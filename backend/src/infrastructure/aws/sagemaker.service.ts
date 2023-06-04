@@ -6,7 +6,7 @@ export class SagemakerService {
   readonly #client: SageMakerRuntimeClient;
 
   constructor() {
-    this.#client = new SageMakerRuntimeClient({});
+    this.#client = new SageMakerRuntimeClient({ region: "eu-central-1" });
   }
 
   public client(): SageMakerRuntimeClient {
