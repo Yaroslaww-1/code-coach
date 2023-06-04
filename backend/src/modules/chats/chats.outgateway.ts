@@ -1,7 +1,7 @@
 import { WebSocketGateway, WebSocketServer } from "@nestjs/websockets";
 import { Server } from "socket.io";
 
-@WebSocketGateway(8001, { transports: ["websocket"], cors: { origin: "*" } })
+@WebSocketGateway({ transports: ["websocket"], cors: { origin: "*" } })
 export class ChatsWebSocketOutGateway {
   @WebSocketServer()
   private server: Server;

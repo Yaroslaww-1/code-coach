@@ -1,7 +1,7 @@
 import { MessageBody, SubscribeMessage, WebSocketGateway } from "@nestjs/websockets";
 import { SendMessageCommand } from "./commands/send-message.command";
 
-@WebSocketGateway(8001, { transports: ["websocket"], cors: { origin: "*" } })
+@WebSocketGateway({ transports: ["websocket"], cors: { origin: "*" } })
 export class ChatsWebSocketGateway {
   constructor(
     private readonly sendMessageCommand: SendMessageCommand,
