@@ -25,6 +25,7 @@ jobs:
 
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v21
+      continue-on-error: true
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -55,11 +56,12 @@ jobs:
 
     - name: Deploy to S3
       uses: reggionick/s3-deploy@v3
+      continue-on-error: true
       with:
           folder: build
           bucket: ${{ secrets.S3_BUCKET }}
           bucket-region: eu-central-1
-          
+
     - name: Notify success
       if: always()
       run: echo "Success"
