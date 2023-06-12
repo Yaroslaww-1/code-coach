@@ -1,0 +1,65 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - 'main'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm i
+
+    - name: Generate deployment package
+      run: zip -r deploy.zip . -x '*.git*'
+
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v21
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: CodeCoach
+        environment_name: CodeCoach-Dev
+        version_label: 1
+        region: eu-central-1
+        deployment_package: deploy.zip
+
+    - name: Notify success
+      if: always()
+      run: echo "Success"
+
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm i
+
+    - name: Build
+      run: npm run build
+
+    - name: Deploy to S3
+      uses: reggionick/s3-deploy@v3
+      with:
+          folder: build
+          bucket: ${{ secrets.S3_BUCKET }}
+          bucket-region: eu-central-1
+          
+    - name: Notify success
+      if: always()
+      run: echo "Success"
